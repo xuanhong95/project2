@@ -15,9 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::auth();
-
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
+	'manage' => 'ManageController',
+	'add-info' => 'AddInfoController',
+	]);
 Route::get('/home', 'HomeController@index');
-
-#  /app/Http/rapyd.php
-Route::controller('rapyd-demo','\Zofe\Rapyd\Demo\DemoController');
