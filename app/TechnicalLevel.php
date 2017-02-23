@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class technicalLevel extends Model
+class TechnicalLevel extends Model
 {
     //
 }

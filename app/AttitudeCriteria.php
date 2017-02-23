@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class attitudeCriteria extends Model
+class AttitudeCriteria extends Model
 {
     //
 }

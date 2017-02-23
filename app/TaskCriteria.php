@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class taskCriteria extends Model
+class TaskCriteria extends Model
 {
     //
 }

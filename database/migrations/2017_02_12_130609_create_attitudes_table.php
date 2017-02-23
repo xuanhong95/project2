@@ -14,8 +14,8 @@ class CreateAttitudesTable extends Migration
     {
         Schema::create('attitudes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_id')->unsigned();
-            $table->foreign('student_id')->references('id')->on('users');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('criteria_id')->unsigned();
             $table->foreign('criteria_id')->references('id')->on('attitude_criterias');
             $table->integer('point_id')->unsigned();
