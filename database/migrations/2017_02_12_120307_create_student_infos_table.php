@@ -14,9 +14,10 @@ class CreateStudentInfosTable extends Migration
     {
         Schema::create('student_infos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_id')->unsigned();
-            $table->foreign('student_id')->references('id')->on('users');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('class',10);
+            $table->string('student_number', 10);
             $table->boolean('is_male')->default(true);
             $table->boolean('have_laptop')->default(true);
             $table->string('address');

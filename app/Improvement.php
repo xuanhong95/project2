@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class improvement extends Model
+class Improvement extends Model
 {
     //
 }
