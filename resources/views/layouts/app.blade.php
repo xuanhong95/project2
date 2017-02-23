@@ -35,6 +35,10 @@
         .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
             background-color: #bf3f3f;
         }
+        .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover{
+            background-color: rgba(189, 218, 214, 0.59);
+        }
+
     </style>
 </head>
 <body id="app-layout">
@@ -53,7 +57,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 @if(Auth::guest())
-                @elseif(Auth::user()->user_type==="1")
+                @elseif(Auth::user()->user_type=="1")
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
@@ -61,15 +65,25 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">ahiahi</a></li>
+                            <li><a href="#">ahiahi</a></li>
+                            <li><a href="#">ahiahi</a></li>
+                            <li><a href="#">ahiahi</a></li>
                         </ul>
                     </li>
                 </ul>
-                @elseif(Auth::user()->user_type==="2")
+                @elseif(Auth::user()->user_type=="2")
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                       <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
                         Student <span class="caret"></span>
                       </a>
+                      <ul class="dropdown-menu" role="menu">
+                         <li><a href="#">CV</a></li>
+                         <li><a href="#">Themes</a></li>
+                         <li><a href="#">Report</a></li>
+                         <li><a href="#">Internship Status</a></li>
+                         <li><a href="#">Feedback</a></li>
+                      </ul>
                     </li>
                 </ul>
                 @else

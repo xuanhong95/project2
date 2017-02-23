@@ -19,7 +19,7 @@ class ManageController extends Controller
 
 	public function anySetItem(){
 		$form = \DataForm::create();
-		$form->text('title','Title'); 
+		$form->text('title','Title');
 		$form->textarea('body','Body')->rule('required');
 		$form->submit('Save');
 
@@ -29,5 +29,8 @@ class ManageController extends Controller
 		});
 
 		return view('manage.set_item', compact('form'));
+	}
+	public function showCV(){
+		return view('cv');
 	}
 }
