@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="shortcut icon" href="images/logonho.png">
     <title>Internship Manager</title>
 
     <!-- Fonts -->
@@ -57,17 +57,27 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">Mua dâm</a>
+                        <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
+                          Mua dâm <span class="caret"></span>
+                        </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">ahiahi</a></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/company') }}" style="color:white;">Bán dâm</a></li>
+                    <li>
+                      <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
+                        Bán dâm <span class="caret"></span>
+                      </a>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/company') }}" style="color:white;">Môi giới</a></li>
+                    <li>
+                      <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
+                        Môi Giới <span class="caret"></span>
+                      </a>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
