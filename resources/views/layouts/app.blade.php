@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="images/logonho.png">
-    <title>Internship Manager</title>
+    <title> SIE Internship Manager</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -32,6 +32,9 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
+        .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
+            background-color: #bf3f3f;
+        }
     </style>
 </head>
 <body id="app-layout">
@@ -39,47 +42,45 @@
         <div class="container">
             <div class="navbar-header">
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}" style="color:white;">
-                    Bán dâm .com
+                    SIE Internship Manager
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
+                @if(Auth::guest())
+                @elseif(Auth::user()->user_type==="1")
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
-                          Mua dâm <span class="caret"></span>
+                          Company <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">ahiahi</a></li>
                         </ul>
                     </li>
                 </ul>
+                @elseif(Auth::user()->user_type==="2")
                 <ul class="nav navbar-nav">
-                    <li>
+                    <li class="dropdown">
                       <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
-                        Bán dâm <span class="caret"></span>
+                        Student <span class="caret"></span>
                       </a>
                     </li>
                 </ul>
+                @else
                 <ul class="nav navbar-nav">
-                    <li>
+                    <li class=dropdown>
                       <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
-                        Môi Giới <span class="caret"></span>
+                        Teacher <span class="caret"></span>
                       </a>
                     </li>
                 </ul>
-
+                @endif
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
