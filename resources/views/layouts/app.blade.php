@@ -78,7 +78,7 @@
                         Student <span class="caret"></span>
                       </a>
                       <ul class="dropdown-menu" role="menu">
-                         <li><a href="#">CV</a></li>
+                         <li><a href="/student-report">CV</a></li>
                          <li><a href="#">Themes</a></li>
                          <li><a href="#">Report</a></li>
                          <li><a href="#">Internship Status</a></li>

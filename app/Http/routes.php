@@ -21,4 +21,8 @@ Route::controllers([
 	'manage' => 'ManageController',
 	'add-info' => 'AddInfoController',
 	]);
+Route::get('/student-report',function(){
+    return view('student.report');
+
+})->middleware('CheckLogin');
 Route::get('/home', 'HomeController@index');
