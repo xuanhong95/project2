@@ -137,11 +137,7 @@
             </div>
 
             <!-- End Nội dung báo cáo -->
-            <div class="">
-                <div class="form-group">
-                    {!! $form->field('Nộp báo cáo') !!}
-                </div>
-            </div>
+            
             {!! $form->footer !!}
         </div>
     </div>
