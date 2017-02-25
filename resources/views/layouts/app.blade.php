@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
+    //datepicker
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
@@ -27,7 +30,7 @@
             background-image: url(/images/bg-header.jpg);
         }
         #app-layout{
-            background: rgba(228, 228, 228, 0.48);;
+            background: rgba(228, 228, 228, 1.48);;
             background-size: 100%;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -64,10 +67,9 @@
                           Company <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">ahiahi</a></li>
-                            <li><a href="#">ahiahi</a></li>
-                            <li><a href="#">ahiahi</a></li>
-                            <li><a href="#">ahiahi</a></li>
+                            <li><a href="#">Đăng ký nhận thực tập</a></li>
+                            <li><a href="#">Giao công việc</a></li>
+                            <li><a href="#">Cho điểm</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -80,7 +82,7 @@
                       <ul class="dropdown-menu" role="menu">
                          <li><a href="/student-report">CV</a></li>
                          <li><a href="#">Themes</a></li>
-                         <li><a href="#">Report</a></li>
+                         <li><a href="/student-report">Report</a></li>
                          <li><a href="#">Internship Status</a></li>
                          <li><a href="#">Feedback</a></li>
                       </ul>
@@ -92,6 +94,11 @@
                       <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
                         Teacher <span class="caret"></span>
                       </a>
+                      <ul class="dropdown-menu" role="menu">
+                          <li><a href="#"></a></li>
+                          <li><a href="#"></a></li>
+                          <li><a href="#"></a></li>
+                      </ul>
                     </li>
                 </ul>
                 @endif
