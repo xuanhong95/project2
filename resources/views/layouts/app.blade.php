@@ -20,7 +20,7 @@
 
     <style>
         body {
-            font-family: 'Lato';
+            font-family: 'Helvetica, Arial, sans-serif';
         }
 
         .fa-btn {
@@ -41,7 +41,7 @@
         .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover{
             background-color: rgba(189, 218, 214, 0.59);
         }
-
+        
     </style>
 </head>
 <body id="app-layout">
