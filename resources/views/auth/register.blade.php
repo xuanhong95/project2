@@ -1,13 +1,5 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="/css/homepage.css">
-<style type="text/css">
-    .footer{
-        bottom: 0;
-    }
-    html{
-        overflow: hidden;
-    }
-</style>
 @section('content')
 <div class="container" style="margin-top: 70px">
     <div class="row">
@@ -25,9 +17,9 @@
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
 
                                 @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
@@ -39,9 +31,9 @@
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
 
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
@@ -53,9 +45,9 @@
                                 <input id="password" type="password" class="form-control" name="password">
 
                                 @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
@@ -67,9 +59,58 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
 
                                 @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('class') ? ' has-error' : '' }}">
+                            <label for="password-confirm" class="col-md-4 control-label">Class</label>
+
+                            <div class="col-md-6">
+                                <select id="class" class="form-control" name="class">
+                                    <option value="VUWIT12B">VUWIT12B</option>
+                                    <option value="LTU12A">LTU12A</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('is_male') ? ' has-error' : '' }}">
+                            <label for="password-confirm" class="col-md-4 control-label">Gender</label>
+
+                            <div class="col-md-6">
+                                <select id="is_male" class="form-control" name="is_male">
+                                    <option value="0">Nam</option>
+                                    <option value="1">Nữ</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
+                            <label for="student_number" class="col-md-4 control-label">Student Number</label>
+
+                            <div class="col-md-6">
+                                <input id="student_number" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}">
+
+                                @if ($errors->has('student_number'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('student_number') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                            <label for="phone" class="col-md-4 control-label">Phone</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}">
+
+                                @if ($errors->has('phone'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('phone') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
