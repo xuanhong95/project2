@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+
 use Closure;
 
 class CheckLogin
@@ -15,7 +16,7 @@ class CheckLogin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::guest()){
+        if(\Auth::check()){
             return view('auth.login');
         }
         return $next($request);

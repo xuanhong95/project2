@@ -34,6 +34,9 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
         ],
+        'checkLogin'=>[
+                \App\Http\Middleware\CheckLogin::class,
+        ],
     ];
 
     /**
