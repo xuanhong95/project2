@@ -19,10 +19,9 @@
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
-        body {
-            font-family: 'Helvetica, Arial, sans-serif';
+        body{
+            font-family:  'Segoe UI'
         }
-
         .fa-btn {
             margin-right: 6px;
         }
