@@ -76,17 +76,6 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('is_male') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">Gender</label>
-
-                            <div class="col-md-6">
-                                <select id="is_male" class="form-control" name="is_male">
-                                    <option value="0">Nam</option>
-                                    <option value="1">Nữ</option>
-                                </select>
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
                             <label for="student_number" class="col-md-4 control-label">Student Number</label>
 
