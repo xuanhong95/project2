@@ -67,42 +67,20 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('class') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">Class</label>
+                            <label for="password-confirm" class="col-md-4 control-label">Role:</label>
 
                             <div class="col-md-6">
-                                <select id="class" class="form-control" name="class">
-                                    <option value="VUWIT12B">VUWIT12B</option>
-                                    <option value="LTU12A">LTU12A</option>
+                                <select id="role" class="form-control" name="role">
+                                    <option value="0">Student</option>
+                                    <option value="1">SIE Instructor</option>
+                                    <option value="2">Enterprise Instructor</option>
+                                    <option value="3">Enterprise</option>
+                                    <option value="4">Internship Manager</option>
+                                    <option value="5">Manager</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
-                            <label for="student_number" class="col-md-4 control-label">Student Number</label>
 
-                            <div class="col-md-6">
-                                <input id="student_number" type="text" class="form-control" name="student_number" value="{{ old('student_number') }}">
-
-                                @if ($errors->has('student_number'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('student_number') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <label for="phone" class="col-md-4 control-label">Phone</label>
-
-                            <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}">
-
-                                @if ($errors->has('phone'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('phone') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
