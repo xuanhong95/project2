@@ -38,6 +38,7 @@ class ManageController extends Controller
 		$student=\DB::table('student_infos')
 			->select('student_number','phone','class')
 			->where('id','=',\Auth::user()->id)
+			->first()
 			->get();
 
 		$form=\DataForm::create();
@@ -46,13 +47,13 @@ class ManageController extends Controller
 			->insertValue(\Auth::user()->name)
 			->mode('readonly');
 		$form->add('student_number','Mã số sinh viên','text')
-			->insertValue($student[0]->student_number)
+			->insertValue($student->student_number)
 			->mode('readonly');
 		$form->add('student_class','Lớp:','text')
-			->insertValue($student[0]->class)
+			->insertValue($student->class)
 			->mode('readonly');
 		$form->add('student_phone','Số điện thoại:','text')
-			->insertValue($student[0]->phone)
+			->insertValue($student->phone)
 			->mode('readonly');
 		$form->add('student_email','Email:','text')
 			->insertValue(\Auth::user()->email)

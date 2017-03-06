@@ -72,7 +72,7 @@
                             <div class="col-md-6">
                                 <select id="role" class="form-control" name="role">
                                     <option value="0">Student</option>
-                                    <option value="1">SIE Instructor</option>
+                                    <option value="1">Instructor Teacher</option>
                                     <option value="2">Enterprise Instructor</option>
                                     <option value="3">Enterprise</option>
                                     <option value="4">Internship Manager</option>

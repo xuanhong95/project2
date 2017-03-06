@@ -56,21 +56,7 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                @if(Auth::guest())
-                @elseif(Auth::user()->user_type=="1")
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
-                            Company <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Đăng ký nhận thực tập</a></li>
-                            <li><a href="#">Giao công việc</a></li>
-                            <li><a href="#">Cho điểm</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                @elseif(Auth::user()->user_type=="2")
+                @if(\Auth::user()->user_type==0)
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
@@ -78,27 +64,90 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">CV</a></li>
-                            <li><a href="#">Themes</a></li>
                             <li><a href="/student-report">Report</a></li>
-                            <li><a href="#">Internship Status</a></li>
                             <li><a href="#">Feedback</a></li>
                         </ul>
                     </li>
                 </ul>
-                @elseif(Auth::user()->user_type=="3")
+
+                @elseif(\Auth::user()->user_type==1)
                 <ul class="nav navbar-nav">
                     <li class=dropdown>
                         <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
-                            Teacher <span class="caret"></span>
+                            Instructor Teacher <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Marking</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                @elseif(\Auth::user()->user_type==2)
+                <ul class="nav navbar-nav">
+                    <li class=dropdown>
+                        <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
+                            Enterprise Instructor <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Marking</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+
+                @elseif(\Auth::user()->user_type==3)
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
+                            Enterprise <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Internship Registration</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                @elseif(\Auth::user()->user_type==4)
+                <ul class="nav navbar-nav">
+                    <li class=dropdown>
+                        <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
+                            Internship Manager <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="/teacher/seasons">Seasons</a></li>
-                            <li><a href="#"></a></li>
-                            <li><a href="#"></a></li>
+                            <li><a href="#">Internship Schedule</a></li>
+                            <li><a href="#">Score</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                @elseif(\Auth::user()->user_type==5)
+                <ul class="nav navbar-nav">
+                    <li class=dropdown>
+                        <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
+                            System Manager <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Users</a></li>
+                            <li><a href="#">Config</a></li>
                         </ul>
                     </li>
                 </ul>
                 @endif
+
+                <ul class="nav navbar-nav">
+                    <li class=dropdown>
+                        <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
+                            Internship <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Students</a></li>
+                            <li><a href="#">Companies</a></li>
+                            <li><a href="#">Topics</a></li>
+                            <li><a href="#">Result</a></li>
+                        </ul>
+                    </li>
+                </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
@@ -112,7 +161,9 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="#"><i class=""></i>Profile</a></li>
                             <li><a href="{{ url('auth/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+
                         </ul>
                     </li>
                     @endif
