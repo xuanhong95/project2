@@ -23,3 +23,12 @@ Route::controllers([
 	]);
 Route::get('/student-report','ManageController@showStudentReport');
 Route::get('/home', 'HomeController@index');
+Route::get('/teacher/seasons','TeacherController@showSeasons');
+Route::post('/teacher/seasons/create',[
+    'as'=>'createNewSeason',
+    'uses'=>'TeacherController@showCreateSeasonPage'
+]);
+Route::get('/teacher/seasons/create',[
+    'as'=>'createNewSeason',
+    'uses'=>'TeacherController@showCreateSeasonPage'
+]);
