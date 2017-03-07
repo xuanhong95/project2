@@ -15,6 +15,7 @@ class TeacherController extends Controller
 
     public function showSeasons(){
         $seasons=\DB::table('seasons')->select('id','is_openning')->get();
+        // dd($seasons);
         return view('teacher.seasons',compact('seasons'));
     }
 
@@ -25,15 +26,33 @@ class TeacherController extends Controller
         $form->add('start_date','start_date:','text');
         $form->add('register_deadline','register_deadline:','text');
         $form->add('submit_result_deadline','submit_result_deadline:','text');
-        $form->add('remark_deadline','remarking_deadline:','text');
+        $form->add('remarking_deadline','remarking_deadline:','text');
         $form->add('end_date','end_date:','text');
         $form->submit('Start new season');
+
+        $form->saved(function () use($form){
+            $form->message("Saved");
+            $form->link('/teacher/seasons','Back');
+        });
+        $form->build();
+
+        return view('teacher.create-season',compact('form','season'));
+    }
+
+    public function showSeasonInfo($season){
+        $form=\DataForm::source(\App\Season::where('id',$season)->first());
+        $form->add('start_date','start_date:','text');
+        $form->add('register_deadline','register_deadline:','text');
+        $form->add('submit_result_deadline','submit_result_deadline:','text');
+        $form->add('remarking_deadline','remarking_deadline:','text');
+        $form->add('end_date','end_date:','text');
+        $form->submit('Save');
 
         $form->saved(function () use($form){
             $form->message("Saved");
         });
         $form->build();
 
-        return view('teacher.create-season',compact('form','season'));
+        return view('teacher.edit-season',compact('form','season'));
     }
 }

@@ -66,7 +66,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('class') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
                             <label for="password-confirm" class="col-md-4 control-label">Role:</label>
 
                             <div class="col-md-6">

@@ -23,7 +23,10 @@ Route::controllers([
 	]);
 Route::get('/student-report','ManageController@showStudentReport');
 Route::get('/home', 'HomeController@index');
-Route::get('/teacher/seasons','TeacherController@showSeasons');
+Route::get('/teacher/seasons',[
+    'as'=>'seasons',
+    'uses'=>'TeacherController@showSeasons',
+]);
 Route::post('/teacher/seasons/create',[
     'as'=>'createNewSeason',
     'uses'=>'TeacherController@showCreateSeasonPage'
@@ -31,4 +34,16 @@ Route::post('/teacher/seasons/create',[
 Route::get('/teacher/seasons/create',[
     'as'=>'createNewSeason',
     'uses'=>'TeacherController@showCreateSeasonPage'
+]);
+
+Route::post('/profile','AddInfoController@showProfile');
+Route::get('/profile','AddInfoController@showProfile');
+
+Route::post('/teacher/seasons/info/id={season}',[
+    'as'=>'seasoninfo',
+    'uses'=>'TeacherController@showSeasonInfo'
+]);
+Route::get('/teacher/seasons/info/id={season}',[
+    'as'=>'seasoninfo',
+    'uses'=>'TeacherController@showSeasonInfo'
 ]);

@@ -1,8 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <style media="screen">
-    .margin-left-seasons{
-        margin-left: 60px;
+    .margin-seasons{
+        margin-left: 30px;
+        margin-bottom: 30px;
     }
 </style>
 <div class="container" style="margin-top:70px">
@@ -11,24 +12,33 @@
         <a href="/teacher/seasons/create"  class="btn btn-primary">Start new Season...</a>
     </div>
 
-    <div class="col-md-10 col-md-offset-1 well">
+    <div class="col-md-10 col-md-offset-1 well col-sm-10 col-xs-10 col-xs-offset-1">
         <legend>Seasons:</legend>
         @if(count($seasons)==0)
             <div class="col-md-6 col-md-offset-3">
                 <h2>There aren't any available seasons</h2>
             </div>
         @else
-            @foreach($seasons as $season)
-                <div class="" >
-                    <div class="col-md-3 btn btn-lg btn-info margin-left-seasons">
-                        <h4>Season {!! $season->id !!}</h4>
-                        <h5>Status: ({!! $season->is_openning !!})</h5>
+            @for ($i=count($seasons);$i>0;$i--)
+                <div class="col-md-offset-1" >
+                    <div class="col-md-3 btn btn-lg
+                        <?php echo $seasons[$i-1]->is_openning==1?'btn-info':'btn-warning'  ?>
+                        margin-seasons col-sm-3 col-xs-3">
+
+                        <a href="/teacher/seasons/info/id={!! $seasons[$i-1]->id !!}"><h4>Season {!! $i !!}</h4></a>
+                        <h5>Status: {!! $seasons[$i-1]->is_openning==1?'Openning':'Finished' !!}</h5>
                     </div>
                 </div>
-
-            @endforeach
+            @endfor
         @endif
     </div>
 
 </div>
+<script type="text/javascript">
+    $(function(){
+        $('.season').on('click',function(){
+            $(this).
+        });
+    });
+</script>
 @endsection

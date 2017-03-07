@@ -21,7 +21,7 @@
   }
 
   .container {
-    min-height: 60%;
+    min-height: 100%;
   }
   .footer {
     margin-top: 30px;

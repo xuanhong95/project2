@@ -56,6 +56,9 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
+                @if(\Auth::guest())
+
+                @else
                 @if(\Auth::user()->user_type==0)
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
@@ -148,6 +151,7 @@
                         </ul>
                     </li>
                 </ul>
+            @endif
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
@@ -161,7 +165,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"><i class=""></i>Profile</a></li>
+                            <li><a href="/profile"><i class=""></i>Profile</a></li>
                             <li><a href="{{ url('auth/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
 
                         </ul>
@@ -178,7 +182,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
-
-
-
 </html>
