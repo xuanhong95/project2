@@ -49,9 +49,12 @@
         </div>
         <br>
         <br>
-        <div class="form-group col-sm-6">
-            <div class="col-sm-offset-2">
+        <div class="form-group ">
+            <div class="col-sm-4 col-sm-offset-2">
                 {!! $form->footer !!}
+            </div>
+            <div class="col-sm-4 col-sm-offset-2">
+                <a href="/teacher/seasons" class="btn btn-default">Cancel</a>
             </div>
         </div>
 
@@ -66,7 +69,7 @@
         changeMonth:true,
         changeYear:true,
         dateFormat:'yy/mm/dd',
-        yearRange:'1980:2050',
+        yearRange:':+1',
     });
 </script>
 @endsection
