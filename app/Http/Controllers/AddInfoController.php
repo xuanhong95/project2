@@ -91,7 +91,7 @@ class AddInfoController extends Controller
 		return view('student.add_personal_info', compact('form'));
 	}
 
-	public function showProfile(){
+	public function anyShowProfile(){
 		$user_type=\Auth::user()->user_type;
 		$user_id=\Auth::user()->id;
 		if($user_type==0){

@@ -36,9 +36,6 @@ Route::get('/teacher/seasons/create',[
     'uses'=>'TeacherController@showCreateSeasonPage'
 ]);
 
-Route::post('/profile','AddInfoController@showProfile');
-Route::get('/profile','AddInfoController@showProfile');
-
 Route::post('/teacher/seasons/info/id={season}',[
     'as'=>'seasoninfo',
     'uses'=>'TeacherController@showSeasonInfo'
