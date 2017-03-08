@@ -52,9 +52,7 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
-            'class' => 'required',
-            'student_number' => 'required',
-            'phone' => 'required|max:11',
+            'role' => 'required',
         ]);
     }
 
@@ -65,20 +63,14 @@ class AuthController extends Controller
      * @return User
      */
     protected function create(array $data)
-    {   
+    {
+        // dd($data);
         $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'user_type' => intval($data['role']),
         ]);
-
-        $student_info = new \App\StudentInfo();
-        $student_info->user_id = $user->id;
-        $student_info->class = $data['class'];
-        $student_info->student_number = $data['student_number'];
-        $student_info->phone = $data['phone'];
-        $student_info->have_laptop = 0;
-        $student_info->save();
 
         return $user;
     }

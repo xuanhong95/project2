@@ -1,7 +1,5 @@
 @extends('layouts.app')
-<style>
 
-</style>
 @section('content')
 <div class="container" style='margin-top:70px'>
     @if(Session::has('message'))
@@ -99,7 +97,7 @@
         </div>
     </div>
     @endif
-    
+
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="/js/jquery.numeric.js"></script>

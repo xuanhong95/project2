@@ -14,7 +14,7 @@
   * {
     margin: 0;
     padding: 0;
-  } 
+  }
 
   html, body {
     height: 100%;
@@ -30,7 +30,7 @@
     left: 0;
     background-color: #efefef;
     text-align: center;
-  } 
+  }
 </style>
 <div class="footer">
   <footer style="background-image:url('/images/footersievn.png'); background-repeat:repeat-x;">
