@@ -18,10 +18,11 @@ class CreateStudentInfosTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('class',10);
             $table->string('student_number', 10);
-            $table->boolean('is_male')->default(true);
-            $table->boolean('have_laptop')->default(true);
+            $table->boolean('is_male');
+            $table->boolean('have_laptop');
             $table->string('address');
-            $table->string('phone',18);
+            $table->string('phone',15)->nullable();
+            $table->string('birthday',10);
             $table->timestamps();
         });
 

@@ -15,7 +15,7 @@ class CreateGeneralAppreciationsTable extends Migration
         Schema::create('general_appreciations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('point')->unique();
-            $table->string('description');
+            $table->string('description');        
             $table->timestamps();
         });
     }

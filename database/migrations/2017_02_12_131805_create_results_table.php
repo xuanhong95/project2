@@ -5,7 +5,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateResultsTable extends Migration
 {
-    /**
+    /**THis is made by Instructor Teacher
+    * Confirmed by Enterprise Instructors
      * Run the migrations.
      *
      * @return void
@@ -18,6 +19,7 @@ class CreateResultsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->decimal('progress_point',3,1);
             $table->decimal('exam_point',3,1);
+            $table->boolean('is_confirmed');
             $table->timestamps();
         });
     }

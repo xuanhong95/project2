@@ -5,7 +5,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTimesheetsTable extends Migration
 {
-    /**
+    /**made by Enterprise Instructors
+     * Confirmed ny student and Instructor Teachers
      * Run the migrations.
      *
      * @return void
@@ -24,6 +25,8 @@ class CreateTimesheetsTable extends Migration
             $table->string('leave')->nullable();
             $table->string('absent_without_leave')->nullable();
             $table->string('other')->nullable();
+            $table->boolean('is_student_confirmed')->nullable();
+            $table->boolean('is_teacher_confirmed')->nullable();
             $table->timestamps();
         });
     }

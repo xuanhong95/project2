@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateImprovementsTable extends Migration
 {
-    /**
+    /**THis is made by Enterprise Instructors
      * Run the migrations.
      *
      * @return void

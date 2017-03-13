@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTechnicalLevelsTable extends Migration
 {
-    /**
+    /**THis is managed by Students
      * Run the migrations.
      *
      * @return void

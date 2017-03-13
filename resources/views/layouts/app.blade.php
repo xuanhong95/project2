@@ -72,7 +72,7 @@
                             Student <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">CV</a></li>
+                            <li><a href="/add-info/show-cv/1">CV</a></li>
                             <li><a href="/student-report">Report</a></li>
                             <li><a href="#">Feedback</a></li>
                         </ul>
@@ -171,7 +171,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/profile"><i class=""></i>Profile</a></li>
+                            <li><a href="/add-info/show-profile"><i class=""></i>Profile</a></li>
                             <li><a href="{{ url('auth/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
 
                         </ul>

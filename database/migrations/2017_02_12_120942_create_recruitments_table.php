@@ -6,6 +6,9 @@ use Illuminate\Database\Migrations\Migration;
 class CreateRecruitmentsTable extends Migration
 {
     /**
+     *This form is created by Enterprises
+     *Only be confirm by Internship Manager
+     *
      * Run the migrations.
      *
      * @return void
@@ -14,10 +17,11 @@ class CreateRecruitmentsTable extends Migration
     {
         Schema::create('recruitments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('company_id')->unsigned();
-            $table->foreign('company_id')->references('id')->on('companies');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('quantity');
             $table->integer('season');
+            $table->boolean('is_confirm')->nullable();
             $table->timestamps();
         });
     }
