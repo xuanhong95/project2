@@ -15,8 +15,10 @@ class CreateSeasonsTable extends Migration
         Schema::create('seasons', function (Blueprint $table) {
             $table->increments('id');
             $table->date('start_date');
-            $table->date('end_date');
-            $table->boolean('is_open')->default(false);
+            $table->date('end_date')->nullable();
+            $table->date('register_deadline')->nullable();
+            $table->date('submit_result_deadline')->nullable();
+            $table->date('remarking_deadline')->nullable();
             $table->timestamps();
         });
     }

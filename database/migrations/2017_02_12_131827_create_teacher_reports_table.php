@@ -5,7 +5,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTeacherReportsTable extends Migration
 {
-    /**
+    /**Input by Instructor teacher
+     *Confirmed by
      * Run the migrations.
      *
      * @return void
@@ -21,7 +22,7 @@ class CreateTeacherReportsTable extends Migration
             $table->integer('season')->unsigned();
             $table->foreign('season')->references('id')->on('seasons');
             $table->text('advantage_disadvantage_improvement')->nullable();
-            $table->boolean('is_company_confirm')->default(false);
+            $table->boolean('is_confirmed')->nullable();
             $table->timestamps();
         });
     }

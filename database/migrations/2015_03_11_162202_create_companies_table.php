@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDobToStudentInfo extends Migration
+class CreateCompaniesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,12 @@ class AddDobToStudentInfo extends Migration
      */
     public function up()
     {
-        Schema::table('student_infos', function (Blueprint $table) {
-            $table->string('dob', 10)->after('phone');
+        Schema::create('companies',function(Blueprint $table){
+            $table->increments('id');
+            $table->string('name');
+            $table->string('phone',15)->nullable();
+            $table->string('address');
+            $table->timestamps();
         });
     }
 
@@ -24,8 +28,6 @@ class AddDobToStudentInfo extends Migration
      */
     public function down()
     {
-        Schema::table('student_infos', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }

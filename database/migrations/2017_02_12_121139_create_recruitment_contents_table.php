@@ -17,7 +17,7 @@ class CreateRecruitmentContentsTable extends Migration
             $table->integer('recruitment_id')->unsigned();
             $table->foreign('recruitment_id')->references('id')->on('recruitments');
             $table->string('role');
-            $table->text('jobDescription');
+            $table->text('job_description');
             $table->text('requirement');
             $table->timestamps();
         });
