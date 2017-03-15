@@ -76,7 +76,7 @@
                                     <option value="2">Enterprise Instructor</option>
                                     <option value="3">Enterprise</option>
                                     <option value="4">Internship Manager</option>
-                                    <option value="5">Manager</option>
+                                    <option value="5">System Manager</option>
                                 </select>
                             </div>
                         </div>
