@@ -48,48 +48,48 @@ class AddInfoController extends Controller
 		return view('student.cv', compact('form'));
 	}
 
-	public function anyPersonalInfo($id){
-		if (!\Auth::user()){
-			return redirect('/');
-		}
+	// public function anyPersonalInfo($id){
+	// 	if (!\Auth::user()){
+	// 		return redirect('/');
+	// 	}
 
-		$source = \App\User::join('student_infos', 'users.id', '=', 'student_infos.user_id')
-							->where('users.id', '1')
-							->get(['users.name', 'users.email',
-								'student_infos.class', 'student_infos.student_number',
-								'student_infos.is_male', 'student_infos.phone',
-								]);
+	// 	$source = \App\User::join('student_infos', 'users.id', '=', 'student_infos.user_id')
+	// 						->where('users.id', '1')
+	// 						->get(['users.name', 'users.email',
+	// 							'student_infos.class', 'student_infos.student_number',
+	// 							'student_infos.is_male', 'student_infos.phone',
+	// 							]);
 
-		$form = \DataForm::source($source);
+	// 	$form = \DataForm::source($source);
 
-		$form->add('name', 'Name', 'text')->insertValue($source[0]->name)->rule('required');
-		$form->add('class', 'Class', 'select')->options(['VUWIT12B' => 'VUWIT12B', 'LTU12A' => 'LTU12A'])->insertValue($source[0]->class);
-		$form->add('student_number', 'MSSV', 'text')->insertValue($source[0]->student_number)->rule('required');
-		$form->add('phone', 'Số điện thoại', 'text')->insertValue($source[0]->phone);
-		$form->add('is_male', 'Giới tính', 'select')->options(['0' => 'Nam', '1' => 'Nữ'])->insertValue($source[0]->is_male);
-		$form->add('dob', 'Ngày sinh', 'text')->insertValue($source[0]->dob)->rule('required');
+	// 	$form->add('name', 'Name', 'text')->insertValue($source[0]->name)->rule('required');
+	// 	$form->add('class', 'Class', 'select')->options(['VUWIT12B' => 'VUWIT12B', 'LTU12A' => 'LTU12A'])->insertValue($source[0]->class);
+	// 	$form->add('student_number', 'MSSV', 'text')->insertValue($source[0]->student_number)->rule('required');
+	// 	$form->add('phone', 'Số điện thoại', 'text')->insertValue($source[0]->phone);
+	// 	$form->add('is_male', 'Giới tính', 'select')->options(['0' => 'Nam', '1' => 'Nữ'])->insertValue($source[0]->is_male);
+	// 	$form->add('dob', 'Ngày sinh', 'text')->insertValue($source[0]->dob)->rule('required');
 
-		$form->submit('Save');
-		$form->saved(function () use ($form, $id) {
-			$input = \Input::all();
+	// 	$form->submit('Save');
+	// 	$form->saved(function () use ($form, $id) {
+	// 		$input = \Input::all();
 
-			$student_info = \App\StudentInfo::where('user_id', $id)->first();
-			$student_info->dob = $input['dob'];
-			$student_info->phone = $input['phone'];
-			$student_info->is_male = $input['is_male'];
-			$student_info->student_number = $input['student_number'];
-			$student_info->class = $input['class'];
-			$student_info->save();
+	// 		$student_info = \App\StudentInfo::where('user_id', $id)->first();
+	// 		$student_info->dob = $input['dob'];
+	// 		$student_info->phone = $input['phone'];
+	// 		$student_info->is_male = $input['is_male'];
+	// 		$student_info->student_number = $input['student_number'];
+	// 		$student_info->class = $input['class'];
+	// 		$student_info->save();
 
-			$user = \App\User::where('id', $id)->first();
-			$user->name = $input['name'];
-			$user->save();
+	// 		$user = \App\User::where('id', $id)->first();
+	// 		$user->name = $input['name'];
+	// 		$user->save();
 
-			\Session::flash('message', 'Thành Công');
-		});
-		$form->build();
-		return view('student.add_personal_info', compact('form'));
-	}
+	// 		\Session::flash('message', 'Thành Công');
+	// 	});
+	// 	$form->build();
+	// 	return view('student.add_personal_info', compact('form'));
+	// }
 
 	public function anyShowProfile(){
 		$user_type=\Auth::user()->user_type;
