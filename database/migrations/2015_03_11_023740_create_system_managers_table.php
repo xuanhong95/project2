@@ -3,24 +3,20 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttitudesTable extends Migration
+class CreateSystemManagersTable extends Migration
 {
-    /**THis is made by Enterprise Instructors
+    /**
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('attitudes', function (Blueprint $table) {
+        Schema::create('system_managers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('criteria_id')->unsigned();
-            $table->foreign('criteria_id')->references('id')->on('attitude_criterias');
-            $table->integer('point_id')->unsigned();
-            $table->foreign('point_id')->references('id')->on('points');
-            $table->string('comment',100);
+            $table->string('phone');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateAttitudesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('attitudes');
+        Schema::drop('system_managers');
     }
 }

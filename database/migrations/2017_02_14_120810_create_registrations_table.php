@@ -5,7 +5,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateRegistrationsTable extends Migration
 {
-    /**
+    /**Made by student
+     * Confirmed by Internship Manager
      * Run the migrations.
      *
      * @return void
@@ -21,11 +22,11 @@ class CreateRegistrationsTable extends Migration
             $table->integer('season')->unsigned();
             $table->foreign('season')->references('id')->on('seasons');
             $table->string('system&network_skill',100)->nullable();
-            $table->string('specialityCertificate',100)->nullable();
-            $table->string('softSkill',100)->nullable();
-            $table->string('otherDescription',100)->nullable();
-            $table->string('wishedSkill',100)->nullable();
-            $table->boolean('is_company_confirm')->default(false);
+            $table->string('special_certificate',100)->nullable();
+            $table->string('soft_skill',100)->nullable();
+            $table->string('other_description',100)->nullable();
+            $table->string('wished_skill',100)->nullable();
+            $table->boolean('is_confirmed')->nullable();
             $table->timestamps();
         });
     }

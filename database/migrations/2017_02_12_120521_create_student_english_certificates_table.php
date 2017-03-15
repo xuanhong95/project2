@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateStudentEnglishCertificatesTable extends Migration
 {
-    /**
+    /**This is managed by Students
      * Run the migrations.
      *
      * @return void

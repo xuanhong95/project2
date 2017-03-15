@@ -5,7 +5,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateStudentReportsTable extends Migration
 {
-    /**
+    /**Made by Students
+     *Confirmed by Instructor Teacher and Enterprise Instructor
      * Run the migrations.
      *
      * @return void
@@ -27,8 +28,8 @@ class CreateStudentReportsTable extends Migration
             $table->string('result');
             $table->string('advantage');
             $table->string('shortcoming');
-            $table->boolean('is_company_confirm')->default(false);
-            $table->boolean('is_teacher_confirm')->default(false);
+            $table->boolean('is_company_confirmed')->nullable();
+            $table->boolean('is_teacher_confirmed')->nullable();
             $table->timestamps();
         });
     }
