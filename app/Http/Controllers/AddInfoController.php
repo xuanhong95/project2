@@ -146,6 +146,7 @@ public function anyShowProfile(){
 	}else if($user_type==1){	//Start teacher profile
 
 		$info=\DB::table('teachers')->where('user_id',$user_id)->first();
+		// dd($info);
 		// if profile is still null,add default
 		if(is_null($info)){
 			\DB::table('teachers')->insertGetId([
@@ -161,14 +162,14 @@ public function anyShowProfile(){
 
 		$form->saved(function() use ($form){
 			$input=\Input::all();
-
+			// dd($input);
 			$info=\App\Teacher::where('user_id',\Auth::user()->id)->first();
 			$info->subject=$input['subject'];
 			$info->save();
 
-			$info_name=\App\User::where('id',\Auth::user()->id)->first();
-			$info_name->name=$input['name'];
-			$info_name->save();
+			// $info_name=\App\User::where('id',\Auth::user()->id)->first();
+			// $info_name->name=$input['name'];
+			// $info_name->save();
 
 			$form->message('Saved');
 			$form->link('/','Back');
