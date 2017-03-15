@@ -23,6 +23,8 @@ class AddInfoController extends Controller
 		->where('users.id', $id)
 		->get(['users.name', 'users.email',
 			'student_infos.class', 'student_infos.student_number',
+			'student_infos.address', 'student_infos.phone',
+			'student_infos.is_male', 'student_infos.have_laptop',
 			]);
 
 		$form = \DataForm::source($source);
@@ -30,10 +32,10 @@ class AddInfoController extends Controller
 		$form->text('name','Name')->insertValue($source[0]->name)->mode('readonly');
 		$form->text('class', 'Lớp')->insertValue($source[0]->class)->mode('readonly');
 		$form->text('student_number', 'Mã số sinh viên')->insertValue($source[0]->student_number)->mode('readonly');
-		$form->add('is_male', 'Giới tính', 'select')->options(['0' => '--select--', '1' => 'Nam', '2' => 'Nữ'])->rule('not_in:0');
+		$form->add('is_male', 'Giới tính', 'select')->options(['0' => '--select--', '1' => 'Nam', '2' => 'Nữ'])->rule('not_in:0')->insertValue($source[0]->is_male)->mode('readonly');
 		$form->add('have_laptop', 'Có Laptop', 'checkbox');
-		$form->add('address', 'Địa chỉ', 'text');
-		$form->add('phone', 'Số điện thoại', 'text');
+		$form->add('address', 'Địa chỉ', 'text')->insertValue($source[0]->address);
+		$form->add('phone', 'Số điện thoại', 'text')->insertValue($source[0]->phone);
 		$form->text('email', 'Email')->insertValue($source[0]->email)->mode('readonly');
 		$form->add('certificate_id', 'Chứng chỉ tiếng anh', 'select')->options(['0' => '--select--', '1' => 'IELTS', '2' => 'TOEFL', '3' => 'TOEIC'])->rule('not_in:0');
 		$form->add('language_id', 'Ngôn ngữ lập trình', 'select')->options(['0' => '--select--', '1' => 'C', '2' => 'C++', '3' => 'C#', '4' => 'PHP'])->rule('not_in:0');

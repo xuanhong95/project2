@@ -37,9 +37,8 @@ class ManageController extends Controller
 	public function showStudentReport(){
 		$student=\DB::table('student_infos')
 			->select('student_number','phone','class')
-			->where('id','=',\Auth::user()->id)
-			->first()
-			->get();
+			->where('user_id','=',\Auth::user()->id)
+			->first();
 
 		$form=\DataForm::create();
 

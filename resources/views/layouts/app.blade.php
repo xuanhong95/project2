@@ -72,7 +72,7 @@
                             Student <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/add-info/show-cv/1">CV</a></li>
+                            <li><a href="/add-info/show-cv/{{\Auth::user()->id}}">CV</a></li>
                             <li><a href="/student-report">Report</a></li>
                             <li><a href="#">Feedback</a></li>
                         </ul>

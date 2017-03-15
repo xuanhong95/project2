@@ -72,6 +72,10 @@ class AuthController extends Controller
             'user_type' => intval($data['role']),
         ]);
 
+        $student_info = new \App\StudentInfo();
+        $student_info->user_id = $user->id;
+        $student_info->save();
+
         return $user;
     }
 }
