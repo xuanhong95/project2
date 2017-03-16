@@ -113,7 +113,7 @@
                         <table>
                             <tr>
                                 <div class="form-group">
-                                    <div class="col-sm-4" style="text-align: right;">
+                                    <div class="col-sm-5" style="text-align: right;">
                                         <label style="margin-top:5px; margin-bottom: 0px">
                                             Điện thoại:
                                         </label>
@@ -216,16 +216,77 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-md-3" style="border:1px solid black">Ghi đầy đủ thông tin sau nếu sinh viên đã có địa chỉ thực tập
+                    <td class="col-md-3" style="border:1px solid black">Đã có công ty thực tập
                     </td>
                     <td class="col-md-9" colspan="2" style="border:1px solid black">
-                        <p>Tên đầy đủ của cơ quan, công ty:</p>
-                        <p>Địa chỉ:</p>
-                        <p>Người phụ trách</p>
-                        <p>Điện thoại:</p>
-                        <p>Email:</p>
-                        <p>Thời gian thực tập:</p>
-                        <p>Từ: đến: </p>
+                        <div>
+                            <input type="checkbox" id="have_company" value="1">
+                        </div>
+                        <div id="div_company" class="hidden" style="margin-top:10px">
+                            <div class="form-group">
+                                <div class="col-sm-3" style="text-align: right;">
+                                    <label>
+                                        Tên đầy đủ của cơ quan, công ty:
+                                    </label>
+                                </div>
+                                <div class="col-sm-8 required {{ $form->field('cpn_name')->has_error }}">
+                                    {!! $form->field('cpn_name') !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3" style="text-align: right;">
+                                    <label style="margin-top:5px; margin-bottom: 0px">
+                                        Địa chỉ:
+                                    </label>
+                                </div>
+                                <div class="col-sm-8 required {{ $form->field('cpn_address')->has_error }}">
+                                    {!! $form->field('cpn_address') !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3" style="text-align: right;">
+                                    <label style="margin-top:5px; margin-bottom: 0px">
+                                        Người phụ trách:
+                                    </label>
+                                </div>
+                                <div class="col-sm-8 required {{ $form->field('cpn_instructor')->has_error }}">
+                                    {!! $form->field('cpn_instructor') !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3" style="text-align: right;">
+                                    <label style="margin-top:5px; margin-bottom: 0px">
+                                        Điện thoại:
+                                    </label>
+                                </div>
+                                <div class="col-sm-8 required {{ $form->field('cpn_phone')->has_error }}">
+                                    {!! $form->field('cpn_phone') !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3" style="text-align: right;">
+                                    <label style="margin-top:5px; margin-bottom: 0px">
+                                        Email:
+                                    </label>
+                                </div>
+                                <div class="col-sm-8 required {{ $form->field('cpn_email')->has_error }}">
+                                    {!! $form->field('cpn_email') !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3" style="text-align: right;">
+                                    <label style="margin-top:5px; margin-bottom: 0px">
+                                        Thời gian thực tập
+                                    </label>
+                                </div>
+                                <div class="col-sm-4 required {{ $form->field('cpn_startdate')->has_error }}">
+                                    {!! $form->field('cpn_startdate') !!}
+                                </div>
+                                <div class="col-sm-4 required {{ $form->field('cpn_enddate')->has_error }}">
+                                    {!! $form->field('cpn_enddate') !!}
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -259,5 +320,10 @@
     });
 
     $("#phone").numeric();
+
+    $('#have_company').click(function(){
+        $('#div_company').toggleClass('hidden');
+    });
+
 </script>
 @endsection
