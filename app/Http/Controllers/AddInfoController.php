@@ -20,7 +20,7 @@ class AddInfoController extends Controller
 			return redirect('/');
 		}
 
-		$avail_company = \App\AvailableCompany::where('user_id', $id)->get();
+		$avail_company = \App\AvailableCompany::where('user_id', $id)->first();
 		if(empty($avail_company)){
 			$source = \App\User::join('student_infos', 'users.id', '=', 'student_infos.user_id')
 			->where('users.id', $id)
