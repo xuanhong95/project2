@@ -26,7 +26,7 @@
                         margin-seasons col-sm-3 col-xs-3">
 
                         <a href="/teacher/seasons/info/id={!! $seasons[$i-1]->id !!}"><h4>Season {!! $seasons[$i-1]->id !!}</h4></a>
-                        <h5>Status: {!! $seasons[$i-1]->is_openning==1?'Openning':'Finished' !!}</h5>
+                        <h5>Status: <!-- {!! $seasons[$i-1]->is_openning==1?'Openning':'Finished' !!}--></h5>
                     </div>
                 </div>
             @endfor
@@ -37,7 +37,7 @@
 <script type="text/javascript">
     $(function(){
         $('.season').on('click',function(){
-            $(this).
+
         });
     });
 </script>

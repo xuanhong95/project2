@@ -14,7 +14,7 @@ class TeacherController extends Controller
     }
 
     public function showSeasons(){
-        $seasons=\DB::table('seasons')->select('id','is_openning')->get();
+        $seasons=\DB::table('seasons')->get();
         // dd($seasons);
         return view('teacher.seasons',compact('seasons'));
     }

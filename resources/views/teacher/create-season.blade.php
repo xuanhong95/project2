@@ -35,7 +35,7 @@
         </div>
 
         <div class="form-group">
-            <label for="remark_deadline" class="col-sm-3 control-label">Hạn phúc khảo:</label>
+            <label for="remarking_deadline" class="col-sm-3 control-label">Hạn phúc khảo:</label>
             <div class="col-sm-6 dateinput">
                 {!! $form->field('remarking_deadline') !!}
             </div>
@@ -65,7 +65,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-    $('#start_date, #register_deadline, #submit_result_deadline, #remark_deadline, #end_date').datepicker({
+    $('#start_date, #register_deadline, #submit_result_deadline, #remarking_deadline, #end_date').datepicker({
         changeMonth:true,
         changeYear:true,
         dateFormat:'yy/mm/dd',

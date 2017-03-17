@@ -20,7 +20,7 @@ class AddInfoController extends Controller
 			return redirect('/');
 		}
 
-		$avail_company = \App\AvailableCompany::where('user_id', $id)->get();
+		$avail_company = \App\AvailableCompany::where('user_id', $id)->first();
 		if(empty($avail_company)){
 			$source = \App\User::join('student_infos', 'users.id', '=', 'student_infos.user_id')
 			->where('users.id', $id)
@@ -100,7 +100,7 @@ class AddInfoController extends Controller
 				\DB::table('student_infos')->insertGetId([
 					'user_id'=>\Auth::user()->id,
 					]);
-
+				$info=\DB::table('student_infos')->where('user_id',$user_id)->first();
 			}
 
 			$name=\DB::table('users')->where('id',$user_id)->first();
@@ -150,6 +150,7 @@ class AddInfoController extends Controller
 			\DB::table('teachers')->insertGetId([
 				'user_id'=>\Auth::user()->id,
 				]);
+			$info=\DB::table('teachers')->where('user_id',$user_id)->first();
 		}
 		$name=\DB::table('users')->where('id',$user_id)->first();
 
@@ -165,9 +166,9 @@ class AddInfoController extends Controller
 			$info->subject=$input['subject'];
 			$info->save();
 
-			// $info_name=\App\User::where('id',\Auth::user()->id)->first();
-			// $info_name->name=$input['name'];
-			// $info_name->save();
+			 $info_name=\App\User::where('id',\Auth::user()->id)->first();
+			$info_name->name=$input['name'];
+			$info_name->save();
 
 			$form->message('Saved');
 			$form->link('/','Back');
@@ -179,27 +180,30 @@ class AddInfoController extends Controller
 
 	}else if($user_type==2){// create profile for enterprise instructor
 
-		$info=\DB::table('enterprise_instructors')->where('user_id',$user_id)->first();
+		$info=\App\EnterpriseInstructor::where('user_id',$user_id)->first();
 		// if profile is still null,add default
 		if(is_null($info)){
 			\DB::table('enterprise_instructors')->insertGetId([
 				'user_id'=>\Auth::user()->id,
+				'company_id'=>'1',
 				]);
+			$info=\App\EnterpriseInstructor::where('user_id',$user_id)->first();
 		}
-		$name=\DB::table('users')->where('id',$user_id)->first();
+		$name=\App\User::where('id',$user_id)->first();
 		$list_companies=\DB::table('companies')->select('id','name')->orderBy('name','esc')->get();
-
+		// dd($list_companies);
+		//Create form
 		$form=\DataForm::create();
-		$form->add('name','Name','text')->insertValue($name->name);
-		$form->add('company','Company:','select')->option('','--Choose--')->option($list_companies)->insertValue($info->name);
+		$form->add('company','Company:','text')->insertValue($info->company)->mode('readonly');
+		$form->add('name','Name:','text')->insertValue($name->name);
 		$form->add('phone','Phone:','text')->insertValue($info->phone);
 		$form->submit('Save');
 
+		//Save data from input
 		$form->saved(function() use ($form){
 			$input=\Input::all();
 
 			$info=\App\EnterpriseInstructor::where('user_id',\Auth::user()->id)->first();
-			$info->company_id=$input['company'];
 			$info->phone=$input['phone'];
 			$info->save();
 
@@ -221,16 +225,21 @@ class AddInfoController extends Controller
 		if(is_null($info)){
 			\DB::table('enterprises')->insertGetId([
 				'user_id'=>\Auth::user()->id,
+				'company_id'=>'1',
 				]);
+			$info=\DB::table('enterprises')->where('user_id',$user_id)->first();
 		}
 
 		$name=\DB::table('users')->where('id',$user_id)->first();
 
+		//Create Input Form
 		$form=\DataForm::create();
+		$form->add('company','Company:','text')->insertValue($info->company)->mode('readonly');
 		$form->add('name','Name','text')->insertValue($name->name);
 		$form->add('phone','Phone:','text')->insertValue($info->phone);
 		$form->submit('Save');
 
+		//Save Data from Input
 		$form->saved(function() use ($form){
 			$input=\Input::all();
 
@@ -257,16 +266,17 @@ class AddInfoController extends Controller
 			\DB::table('managers')->insertGetId([
 				'user_id'=>\Auth::user()->id,
 				]);
+			$info=\DB::table('managers')->where('user_id',$user_id)->first();
 		}
 		$name=\DB::table('users')->where('id',$user_id)->first();
 
-
+		//Create Input Form
 		$form=\DataForm::create();
 		$form->add('name','Name','text')->insertValue($name->name);
 		$form->add('phone','Phone:','text')->insertValue($info->phone);
-
 		$form->submit('Save');
 
+		//Save Data from Input
 		$form->saved(function() use ($form){
 			$input=\Input::all();
 
@@ -293,16 +303,17 @@ class AddInfoController extends Controller
 			\DB::table('system_managers')->insertGetId([
 				'user_id'=>\Auth::user()->id,
 				]);
+			$info=\DB::table('system_managers')->where('user_id',$user_id)->first();
 		}
 		$name=\DB::table('users')->where('id',$user_id)->first()->name;
 
-
+		//Create Input Form
 		$form=\DataForm::create();
 		$form->add('name','Name','text')->insertValue($name);
 		$form->add('phone','Phone:','text')->insertValue($info->phone);
-
 		$form->submit('Save');
 
+		//Save Data from Input
 		$form->saved(function() use ($form){
 			$input=\Input::all();
 
