@@ -20,6 +20,7 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 	'manage' => 'ManageController',
 	'add-info' => 'AddInfoController',
+    'company' => 'CompanyController',
 	]);
 Route::get('/student-report','ManageController@showStudentReport');
 Route::get('/home', 'HomeController@index');
