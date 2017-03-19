@@ -135,9 +135,7 @@
                         <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
                             Companies <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="/teacher/seasons">Recruitments</a></li>
-                        </ul>
+                        
                     </li>
                 </ul>
 

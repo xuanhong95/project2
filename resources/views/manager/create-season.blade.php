@@ -54,7 +54,7 @@
                 {!! $form->footer !!}
             </div>
             <div class="col-sm-4 col-sm-offset-2">
-                <a href="/teacher/seasons" class="btn btn-default">Cancel</a>
+                <a href="{!! route('seasons') !!}" class="btn btn-default">Cancel</a>
             </div>
         </div>
 
