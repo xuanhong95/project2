@@ -82,7 +82,8 @@ class AddInfoController extends Controller
 		$form->submit('Save');
 
 		$form->saved(function () use ($form) {
-			dd(\Input::all());
+			$form->message('Saved');
+            $form->link('/','Back');
 		});
 		$form->build();
 		return view('student.cv', compact('form'));
@@ -118,8 +119,10 @@ class AddInfoController extends Controller
 
 			$form->saved(function() use ($form){
 				$input=\Input::all();
-
+				if(empty($input['have_laptop']))
+					$input['have_laptop'] = 0;
 				$info=\App\StudentInfo::where('user_id',\Auth::user()->id)->first();
+
 				$info->class=$input['class'];
 				$info->student_number=$input['student_number'];
 				$info->is_male=$input['is_male'];
@@ -234,7 +237,7 @@ class AddInfoController extends Controller
 
 		//Create Input Form
 		$form=\DataForm::create();
-		$form->add('company','Company:','text')->insertValue($info->company)->mode('readonly');
+		$form->add('company','Company:','text')->insertValue(\App\Company::getCompanyNameByID($info->company_id))->mode('readonly');
 		$form->add('name','Name','text')->insertValue($name->name);
 		$form->add('phone','Phone:','text')->insertValue($info->phone);
 		$form->submit('Save');
