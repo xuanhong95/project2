@@ -111,7 +111,7 @@
                             Enterprise <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Internship Registration</a></li>
+                            <li><a href="/company/register">Internship Registration</a></li>
                         </ul>
                     </li>
                 </ul>
