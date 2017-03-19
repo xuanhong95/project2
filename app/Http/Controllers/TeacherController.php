@@ -16,10 +16,10 @@ class TeacherController extends Controller
     public function showSeasons(){
         $seasons=\DB::table('seasons')->get();
         // dd($seasons);
-        return view('teacher.seasons',compact('seasons'));
+        return view('manager.seasons',compact('seasons'));
     }
 
-    public function showCreateSeasonPage(){
+    public function showCreateSeason(){
         $season=\DB::table('seasons')->count('id')+1;
 
         $form=\DataForm::source(new \App\Season);
@@ -36,7 +36,7 @@ class TeacherController extends Controller
         });
         $form->build();
 
-        return view('teacher.create-season',compact('form','season'));
+        return view('manager.create-season',compact('form','season'));
     }
 
     public function showSeasonInfo($season){
@@ -53,6 +53,6 @@ class TeacherController extends Controller
         });
         $form->build();
 
-        return view('teacher.edit-season',compact('form','season'));
+        return view('manager.edit-season',compact('form','season'));
     }
 }

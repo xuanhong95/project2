@@ -62,9 +62,11 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
+
                 @if(\Auth::guest())
 
                 @else
+                <!-- navbar for STUDENT -->
                 @if(\Auth::user()->user_type==0)
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
@@ -78,7 +80,7 @@
                         </ul>
                     </li>
                 </ul>
-
+                <!-- navbar for INSTRUCTOR TEACHER -->
                 @elseif(\Auth::user()->user_type==1)
                 <ul class="nav navbar-nav">
                     <li class=dropdown>
@@ -90,7 +92,7 @@
                         </ul>
                     </li>
                 </ul>
-
+                <!-- navbar for ENTERPRISE INSTRUCTOR -->
                 @elseif(\Auth::user()->user_type==2)
                 <ul class="nav navbar-nav">
                     <li class=dropdown>
@@ -103,7 +105,7 @@
                     </li>
                 </ul>
 
-
+                <!-- navbar for ENTERPRISE -->
                 @elseif(\Auth::user()->user_type==3)
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
@@ -116,6 +118,7 @@
                     </li>
                 </ul>
 
+                <!-- navbar for INTERNSHIP MANAGER -->
                 @elseif(\Auth::user()->user_type==4)
                 <ul class="nav navbar-nav">
                     <li class=dropdown>
@@ -123,13 +126,22 @@
                             Internship Manager <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/teacher/seasons">Seasons</a></li>
+                            <li><a href="{!! route('seasons') !!}">Seasons</a></li>
                             <li><a href="#">Internship Schedule</a></li>
                             <li><a href="#">Score</a></li>
                         </ul>
                     </li>
+                    <li class=dropdown>
+                        <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
+                            Companies <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/teacher/seasons">Recruitments</a></li>
+                        </ul>
+                    </li>
                 </ul>
 
+                <!-- navbar for SYSTEM MANAGER -->
                 @elseif(\Auth::user()->user_type==5)
                 <ul class="nav navbar-nav">
                     <li class=dropdown>
@@ -144,6 +156,7 @@
                 </ul>
                 @endif
 
+                <!-- DEFAULT navbar  -->
                 <ul class="nav navbar-nav">
                     <li class=dropdown>
                         <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">

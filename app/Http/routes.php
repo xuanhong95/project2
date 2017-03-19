@@ -24,16 +24,9 @@ Route::controllers([
 	]);
 Route::get('/student-report','ManageController@showStudentReport');
 Route::get('/home', 'HomeController@index');
-Route::get('/teacher/seasons',[
-    'as'=>'seasons',
-    'uses'=>'TeacherController@showSeasons',
-]);
-Route::any('/teacher/seasons/create',[
-    'as'=>'createNewSeason',
-    'uses'=>'TeacherController@showCreateSeasonPage'
-]);
 
-Route::any('/teacher/seasons/info/id={season}',[
-    'as'=>'seasoninfo',
-    'uses'=>'TeacherController@showSeasonInfo'
-]);
+Route::group(['prefix'=>'manager','middleware'=>'auth'],function(){
+    Route::get('seasons','TeacherController@showSeasons')->name('seasons');
+    Route::any('seasons/create','TeacherController@showCreateSeasonPage')->name('create-season');
+    Route::any('seasons/{season}','TeacherController@showSeasonInfo')->name('edit-season');
+});

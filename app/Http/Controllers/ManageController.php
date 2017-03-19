@@ -17,23 +17,6 @@ class ManageController extends Controller
 		dd('index');
 	}
 
-	public function anySetItem(){
-		$form = \DataForm::create();
-		$form->text('title','Title');
-		$form->textarea('body','Body')->rule('required');
-		$form->submit('Save');
-
-		$form->saved(function() use ($form)
-		{
-			dd(\Input::all());
-		});
-
-		return view('manage.set_item', compact('form'));
-	}
-	public function showCV(){
-		return view('cv');
-	}
-
 	public function showStudentReport(){
 		$student=\DB::table('student_infos')
 			->select('student_number','phone','class')
