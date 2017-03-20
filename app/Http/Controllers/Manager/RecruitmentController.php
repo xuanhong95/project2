@@ -17,6 +17,11 @@ class RecruitmentController extends \App\Http\Controllers\Controller
     public function showRecruitments()
     {
         $lastSeason=\App\Season::orderBy('id','desc')->first();
+
+        if(is_null($lastSeason)) {
+            return redirect()->route('seasons');
+        }
+
         $recruitments=\App\Recruitment::join('enterprises', 'recruitments.user_id', '=', 'enterprises.user_id')
                                         ->join('companies', 'companies.id','=','enterprises.company_id')
                                         ->where('recruitments.season','=',$lastSeason->id)
