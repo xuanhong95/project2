@@ -9,7 +9,7 @@
 <div class="container" style="margin-top:70px">
 
     <div class="col-md-10" style="margin-bottom:30px">
-        <a href="{!! route('create-season') !!}"  class="btn btn-primary">Start new Season...</a>
+        <a href="{!! route('create-season') !!}"  class="btn btn-info">Start new Season...</a>
     </div>
 
     <div class="col-md-10 col-md-offset-1 well col-sm-10 col-xs-10 col-xs-offset-1">
@@ -48,9 +48,11 @@
                 <div class="col-md-offset-1" >
                     <div class="col-md-3 btn btn-lg
                         margin-seasons col-sm-3 col-xs-3
-                        <?php echo is_openningSeason($seasons[$i-1])?'btn-info':'btn-warning' ?>
+                        <?php echo is_openningSeason($seasons[$i-1])?'btn-primary':'btn-warning' ?>
                         ">
-                        <a href="{!! route('edit-season',['season'=>$seasons[$i-1]->id]) !!}"><h4>Season {!! $seasons[$i-1]->id !!}</h4></a>
+                        <a href="{!! route('edit-season',['season'=>$seasons[$i-1]->id]) !!}"
+                            style="color:white"
+                            ><h4>Season {!! $seasons[$i-1]->id !!}</h4></a>
                         <h5>Status:<?php echo getStatus($seasons[$i-1]) ?></h5>
                     </div>
                 </div>

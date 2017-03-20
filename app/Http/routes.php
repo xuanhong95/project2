@@ -14,26 +14,47 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/login',function(){
+    return view('auth.login');
+});
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-	'manage' => 'ManageController',
-	'add-info' => 'AddInfoController',
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+    'manage' => 'ManageController',
+    'add-info' => 'AddInfoController',
     'company' => 'CompanyController',
-	]);
+]);
 Route::get('/student-report','ManageController@showStudentReport');
 Route::get('/home', 'HomeController@index');
 
-Route::group(['prefix'=>'manager','middleware'=>'auth'],function(){
+Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],function(){
 
-    Route::group(['namespace'=>'Manager'],function(){
+    Route::any('seasons','SeasonController@showSeasons')
+        ->name('seasons');
+    Route::any('seasons/create','SeasonController@showCreateSeason')
+        ->name('create-season');
+    Route::any('seasons/{season}','SeasonController@showSeasonInfo')
+        ->name('edit-season');
+    Route::any('recruitments','RecruitmentController@showRecruitments')
+        ->name('manager-recruitments');
+    Route::any('recruitments/{id}','RecruitmentController@readRecruitment')
+        ->name('read-recruitment');
+    Route::any('recruitments/{id}/accept','RecruitmentController@acceptRecruitment')
+        ->name('accept-recruitment');
+    Route::any('recruitments/{id}/deny','RecruitmentController@denyRecruitment')
+        ->name('deny-recruitment');
+});
 
-        Route::any('seasons','SeasonController@showSeasons')
-                ->name('seasons');
-        Route::any('seasons/create','SeasonController@showCreateSeason')
-                ->name('create-season');
-        Route::any('seasons/{season}','SeasonController@showSeasonInfo')
-                ->name('edit-season');
+Route::group(['middleware'=>'auth','prefix'=>'company'],function(){
+
+    Route::any('register','CompanyController@register')
+        ->name('create-recruitment');
+
+    Route::group(['namespace'=>'Enterprise'],function(){
+
+        Route::any('recruitments','RecruitmentController@showRecruitments')
+            ->name('enterprise-recruitment');
+
     });
+
 });

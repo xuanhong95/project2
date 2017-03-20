@@ -113,7 +113,8 @@
                             Enterprise <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/company/register">Internship Registration</a></li>
+                            <li><a href="{!! route('create-recruitment') !!}">Create new recruitment</a>                                    </li>
+                            <li><a href="{!! route('enterprise-recruitment') !!}">Show Recruitments</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -135,68 +136,70 @@
                         <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
                             Companies <span class="caret"></span>
                         </a>
-                        
-                    </li>
-                </ul>
-
-                <!-- navbar for SYSTEM MANAGER -->
-                @elseif(\Auth::user()->user_type==5)
-                <ul class="nav navbar-nav">
-                    <li class=dropdown>
-                        <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
-                            System Manager <span class="caret"></span>
-                        </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Users</a></li>
-                            <li><a href="#">Config</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                @endif
+                        <li><a href="{!! route('manager-recruitments') !!}">Recruitments</a></li>
+                    </ul>
+                </li>
+            </ul>
 
-                <!-- DEFAULT navbar  -->
-                <ul class="nav navbar-nav">
-                    <li class=dropdown>
-                        <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
-                            Internship <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Students</a></li>
-                            <li><a href="#">Companies</a></li>
-                            <li><a href="#">Topics</a></li>
-                            <li><a href="#">Result</a></li>
-                        </ul>
-                    </li>
-                </ul>
+            <!-- navbar for SYSTEM MANAGER -->
+            @elseif(\Auth::user()->user_type==5)
+            <ul class="nav navbar-nav">
+                <li class=dropdown>
+                    <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
+                        System Manager <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Users</a></li>
+                        <li><a href="#">Config</a></li>
+                    </ul>
+                </li>
+            </ul>
             @endif
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                    <li><a href="{{ url('auth/login') }}" style="color:white;">Login</a></li>
-                    <li><a href="{{ url('auth/register') }}" style="color:white;">Register</a></li>
-                    @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:white;">
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
 
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="/add-info/show-profile"><i class=""></i>Profile</a></li>
-                            <li><a href="{{ url('auth/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+            <!-- DEFAULT navbar  -->
+            <ul class="nav navbar-nav">
+                <li class=dropdown>
+                    <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
+                        Internship <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Students</a></li>
+                        <li><a href="#">Companies</a></li>
+                        <li><a href="#">Topics</a></li>
+                        <li><a href="#">Result</a></li>
+                    </ul>
+                </li>
+            </ul>
+            @endif
+            <!-- Right Side Of Navbar -->
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Authentication Links -->
+                @if (Auth::guest())
+                <li><a href="{{ url('auth/login') }}" style="color:white;">Login</a></li>
+                <li><a href="{{ url('auth/register') }}" style="color:white;">Register</a></li>
+                @else
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:white;">
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
 
-                        </ul>
-                    </li>
-                    @endif
-                </ul>
-            </div>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/add-info/show-profile"><i class=""></i>Profile</a></li>
+                        <li><a href="{{ url('auth/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+
+                    </ul>
+                </li>
+                @endif
+            </ul>
         </div>
-    </nav>
-    @yield('content')
-    @extends('layouts.footer')
-    <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    </div>
+</nav>
+@yield('content')
+@extends('layouts.footer')
+<!-- JavaScripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+{{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>
