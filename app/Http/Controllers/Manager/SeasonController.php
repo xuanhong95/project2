@@ -1,25 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Manager;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class TeacherController extends Controller
+class SeasonController extends \App\Http\Controllers\Controller
 {
-    //
-    public function getIndex(){
-        return view('home');
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
-
-    public function showSeasons(){
+    //
+    public function showSeasons()
+    {
         $seasons=\DB::table('seasons')->get();
         // dd($seasons);
-        return view('teacher.seasons',compact('seasons'));
+        return view('manager.seasons',compact('seasons'));
     }
 
-    public function showCreateSeasonPage(){
+    public function showCreateSeason()
+    {
         $season=\DB::table('seasons')->count('id')+1;
 
         $form=\DataForm::source(new \App\Season);
@@ -32,14 +34,15 @@ class TeacherController extends Controller
 
         $form->saved(function () use($form){
             $form->message("Saved");
-            $form->link('/teacher/seasons','Back');
+            $form->link(route('seasons'),'Back');
         });
         $form->build();
 
-        return view('teacher.create-season',compact('form','season'));
+        return view('manager.create-season',compact('form','season'));
     }
 
-    public function showSeasonInfo($season){
+    public function showSeasonInfo($season)
+    {
         $form=\DataForm::source(\App\Season::where('id',$season)->first());
         $form->add('start_date','start_date:','text');
         $form->add('register_deadline','register_deadline:','text');
@@ -53,6 +56,19 @@ class TeacherController extends Controller
         });
         $form->build();
 
-        return view('teacher.edit-season',compact('form','season'));
+        return view('manager.edit-season',compact('form','season'));
+    }
+
+    public function getOpenningSeason()
+    {
+        $currentDate= date('Y-m-d');
+        $openningSeasons=\App\Season::whereBetween($currentDate,['start_date','end_date'])->get();
+        return $openningSeasons;
+    }
+
+    public function is_openningSeason(\App\Season $season)
+    {
+        $currentDate = date('Y-m-d');
+        return ( $currentDate > $season->start_date )&&( $currentDate < $season->end_date )?true:false;
     }
 }

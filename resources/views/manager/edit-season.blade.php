@@ -6,7 +6,7 @@
         {!! $form->header !!}
         <legend>Season {!! $season !!}:</legend>
         <div class="form-group">
-            
+
             <div class="col-sm-6 ">
                 {!! $form->message !!}
             </div>
@@ -51,7 +51,7 @@
 
         <div class="form-group">
             <div class="col-sm-4 col-sm-offset-2">
-                <a href="/teacher/seasons" class="btn btn-default ">Back</a>
+                <a href="{!! route('seasons')!!}" class="btn btn-default ">Back</a>
             </div>
             <div class="col-sm-4 col-sm-offset-2">
                 {!! $form->footer !!}
