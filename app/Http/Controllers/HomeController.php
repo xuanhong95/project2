@@ -22,8 +22,17 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function anyIndex()
     {
         return view('home');
+    }
+
+    public function viewTopicList(){
+        $list_topic = \App\Recruitment::join('enterprises', 'recruitments.user_id', '=', 'enterprises.user_id')
+                                        ->where('recruitments.is_confirm', 1)
+                                        ->orderBy('recruitments.id', 'desc')
+                                        ->get();
+//        dd($list_topic);
+        return view('home.topics', compact('list_topic'));
     }
 }

@@ -25,7 +25,7 @@ Route::controllers([
     'company' => 'CompanyController',
 ]);
 Route::get('/student-report','ManageController@showStudentReport');
-Route::get('/home', 'HomeController@index');
+Route::get('/topics', 'HomeController@viewTopicList');
 
 Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],function(){
 
