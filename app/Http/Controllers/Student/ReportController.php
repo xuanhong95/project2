@@ -70,7 +70,8 @@ class ReportController extends \App\Http\Controllers\Controller
 			$student_report = new \App\StudentReport;
 			$input=\Input::all();
 
-
+			$student_report->student_id = \Auth::id();
+			$student_report->company_id
 			$form->message('Saved');
 			$form->link('route('/')','Back');
 		});

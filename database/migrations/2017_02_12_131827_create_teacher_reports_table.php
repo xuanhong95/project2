@@ -15,12 +15,8 @@ class CreateTeacherReportsTable extends Migration
     {
         Schema::create('teacher_reports', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('company_id')->unsigned();
-            $table->foreign('company_id')->references('id')->on('companies');
-            $table->integer('season')->unsigned();
-            $table->foreign('season')->references('id')->on('seasons');
+            $table->integer('id_allocation')->unsigned();
+            $table->foreign('id_allocation')->references('id')->on('allocations');
             $table->text('advantage_disadvantage_improvement')->nullable();
             $table->boolean('is_confirmed')->nullable();
             $table->timestamps();
