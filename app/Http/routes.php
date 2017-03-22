@@ -18,14 +18,16 @@ Route::get('/', function () {
 Route::get('/login',function(){
     return view('auth.login');
 });
+
+Route::any('profile','AddInfoController@anyShowProfile')
+    ->name('profile');
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
-    'manage' => 'ManageController',
     'add-info' => 'AddInfoController',
     'company' => 'CompanyController',
 ]);
-Route::get('/student-report','ManageController@showStudentReport');
+
 Route::get('/topics', 'HomeController@viewTopicList');
 
 Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],function(){
@@ -67,4 +69,6 @@ Route::group(['middleware'=>'auth','prefix'=>'student','namespace'=>'Student'],f
         ->name('create-feedback');
     Route::any('feedback/{id_feedback}','FeedbackController@showFeedback')
         ->name('show-feedback');
+    Route::any('student-report','ReportController@showStudentReport')
+        ->name('student-report');
 });
