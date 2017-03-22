@@ -13,7 +13,8 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('homepage');
+
 Route::get('/login',function(){
     return view('auth.login');
 });
@@ -56,5 +57,14 @@ Route::group(['middleware'=>'auth','prefix'=>'company'],function(){
             ->name('enterprise-recruitment');
 
     });
+});
 
+Route::group(['middleware'=>'auth','prefix'=>'student','namespace'=>'Student'],function(){
+
+    Route::any('feedback','FeedbackController@showFeedbacks')
+        ->name('student-feedback');
+    Route::any('create-feedback','FeedbackController@createFeedback')
+        ->name('create-feedback');
+    Route::any('feedback/{id_feedback}','FeedbackController@showFeedback')
+        ->name('show-feedback');
 });

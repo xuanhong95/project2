@@ -66,9 +66,5 @@ class SeasonController extends \App\Http\Controllers\Controller
         return $openningSeasons;
     }
 
-    public function is_openningSeason(\App\Season $season)
-    {
-        $currentDate = date('Y-m-d');
-        return ( $currentDate > $season->start_date )&&( $currentDate < $season->end_date )?true:false;
-    }
+
 }

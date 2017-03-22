@@ -29,16 +29,17 @@
                     <a href="#">{!! $recruitment->name !!}</a>
                 </div>
                 <div class="col-md-3 col-md-offset-4">
-                    <p> <?php if( is_null($recruitment->is_confirm) ) echo "Unapproved";
+                    <p>
+                        <?php if( is_null($recruitment->is_confirm) ) echo "Unapproved";
                             elseif( $recruitment->is_confirm == 1 ) echo "Accepted";
-                            else echo "Denied";
+                            else echo "Declined";
                         ?>
                     </p>
                 </div>
+            </div>
+            @endforeach
+        </div>
     </div>
-    @endforeach
-</div>
-</div>
 </div>
 
 @endsection
