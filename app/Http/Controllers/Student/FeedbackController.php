@@ -12,8 +12,8 @@ class FeedbackController extends \App\Http\Controllers\Controller
     //
     public function showFeedbacks()
     {
-        $feedbacks = \App\StudentFeedback::join('student_companies','student_feedbacks.user_id','=','student_companies.user_id')
-        ->join('companies','student_companies.company_id','=','companies.id')
+        $feedbacks = \App\StudentFeedback::join('allocations','student_feedbacks.user_id','=','allocations.student_id')
+        ->join('companies','allocations.company_id','=','companies.id')
         ->where( 'student_feedbacks.user_id','=',\Auth::id() )
         ->select('student_feedbacks.id','companies.name','student_feedbacks.season','is_confirmed')
         ->get();
@@ -32,9 +32,9 @@ class FeedbackController extends \App\Http\Controllers\Controller
         if( \App\Season::is_openningSeason($lastSeason) ){
 
             //get company which student intern in
-            $company=\App\StudentCompany::join('companies','companies.id','=','student_companies.company_id')
+            $company=\App\Allocation::join('companies','companies.id','=','allocations.company_id')
             ->where([
-                ['user_id','=',\Auth::id()],
+                ['student_id','=',\Auth::id()],
                 ['season','=',$lastSeason->id]
                 ])->select('companies.name','season')
                 ->first();
@@ -55,7 +55,7 @@ class FeedbackController extends \App\Http\Controllers\Controller
                     $feedback->feedback_reason = $input['feedback_reason'];
                     $feedback->save();
 
-                    $form->message('Saved');
+                    $form->message('Sent');
                     $form->link( route('student-feedback'),'Back');
                 });
                 $form->build();
@@ -70,8 +70,8 @@ class FeedbackController extends \App\Http\Controllers\Controller
         public function showFeedback($id_feedback)
         {
             $feedbackInfo = \App\StudentFeedback::join(
-                    'student_companies','student_feedbacks.user_id','=','student_companies.user_id')
-            ->join('companies','student_companies.company_id','=','companies.id')
+                    'allocations','student_feedbacks.user_id','=','allocations.student_id')
+            ->join('companies','allocations.company_id','=','companies.id')
             ->where( 'student_feedbacks.id', '=', $id_feedback )
             ->select('companies.name','student_feedbacks.season',
                 'action','feedback_reason','is_confirmed','confirm_reason')
