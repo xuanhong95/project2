@@ -16,10 +16,6 @@
     padding: 0;
   }
 
-  html, body {
-    height: 100%;
-  }
-
   .container {
     min-height: 100%;
   }

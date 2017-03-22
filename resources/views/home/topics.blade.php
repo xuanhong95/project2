@@ -33,7 +33,7 @@
                 <p>Công ty: {{\App\Company::getCompanyNameByID($topic->company_id)}}</p>
                 <p>Người đăng tin: {{\App\Enterprise::getEnterpriseNameByID($topic->user_id)}}</p>
             </div>
-                <a class="btn-view-detail" href="#">View Detail</a>
+                <a class="btn-view-detail" href="/view-topic/{{$topic->id}}">View Detail</a>
             <?php $i++; ?>
             @else
             <div>
@@ -41,7 +41,7 @@
                 <p>Công ty: {{\App\Company::getCompanyNameByID($topic->company_id)}}</p>
                 <p>Người đăng tin: {{\App\Enterprise::getEnterpriseNameByID($topic->user_id)}}</p>
             </div>
-                <a class="btn-view-detail" href="#">View Detail</a>
+                <a class="btn-view-detail" href="/view-topic/{{$topic->id}}">View Detail</a>
             @endif
         </div>
         @endforeach
