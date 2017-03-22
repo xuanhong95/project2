@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateManagersTable extends Migration
+class CreateStudentAppliesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,13 @@ class CreateManagersTable extends Migration
      */
     public function up()
     {
-        Schema::create('managers', function (Blueprint $table) {
+        Schema::create('student_applies', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('phone',15);
+            $table->integer('recruitment_id')->unsigned();
+            $table->foreign('recruitment_id')->references('id')->on('recruitments');
+            $table->string('applied_position');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateManagersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('managers');
+        Schema::drop('student_applies');
     }
 }
