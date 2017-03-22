@@ -14,8 +14,8 @@ class CreateCompanyAppreciationsTable extends Migration
     {
         Schema::create('company_appreciations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('id_allocation')->unsigned();
+            $table->foreign('id_allocation')->references('id')->on('allocations');
             $table->integer('general_appreciation_id')->unsigned();
             $table->foreign('general_appreciation_id')->references('id')->on('general_appreciations');
             $table->boolean('is_continue_receive')->default(true);

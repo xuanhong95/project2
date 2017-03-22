@@ -17,4 +17,10 @@ class Season extends Model
         $currentDate = date('Y-m-d');
         return ( $currentDate >= $season->start_date )&&( $currentDate <= $season->end_date )?true:false;
     }
+
+    public static function is_closedSeason(\App\Season $season)
+    {
+        $currentDate = date('Y-m-d');
+        return ( $currentDate >= $season->start_date )&&( $currentDate <= $season->end_date )?false:true;
+    }
 }
