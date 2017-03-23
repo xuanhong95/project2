@@ -110,10 +110,10 @@
                recruitment_id : {{$topic->id}}
             },
             success : function (result){
-                console.log(result);
+                window.location.reload();
             },
             error : function(){
-                console.log('hihi');
+                console.log('error roi hihi');
             }
         });
     });

@@ -32,7 +32,7 @@ class AddInfoController extends Controller
 		}
 		else{
 			$source = \App\User::join('student_infos', 'users.id', '=', 'student_infos.user_id')
-								->join('available_companies', 'users.id', '=', 'available_companies.user_id')
+			->join('available_companies', 'users.id', '=', 'available_companies.user_id')
 			->where('users.id', $id)
 			->get(['users.name', 'users.email',
 				'student_infos.class', 'student_infos.student_number',
@@ -40,11 +40,13 @@ class AddInfoController extends Controller
 				'student_infos.is_male', 'student_infos.have_laptop',
 				'available_companies.name as cpn_name', 'available_companies.address as cpn_address',
 				'available_companies.instructor as cpn_instructor', 'available_companies.phone as cpn_phone',
-				'available_companies.email as cpn_email', 'available_companies.start_date as cpn_startdate',
-				'available_companies.end_date as cpn_enddate'
+				'available_companies.email as cpn_email', 'available_companies.start_date as cpn_start_date',
+				'available_companies.end_date as cpn_end_date'
 				]);
 		}
-
+		$english_certi = \App\StudentEnglishCertificate::where('user_id', $id)->first();
+		$registration = \App\Registration::where('user_id', $id)->first();
+		$skill_list = \App\StudentProgrammingLanguage::where('user_id', $id)->get(['id', 'language_id', 'level']);
 
 		$form = \DataForm::source($source);
 
@@ -52,14 +54,29 @@ class AddInfoController extends Controller
 		$form->text('class', 'Lớp')->insertValue($source[0]->class)->mode('readonly');
 		$form->text('student_number', 'Mã số sinh viên')->insertValue($source[0]->student_number)->mode('readonly');
 		$form->add('is_male', 'Giới tính', 'select')->options(['0' => '--select--', '1' => 'Nam', '2' => 'Nữ'])->rule('not_in:0')->insertValue($source[0]->is_male)->mode('readonly');
-		$form->add('have_laptop', 'Có Laptop', 'checkbox');
+		$form->add('have_laptop', 'Có Laptop', 'checkbox')->insertValue($source[0]->have_laptop);
 		$form->add('address', 'Địa chỉ', 'textarea')->insertValue($source[0]->address);
 		$form->add('phone', 'Số điện thoại', 'text')->insertValue($source[0]->phone);
 		$form->text('email', 'Email')->insertValue($source[0]->email)->mode('readonly');
-		$form->add('certificate_id', 'Chứng chỉ tiếng anh', 'select')->options(['0' => '--select--', '1' => 'IELTS', '2' => 'TOEFL', '3' => 'TOEIC'])->rule('not_in:0');
-		$form->add('language_id', 'Ngôn ngữ lập trình', 'select')->options(['0' => '--select--', '1' => 'C', '2' => 'C++', '3' => 'C#', '4' => 'PHP'])->rule('not_in:0');
-		$form->add('point', 'Điểm tiếng anh', 'text');
-		$form->add('desire_skill', 'Kỹ năng muốn học hỏi', 'textarea')->placeholder('Nhập càng chi tiết càng tốt');
+		if(empty($english_certi)){
+			$form->add('certificate_id', 'Chứng chỉ tiếng anh', 'select')->options(['' => '--select--', '1' => 'IELTS', '2' => 'TOEFL', '3' => 'TOEIC']);
+			$form->add('point', 'Điểm tiếng anh', 'text');
+		}
+		else{
+			$form->add('certificate_id', 'Chứng chỉ tiếng anh', 'select')->options(['' => '--select--', '1' => 'IELTS', '2' => 'TOEFL', '3' => 'TOEIC'])->insertValue($english_certi->certificate_id);
+			$form->add('point', 'Điểm tiếng anh', 'text')->insertValue($english_certi->point);
+		}
+
+		$form->add('language_id', 'Ngôn ngữ lập trình', 'select')->options(['' => '--select--', '1' => 'C', '2' => 'C++', '3' => 'C#', '4' => 'PHP'])->attributes(['name' => 'language_id[]', 'class' => "skill-select"]);
+
+		if(empty($registration)){
+			$form->add('desire_skill', 'Kỹ năng muốn học hỏi', 'textarea')->placeholder('Nhập càng chi tiết càng tốt');
+		}
+		else{
+			$form->add('desire_skill', 'Kỹ năng muốn học hỏi', 'textarea')->placeholder('Nhập càng chi tiết càng tốt')->insertValue($registration->wished_skill);
+		}
+		
+		
 
 		if(empty($avail_company)){
 			$form->add('cpn_name', 'Company Name', 'text');
@@ -67,8 +84,8 @@ class AddInfoController extends Controller
 			$form->add('cpn_instructor', 'Company Instructor', 'text');
 			$form->add('cpn_phone', 'Company Phone', 'text');
 			$form->add('cpn_email', 'Company Email', 'text');
-			$form->add('cpn_startdate', 'Company Start Date', 'text')->placeholder('From');
-			$form->add('cpn_enddate', 'Company End Date', 'text')->placeholder('To');
+			$form->add('cpn_start_date', 'Company Start Date', 'text')->placeholder('From');
+			$form->add('cpn_end_date', 'Company End Date', 'text')->placeholder('To');
 		}
 		else{
 			$form->add('cpn_name', 'Company Name', 'text')->insertValue($source[0]->cpn_name);
@@ -76,17 +93,92 @@ class AddInfoController extends Controller
 			$form->add('cpn_instructor', 'Company Instructor', 'text')->insertValue($source[0]->cpn_instructor);
 			$form->add('cpn_phone', 'Company Phone', 'text')->insertValue($source[0]->cpn_phone);
 			$form->add('cpn_email', 'Company Email', 'text')->insertValue($source[0]->cpn_email);
-			$form->add('cpn_startdate', 'Company Start Date', 'text')->placeholder('From')->insertValue($source[0]->cpn_startdate);
-			$form->add('cpn_enddate', 'Company End Date', 'text')->placeholder('To')->insertValue($source[0]->cpn_enddate);
+			$form->add('cpn_start_date', 'Company Start Date', 'text')->placeholder('From')->insertValue($source[0]->cpn_startdate);
+			$form->add('cpn_end_date', 'Company End Date', 'text')->placeholder('To')->insertValue($source[0]->cpn_enddate);
 		}
 		$form->submit('Save');
 
-		$form->saved(function () use ($form) {
+		$form->saved(function () use ($form, $english_certi, $avail_company, $registration) {
+			$input = \Input::all();
+
+			$student_info = \App\StudentInfo::where('user_id', \Auth::id())->first();
+			$student_info->have_laptop = $input['have_laptop'];
+			$student_info->address = $input['address'];
+			$student_info->phone = $input['phone'];
+			$student_info->save();
+
+			if(empty($english_certi)){
+				$english_certi = new \App\StudentEnglishCertificate();
+				$english_certi->user_id = \Auth::id();
+				$english_certi->certificate_id = $input['certificate_id'];
+				$english_certi->point = $input['point'];
+				$english_certi->save();
+			}
+			else{
+				$english_certi->certificate_id = $input['certificate_id'];
+				$english_certi->point = $input['point'];
+				$english_certi->save();
+			}
+
+			if(empty($avail_company)){
+				$avail_company = new \App\AvailableCompany();
+				$avail_company->user_id = \Auth::id();
+				$avail_company->name = $input['cpn_name'];
+				$avail_company->instructor = $input['cpn_instructor'];
+				$avail_company->phone = $input['cpn_phone'];
+				$avail_company->email = $input['cpn_email'];
+				$avail_company->start_date = $input['cpn_start_date'];
+				$avail_company->end_date = $input['cpn_end_date'];
+				$avail_company->save();
+			}
+			else{
+				$avail_company->user_id = \Auth::id();
+				$avail_company->name = $input['cpn_name'];
+				$avail_company->instructor = $input['cpn_instructor'];
+				$avail_company->phone = $input['cpn_phone'];
+				$avail_company->email = $input['cpn_email'];
+				$avail_company->start_date = $input['cpn_start_date'];
+				$avail_company->end_date = $input['cpn_end_date'];
+				$avail_company->save();
+			}
+
+			if(empty($registration)){
+				$registration = new \App\Registration();
+				$registration->user_id = \Auth::id();
+				$registration->wished_skill = $input['desire_skill'];
+				$registration->save();
+			}
+			else{
+				$registration->wished_skill = $input['desire_skill'];
+				$registration->save();
+			}
+
+			$skills = $input['language_id'];
+
+			for($i = 0; $i < count($skills); $i++){
+				$skill_list = \App\StudentProgrammingLanguage::where('user_id', \Auth::id())->lists('language_id')->all();
+
+				if(count($skill_list) < 6){
+					if(!in_array($skills[$i], $skill_list)){
+						$new_skill = new \App\StudentProgrammingLanguage();
+						$new_skill->user_id = \Auth::id();
+						$new_skill->language_id = $skills[$i];
+						$new_skill->level = $input["optradio" . ($i+1)];
+						$new_skill->save();
+					}
+					else{
+						$edit_skill = \App\StudentProgrammingLanguage::where('language_id', $skills[$i])->first();
+						$edit_skill->level = $input["optradio" . ($i+1)];
+						$edit_skill->save();
+					}
+				}
+			}
+
 			$form->message('Saved');
-            $form->link('/','Back');
+			$form->link('/','Back');
 		});
 		$form->build();
-		return view('student.cv', compact('form'));
+		return view('student.cv', compact('form', 'avail_company', 'skill_list'));
 	}
 
 
@@ -169,7 +261,7 @@ class AddInfoController extends Controller
 			$info->subject=$input['subject'];
 			$info->save();
 
-			 $info_name=\App\User::where('id',\Auth::user()->id)->first();
+			$info_name=\App\User::where('id',\Auth::user()->id)->first();
 			$info_name->name=$input['name'];
 			$info_name->save();
 

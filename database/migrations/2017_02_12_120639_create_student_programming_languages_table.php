@@ -16,8 +16,7 @@ class CreateStudentProgrammingLanguagesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('language_id')->unsigned();
-            $table->foreign('language_id')->references('id')->on('programming_languages');
+            $table->string('language_id', 5);
             $table->smallInteger('level')->default(1);
             $table->timestamps();
         });
