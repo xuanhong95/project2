@@ -59,12 +59,7 @@ class SeasonController extends \App\Http\Controllers\Controller
         return view('manager.edit-season',compact('form','season'));
     }
 
-    public function getOpenningSeason()
-    {
-        $currentDate= date('Y-m-d');
-        $openningSeasons=\App\Season::whereBetween($currentDate,['start_date','end_date'])->get();
-        return $openningSeasons;
-    }
+    
 
 
 }

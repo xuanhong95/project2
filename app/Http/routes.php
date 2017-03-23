@@ -75,3 +75,11 @@ Route::group(['middleware'=>'auth','prefix'=>'student','namespace'=>'Student'],f
         ->name('student-report');
     Route::any('apply-job','ApplyController@getApplyRequest');
 });
+
+Route::group(['middleware'=>'auth','prefix'=>'instructor','namespace'=>'Instructor'],function(){
+
+    Route::any('students','InstructorController@showStudents')
+        ->name('instructor-students');
+    Route::any('commit-work/{student_id}','WorkCommissionController@commitWork')
+        ->name('commit-work');
+});
