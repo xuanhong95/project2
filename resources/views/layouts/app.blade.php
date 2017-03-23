@@ -101,6 +101,8 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">Marking</a></li>
+                            <li><a href="{!! route('instructor-students') !!}">Manage students</a></li>
+                            <li><a href="#">Timekeeping</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -27,7 +27,10 @@ class Season extends Model
     public static function getOpenningSeason()
     {
         $currentDate= date('Y-m-d');
-        $openningSeasons=\App\Season::whereBetween($currentDate,['start_date','end_date'])->get();
+        $openningSeasons=\App\Season::where([
+            ['start_date','<=',$currentDate],
+            ['end_date','>=',$currentDate]
+            ])->get();
         return $openningSeasons;
     }
 }
