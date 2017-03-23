@@ -30,6 +30,9 @@ class ReportController extends \App\Http\Controllers\Controller
 		$student_allocation = \App\Allocation::where('student_id',\Auth::id())
 			->orderBy('allocations.id','desc')
 			->first();
+		if( is_null( $student_allocation) ){
+			return "You are not in any companies";
+		}
 
 		$company = \App\Company::where('id',$student_allocation->company_id)->first();
 		$teacher = \App\User::where('id',$student_allocation->teacher_id)->first();
