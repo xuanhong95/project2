@@ -18,8 +18,7 @@ class CreateAttitudesTable extends Migration
             $table->foreign('id_allocation')->references('id')->on('allocations');
             $table->integer('criteria_id')->unsigned();
             $table->foreign('criteria_id')->references('id')->on('attitude_criterias');
-            $table->integer('point_id')->unsigned();
-            $table->foreign('point_id')->references('id')->on('points');
+            $table->string('point',1);
             $table->string('comment',100);
             $table->timestamps();
         });

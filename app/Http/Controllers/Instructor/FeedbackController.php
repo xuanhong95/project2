@@ -48,9 +48,9 @@ class FeedbackController extends Controller
             ->first();
         $student_improvement = \App\Improvement::where('id_allocation',$allocation->id)
             ->first();
-        $student_general_appreciate = \App\GeneralAppreciation::where('id_allocation',$allocation->id)
-            ->first();
 
-        $technical_form = \DataForm::source()
+        $technical_form = \DataForm::source($student_technical);
+        $technical_form->add('related_technical',$technical_criterias[0],'radiogroup')
+            ->option(1,'Xuất sắc')->option(1,'A')->option(1,'A')->option(1,'A')->option(1,'A')->option(1,'A')
     }
 }
