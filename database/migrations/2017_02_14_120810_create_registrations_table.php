@@ -17,13 +17,11 @@ class CreateRegistrationsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('season')->unsigned();
-            $table->foreign('season')->references('id')->on('seasons');
-            $table->string('system&network_skill',100)->nullable();
-            $table->string('special_certificate',100)->nullable();
-            $table->string('soft_skill',100)->nullable();
-            $table->string('other_description',100)->nullable();
-            $table->string('wished_skill',100);
+            $table->string('system&network_skill')->nullable();
+            $table->string('special_certificate')->nullable();
+            $table->string('soft_skill')->nullable();
+            $table->string('other_description')->nullable();
+            $table->text('wished_skill')->nullable();;
             $table->boolean('is_confirmed')->nullable();
             $table->timestamps();
         });

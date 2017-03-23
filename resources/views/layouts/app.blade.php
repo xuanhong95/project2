@@ -169,7 +169,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#">Students</a></li>
                         <li><a href="#">Companies</a></li>
-                        <li><a href="#">Topics</a></li>
+                        <li><a href="/topics">Topics</a></li>
                         <li><a href="#">Result</a></li>
                     </ul>
                 </li>
