@@ -40,44 +40,44 @@ textarea{
                         </tr>
                         <tr>
                             <td>Trình độ kỹ thuật liên quan đến đề tài thực tập</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_tech0') !!}</td>
+                            <td>{!! $form->field('comment_tech') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Khả năng nắm bắt các kỹ thuật mới</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_tech1') !!}</td>
+                            <td>{!! $form->field('comment_tech') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Mức độ làm chủ kỹ thuật, công nghệ sau khi đã được hướng dẫn</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_tech2') !!}</td>
+                            <td>{!! $form->field('comment_tech') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Khả năng phân tích</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_tech3') !!}</td>
+                            <td>{!! $form->field('comment_tech') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Phương pháp luận – cách thức tổ chức công việc</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_tech4') !!}</td>
+                            <td>{!! $form->field('comment_tech') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Óc sáng tạo</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_tech5') !!}</td>
+                            <td>{!! $form->field('comment_tech') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Trình độ ngoại ngữ phục vụ cho công việc</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_tech6') !!}</td>
+                            <td>{!! $form->field('comment_tech') !!}</td>
                         </tr>
                     </table>
                 </div>
@@ -93,38 +93,38 @@ textarea{
                         </tr>
                         <tr>
                             <td>Khối lượng công việc đã thực hiện trong thời gian thực tập</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_task0') !!}</td>
+                            <td>{!! $form->field('comment_task') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Chất lượng công việc đã thực hiện trong thời gian thực tập</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_task1') !!}</td>
+                            <td>{!! $form->field('comment_task') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Khả năng tự hoàn thành công việc và cách giải quyết các vấn đề phát sinh</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_task2') !!}</td>
+                            <td>{!! $form->field('comment_task') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Viết tài liệu về công việc đã thực hiện</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_task3') !!}</td>
+                            <td>{!! $form->field('comment_task') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Thuyết trình</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_task4') !!}</td>
+                            <td>{!! $form->field('comment_task') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Tuân thủ các ràng buộc chất lượng công việc của cơ sở thực tập</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_task5') !!}</td>
+                            <td>{!! $form->field('comment_task') !!}</td>
 
                         </tr>
 
@@ -142,38 +142,38 @@ textarea{
                         </tr>
                         <tr>
                             <td>Đúng giờ</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_attitude0') !!}</td>
+                            <td>{!! $form->field('comment_attitude') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Vẻ ngoài (quần áo, tác phong nơi công sở, …)</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_attitude1') !!}</td>
+                            <td>{!! $form->field('comment_attitude') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Giữ gìn hình ảnh cho cơ sở thực tập và cho sản phẩm đã thực hiện trong quá trình làm việc</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_attitude2') !!}</td>
+                            <td>{!! $form->field('comment_attitude') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Làm việc nhóm</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_attitude3') !!}</td>
+                            <td>{!! $form->field('comment_attitude') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Quan hệ, giao tiếp với nhân viên, khách hàng của cơ sở thực tập</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_attitude4') !!}</td>
+                            <td>{!! $form->field('comment_attitude') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Tuân thủ các quy định làm việc của công ty và cam kết khi thực tập</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_attitude5') !!}</td>
+                            <td>{!! $form->field('comment_attitude') !!}</td>
                         </tr>
                     </table>
                 </div>
@@ -189,20 +189,20 @@ textarea{
                         </tr>
                         <tr>
                             <td>Cải thiện năng lực, trình độ kỹ thuật</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_improvement0') !!}</td>
+                            <td>{!! $form->field('comment_improvement') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Cải thiện thái độ, ý thức</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_improvement1') !!}</td>
+                            <td>{!! $form->field('comment_improvement') !!}</td>
 
                         </tr>
                         <tr>
                             <td>Cải thiện về phương pháp làm việc</td>
-                            <td>{!! $form->field('point') !!}</td>
-                            <td>{!! $form->field('comment') !!}</td>
+                            <td>{!! $form->field('point_improvement2') !!}</td>
+                            <td>{!! $form->field('comment_improvement') !!}</td>
                         </tr>
                     </table>
                 </div>
@@ -223,7 +223,7 @@ textarea{
                         </tr>
                         <tr>
                             <td>Quý vị có muốn tiếp tục nhận sinh viên thực tập đợt sau không ?</td>
-                            <td>{!! $form->field('is_continue_receive') !!}</td>
+                            <td>Có: {!! $form->field('is_continue_receive') !!}</td>
                         </tr>
                     </table>
                 </div>
@@ -255,14 +255,14 @@ textarea{
                         <label for="is_language_necessary">3.Ngoại ngữ phải là yêu cầu thiết yếu trong công
                             việc tại cơ sở thực tập hay không ?</label>
                         <div class="col-md-11 col-md-offset-1">
-                            {!! $form->field('is_language_necessary') !!}
+                            Có:  {!! $form->field('is_language_necessary') !!}
                         </div>
                     </div>
                     <div class="col-md-12 form-group">
                         <label for="is_language_met">4.Nếu có, trình độ tiếng Anh / Pháp của sinh viên c
                             ó đáp ứng yêu cầu không ?</label>
                         <div class="col-md-11 col-md-offset-1">
-                            {!! $form->field('is_language_met') !!}
+                            Có:  {!! $form->field('is_language_met') !!}
                         </div>
                     </div>
                     <div class="col-md-12 form-group">
