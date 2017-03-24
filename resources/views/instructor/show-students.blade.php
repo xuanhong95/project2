@@ -22,9 +22,12 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="{!! route('commit-work',['student_id'=>$student->user_id]) !!}">Works</a>
+                            <a href="{!! route('commit-work',['student_id'=>$student->user_id]) !!}"
+                                role="button" class="btn btn-info">Works</a>
                         </div>
                         <div class="col-md-6">
+                            <a href="{!! route('instructor-feedback',['student_id'=>$student->user_id]) !!}"
+                                role="button" class="btn btn-info">Feedback</a>
                         </div>
                     </div>
                 </div>

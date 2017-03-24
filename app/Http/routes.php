@@ -82,4 +82,6 @@ Route::group(['middleware'=>'auth','prefix'=>'instructor','namespace'=>'Instruct
         ->name('instructor-students');
     Route::any('commit-work/{student_id}','WorkCommissionController@commitWork')
         ->name('commit-work');
+    Route::any('feedback/{student_id}','FeedbackController@feedbackStudent')
+        ->name('instructor-feedback');
 });

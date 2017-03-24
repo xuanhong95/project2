@@ -16,8 +16,7 @@ class CreateCompanyAppreciationsTable extends Migration
             $table->increments('id');
             $table->integer('id_allocation')->unsigned();
             $table->foreign('id_allocation')->references('id')->on('allocations');
-            $table->integer('general_appreciation_id')->unsigned();
-            $table->foreign('general_appreciation_id')->references('id')->on('general_appreciations');
+            $table->string('general_appreciation_id',1);
             $table->boolean('is_continue_receive')->default(true);
             $table->string('missing_knownledge')->nullable();
             $table->string('necessary_knownledge')->nullable();
