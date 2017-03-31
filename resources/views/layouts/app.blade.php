@@ -42,7 +42,6 @@
         background-color: rgba(189, 218, 214, 0.59);
     }
     .content{
-        margin-top: 70px;
         min-height: 550px;
     }
 

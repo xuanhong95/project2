@@ -16,9 +16,11 @@ textarea{
     resize : none;
 }
 </style>
-    <div class="container" style="margin-top:70px">
+    <div class="container">
         <div class="col-md-10 col-md-offset-1 well">
-            <legend>Feedback:</legend>
+            <div class="page-header col-md-offset-1">
+                <h2>Feedback</h2>
+            </div>
             <div class="col-md-10 col-md-offset-1 row">
                 {!! $form->header !!}
             </div>
