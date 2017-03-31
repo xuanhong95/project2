@@ -21,7 +21,7 @@
 
     <style>
     body{
-        font-family:  'Segoe UI'
+        font-family:  'Segoe UI';
     }
     .fa-btn {
         margin-right: 6px;
@@ -40,6 +40,10 @@
     }
     .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover{
         background-color: rgba(189, 218, 214, 0.59);
+    }
+    .content{
+        margin-top: 70px;
+        min-height: 550px;
     }
 
     </style>
@@ -198,7 +202,10 @@
         </div>
     </div>
 </nav>
-@yield('content')
+<div class="content">
+    @yield('content')
+</div>
+
 @extends('layouts.footer')
 <!-- JavaScripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>

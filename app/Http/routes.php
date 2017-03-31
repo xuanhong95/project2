@@ -28,9 +28,8 @@ Route::controllers([
     'company' => 'CompanyController',
 ]);
 
-Route::get('/topics', 'HomeController@viewTopicList');
-Route::any('/view-topic/{id}','HomeController@viewTopic')
-        ->name('view-topic');
+Route::get('/topics', 'HomeController@viewTopicList')
+    ->name('view-topics');
 
 Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],function(){
 
@@ -42,7 +41,7 @@ Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],f
         ->name('edit-season');
     Route::any('recruitments','RecruitmentController@showRecruitments')
         ->name('manager-recruitments');
-    Route::any('recruitments/{id}', 'RecruitmentController@readRecruitment')
+    Route::any('recruitments/{id}','RecruitmentController@readRecruitment')
         ->name('read-recruitment');
     Route::any('recruitments/{id}/accept','RecruitmentController@acceptRecruitment')
         ->name('accept-recruitment');
@@ -74,6 +73,7 @@ Route::group(['middleware'=>'auth','prefix'=>'student','namespace'=>'Student'],f
     Route::any('student-report','ReportController@showStudentReport')
         ->name('student-report');
     Route::any('apply-job','ApplyController@getApplyRequest');
+
 });
 
 Route::group(['middleware'=>'auth','prefix'=>'instructor','namespace'=>'Instructor'],function(){
