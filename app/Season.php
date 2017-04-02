@@ -44,4 +44,19 @@ class Season extends Model
         $openningSeason_id = $openningSeason->id;
         return $openningSeason_id;
     }
+
+    public static function getSeasonByID($season_id)
+    {
+        return \App\Season::where('id',$season_id)->first();
+    }
+
+    public static function getAllSeasons()
+    {
+        return \App\Season::all();
+    }
+
+    public static function getAllSeasonIDs()
+    {
+        return \App\Season::select('id')->get();
+    }
 }

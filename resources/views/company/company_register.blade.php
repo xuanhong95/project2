@@ -1,7 +1,7 @@
 @extends('layouts.app')
 <style>
     h3{
-        margin-top: 0px!important;  
+        margin-top: 0px!important;
     }
     p{
         margin: 0px 0px 0px 0px!important;
@@ -43,7 +43,7 @@
                     <h3>CHƯƠNG TRÌNH THỰC TẬP DOANH NGHIỆP</h3>
                 </div>
 
-                <div class="description-block">
+                <div class="description-block col-md-offset-1">
                     <h4><em> Thời gian thực tập </em></h4>
                     <ul>
                         <li class="col-md-offset-1">Thời gian: 15 tuần (Kế hoạch cụ thể do Cơ sở thực tập xây dựng</li>
@@ -53,6 +53,9 @@
                     <p><em>(Chúng tôi cam kết những thông tin dưới đây chỉ được sử dụng bởi Viện Đào tạo Quốc tế, trường Đại học Bách khoa Hà Nội)</em></p>
                 </div>
 
+                <div class="col-md-10 col-md-offset-1" style="margin-top: 15px">
+                    <h3><strong>Season: {!! $season !!}</strong></h3>
+                </div>
                 <div class="col-md-10 col-md-offset-1" style="margin-top: 15px">
                     <strong>1. Thông tin chung </strong>
                     <table class="col-md-12"  style="border:1px solid black;">
@@ -97,27 +100,23 @@
                         <th class="col-md-5">Nội dung</th>
                         <th class="col-md-4">Yêu cầu</th>
                     </tr>
-                    <tr>
+
+                    <tr id="template" class="hide">
                         <td class="col-md-3" >{!! $form->field('position') !!}</td>
                         <td class="col-md-5" >{!! $form->field('content') !!}</td>
                         <td class="col-md-4" >{!! $form->field('require') !!}</td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="text-align: right; border: 0px;">
-                            <img id="add-button" src="/images/addcontent.png"/>
+                        <td colspan="4" style="text-align: right; border: 0px; padding-top:10px">
+                            <div class="pull-right btn-group">
+                                <button type="button" id="reset-button" class="btn btn-default">Reset <i class="glyphicon glyphicon-repeat"></i></button>
+                                <button type="button" id="add-button" class="btn btn-success">Add <i class="glyphicon glyphicon-plus"></i></button>
+                            </div>
                         </td>
                     </tr>
                 </table>
             </div>
 
-            <div class="col-md-10 col-md-offset-1" style="margin-top: 15px">
-                <strong>4. Register Season: </strong>
-                <div class="form-group" style="margin-top:15px">
-                    <div class="col-sm-3 required {{ $form->field('season')->has_error }}">
-                        {!! $form->field('season') !!}
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     @else
@@ -139,15 +138,44 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/js/jquery.numeric.js"></script>
 <script>
+
+    //construct
+    var recruitment_contents = {!! $recruitment_content !!};
+    // alert(recruitment_contents[0]['position']);
+    if(recruitment_contents !== null){
+        $.each(recruitment_contents, function(key,value){
+            console.log(key);
+            $('.add-line tr:last').before("<tr>"+$('#template').html()+"</tr>");
+
+            $('.add-line tr:eq('+key+2+') td:eq(0) textarea').val(value['position']);
+            $('.add-line tr:eq('+key+2+') td:eq(1) textarea').val(value['content']);
+            $('.add-line tr:eq('+key+2+') td:eq(2) textarea').val(value['require']);
+        });
+    }
+    else{
+        $('#add-button').click();
+    }
+
+    // Button add
     var count_skill = 1;
-    
     $('#add-button').click(function(){
         count_skill++;
-        
+
         if(count_skill == 5){
             $('#add-button').addClass('hidden');
         }
-        $('.add-line tr:last').before($('.add-line tr:eq(1)').clone());
+        $('.add-line tr:last').before("<tr>"+$('#template').html()+"</tr>");
+    });
+
+    //Button reset
+    $('#reset-button').on('click',function(){
+        console.log('Work!');
+        var tr_in_addline = $('.addline').find('tr');
+        var count_tr_in_addline =  tr_in_addline.size();
+        for(var i = 1; i < count_tr_in_addline-1; i++){
+            tr_in_addline[i].remove();
+        }
+        $('.addline tr:eq(1) td').val('');
     });
 
     $("#phone").numeric();

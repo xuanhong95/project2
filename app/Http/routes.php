@@ -31,6 +31,12 @@ Route::controllers([
 Route::get('/topics', 'HomeController@viewTopicList')
     ->name('view-topics');
 
+Route::get('/student/season{season?}','StudentController@showStudents')
+    ->name('students-in-season');
+
+Route::get('/companies/season{season?}','CompanyController@showCompanies')
+    ->name('companies-in-season');
+
 Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],function(){
 
     Route::any('seasons','SeasonController@showSeasons')
@@ -49,15 +55,14 @@ Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],f
         ->name('deny-recruitment');
 });
 
-Route::group(['middleware'=>'auth','prefix'=>'company'],function(){
-
-    Route::any('register','CompanyController@register')
-        ->name('create-recruitment');
+Route::group(['middleware'=>'auth','prefix'=>'enterprise'],function(){
 
     Route::group(['namespace'=>'Enterprise'],function(){
 
         Route::any('recruitments','RecruitmentController@showRecruitments')
             ->name('enterprise-recruitment');
+        Route::any('create-new-recruitment','RecruitementController@createRecruitment')
+            ->name('create-recruitment');
 
     });
 });

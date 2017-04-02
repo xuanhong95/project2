@@ -8,75 +8,6 @@ use App\Http\Requests;
 
 class CompanyController extends Controller
 {
-    public function anyRegister(){
-        if(\Auth::user()->user_type != 3){
-            return redirect('/');
-        }
-
-        $source = \App\Enterprise::where('user_id', \Auth::id())->first();
-
-        $form = \DataForm::create();
-
-        //Table Company Data
-        $form->add('name', 'Tên công ty', 'text')->insertValue(\App\Company::getCompanyNameByID($source->company_id))->mode('readonly');
-
-        $form->add('address', 'Địa chỉ', 'text')->insertValue(\App\Company::getCompanyAddressByID($source->company_id))->mode('readonly');
-
-        //Table User Data
-        $form->add('enterprise_instructor', 'Cán bộ phụ trách', 'text')->insertValue(\Auth::user()->name)->rule('required');
-        $form->add('email', 'Email', 'text')->placeholder("pxhong@donuts.biz.vn")->insertValue(\Auth::user()->email)->mode('readonly');
-
-        //Table Enterprise Data
-        $form->add('phone', 'Điện thoại', 'text')->placeholder("0947383678")->insertValue($source->phone);
-
-        //Table recruitment Data
-        $form->add('quantity', 'Số lượng', 'text')->attributes(['style' => 'width: 10%; margin-top: -7px']);
-        $form->add('season', 'Season', 'select')->options(['0'=>'1', '1' => '2']);
-
-        //Table recruitment content Data
-        $form->add('position', 'Vị trí', 'redactor')->placeholder("Web Developer")->attributes(['name'=>'position[]']);
-        $form->add('content', 'Nội dung', 'redactor')->placeholder("Tuyển dụng lập trình web")->attributes(['name'=>'content[]']);
-        $form->add('require', 'Yêu cầu', 'redactor')->placeholder("Biết PHP")->attributes(['name'=>'require[]']);
-
-        $form->submit('Register');
-
-        $form->saved(function () use ($form) {
-			$input = \Input::all();
-            $positions = $input['position'];
-            $contents = $input['content'];
-            $requires = $input['require'];
-
-            $user_table = \App\User::where('id', \Auth::id())->first();
-            $user_table->name = $input['enterprise_instructor'];
-            $user_table->save();
-
-            $enterprise_table = \App\Enterprise::where('user_id', \Auth::id())->first();
-            $enterprise_table->phone = $input['phone'];
-            $enterprise_table->save();
-
-            $recruit_table = new \App\Recruitment();
-            $recruit_table->user_id = \Auth::id();
-            $recruit_table->quantity = $input['quantity'];
-            $recruit_table->season = $input['season'];
-            $recruit_table->save();
-
-            $this_recruitment = \App\Recruitment::orderBy('created_at', 'desc')->first();
-
-            for($i = 0; $i < count($positions); $i++){
-                $recruit_content_table = new \App\RecruitmentContent();
-                $recruit_content_table->recruitment_id = $this_recruitment->id;
-                $recruit_content_table->position = $positions[$i];
-                $recruit_content_table->job_description = $contents[$i];
-                $recruit_content_table->requirement = $requires[$i];
-                $recruit_content_table->save();
-            }
-
-            $form->message('Saved');
-            $form->link('/','Back');
-        });
-        $form->build();
-        return view('company.company_register', compact('form'));
-    }
 
     public function showRecruitments()
     {
@@ -85,13 +16,44 @@ class CompanyController extends Controller
         return view('recruitments',compact('recruitments'));
     }
 
-    public function getConfirmedRecruitments()
+    /*THis function provide infos of companies attending recruitment
+    in Season
+    parameter: $season :define the season to show companies, default is null
+    output:
+
+    */
+    public function showCompanies($season_id = null)
     {
-        return \App\Recruitment::whereNot('is_confirm',null)->get();
+        if (is_null($season_id)){
+            $season = \App\Season::getOpenningSeason();
+        }
+        else{
+            $season = \App\Season::getSeasonByID( $season_id );
+        }
+
+        $enterprises_recruitments = \App\Recruitment::where([
+            ['is_confirm','=','1'],
+            ['updated_at','>=',$season->start_date],
+            ['updated_at','<=',$season->end_date]
+        ])
+        ->distinct()
+        ->get();
+
+        $companies_list = array();
+        //get student infomations through registration->user_id
+        foreach ($enterprises_recruitments as $recruitment) {
+            $company = \App\User::join('enterprises','user_id','=','users.id')
+                ->join('companies','company_id','=','companies.id')
+                ->where('user_id','=',$recruitment->user_id)
+                ->select('companies.name','address')
+                ->first();
+            array_push($companies_list, $company);
+        }
+        // dd($student_registrations);
+        $all_season_id = \App\Season::getAllSeasonIDs();
+
+        return view('internship.companies-in-season',compact('companies_list','all_season_id'));
     }
 
-    public function getUnconfirmedRecruitments()
-    {
-        return \App\Recruitment::where('is_confirm',null)->get();
-    }
+
 }

@@ -70,16 +70,6 @@ class RecruitmentController extends \App\Http\Controllers\Controller
         return view('manager.read-recruitment',compact('form','recruitment_contents'));
     }
 
-    public function getConfirmedRecruitments()
-    {
-        return \App\Recruitment::whereNot('is_confirm',null)->get();
-    }
-
-    public function getUnconfirmedRecruitments()
-    {
-        return \App\Recruitment::where('is_confirm',null)->get();
-    }
-
     public function acceptRecruitment($id){
         $acceptedRecruitment=\App\Recruitment::where('id',$id)->first();
         $acceptedRecruitment->is_confirm=1;
