@@ -170,9 +170,9 @@
                         Internship <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Students</a></li>
-                        <li><a href="#">Companies</a></li>
-                        <li><a href="/topics">Topics</a></li>
+                        <li><a href="{!! route('students-in-season')!!}">Students</a></li>
+                        <li><a href="{!! route('companies-in-season')!!}">Companies</a></li>
+                        <li><a href="{!! route('view-topics') !!}">Topics</a></li>
                         <li><a href="#">Result</a></li>
                     </ul>
                 </li>
@@ -201,6 +201,7 @@
         </div>
     </div>
 </nav>
+
 <div class="content">
     @yield('content')
 </div>
