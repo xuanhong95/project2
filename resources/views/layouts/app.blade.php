@@ -21,7 +21,7 @@
 
     <style>
     body{
-        font-family:  'Segoe UI'
+        font-family:  'Segoe UI';
     }
     .fa-btn {
         margin-right: 6px;
@@ -40,6 +40,9 @@
     }
     .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover{
         background-color: rgba(189, 218, 214, 0.59);
+    }
+    .content{
+        min-height: 550px;
     }
 
     </style>
@@ -167,8 +170,8 @@
                         Internship <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Students</a></li>
-                        <li><a href="#">Companies</a></li>
+                        <li><a href="{!! route('students-in-season')!!}">Students</a></li>
+                        <li><a href="{!! route('companies-in-season')!!}">Companies</a></li>
                         <li><a href="/topics">Topics</a></li>
                         <li><a href="#">Result</a></li>
                     </ul>
@@ -198,7 +201,10 @@
         </div>
     </div>
 </nav>
-@yield('content')
+<div class="content">
+    @yield('content')
+</div>
+
 @extends('layouts.footer')
 <!-- JavaScripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>

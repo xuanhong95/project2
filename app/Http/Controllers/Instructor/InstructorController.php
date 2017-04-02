@@ -15,7 +15,9 @@ class InstructorController extends Controller
         $currentSeason = \App\Season::getOpenningSeason();
 
         if( is_null( $currentSeason ) ){
-            return "There aren't any openning season!!!";
+            $error = "There aren't any openning season!!!";
+            $link = route('homepage');
+            return view('errors.error',compact('error','link'));
         }
 
         $students = \App\Allocation::join('users','student_id','=','users.id')

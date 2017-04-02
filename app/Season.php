@@ -27,10 +27,36 @@ class Season extends Model
     public static function getOpenningSeason()
     {
         $currentDate= date('Y-m-d');
-        $openningSeasons=\App\Season::where([
+        $openningSeason=\App\Season::where([
             ['start_date','<=',$currentDate],
             ['end_date','>=',$currentDate]
-            ])->get();
-        return $openningSeasons;
+            ])->first();
+        return $openningSeason;
+    }
+
+    public static function getOpenningSeasonID()
+    {
+        $currentDate= date('Y-m-d');
+        $openningSeason=\App\Season::where([
+            ['start_date','<=',$currentDate],
+            ['end_date','>=',$currentDate]
+            ])->first();
+        $openningSeason_id = $openningSeason->id;
+        return $openningSeason_id;
+    }
+
+    public static function getSeasonByID($season_id)
+    {
+        return \App\Season::where('id',$season_id)->first();
+    }
+
+    public static function getAllSeasons()
+    {
+        return \App\Season::all();
+    }
+
+    public static function getAllSeasonIDs()
+    {
+        return \App\Season::select('id')->get();
     }
 }

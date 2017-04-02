@@ -4,18 +4,6 @@
 <style >
   .copyright { min-height:40px; background-color:#000000;}
   .copyright p { text-align:left; color:#FFF; padding:10px 0; margin-bottom:0px;}
-  .heading7 { font-size:21px; font-weight:700; color:#d9d6d6; margin-bottom:22px;}
-  .post p { font-size:12px; color:#FFF; line-height:20px;}
-  .post p span { display:block; color:#8f8f8f;}
-  .bottom_ul { list-style-type:none; float:right; margin-bottom:0px;}
-  .bottom_ul li { float:left; line-height:40px;}
-  .bottom_ul li:after { content:"/"; color:#FFF; margin-right:8px; margin-left:8px;}
-  .bottom_ul li a { color:#FFF;  font-size:12px;}
-  * {
-    margin: 0;
-    padding: 0;
-  }
-
   .container {
     min-height: 100%;
   }
@@ -30,7 +18,7 @@
 </style>
 <div class="footer">
   <footer style="background-image:url('/images/footersievn.png'); background-repeat:repeat-x;">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 col-sm-6 footerleft ">
 
