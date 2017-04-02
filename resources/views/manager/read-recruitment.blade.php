@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@extends('layouts.left-sidebar')
+
 <style>
 h3{
     margin-top: 0px!important;
@@ -31,11 +33,9 @@ textarea{
     cursor: pointer;
 }
 </style>
-@section('content')
-<div class="container" style="margin-top:70px;">
+@section('content-with-sidebar')
+<div class="container-fluid" style="margin-top:30px;">
     <div class="col-md-10 col-md-offset-1 well">
-
-
         <div class="form-group">
             {!! $form->header !!}
             <div class="form-group">

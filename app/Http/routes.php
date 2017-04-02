@@ -10,6 +10,14 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+    'add-info' => 'AddInfoController',
+    'company' => 'CompanyController',
+]);
+
+// Public routes
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,24 +27,32 @@ Route::get('/login',function(){
     return view('auth.login');
 });
 
+//Need authentication routes
+
 Route::any('profile','AddInfoController@anyShowProfile')
     ->name('profile');
-Route::controllers([
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
-    'add-info' => 'AddInfoController',
-    'company' => 'CompanyController',
-]);
 
 Route::get('/topics', 'HomeController@viewTopicList')
     ->name('view-topics');
 
+<<<<<<< HEAD
+=======
+Route::get('/topics/{topic_id}', 'HomeController@viewTopic')
+    ->name('view-topic-detail');
+
+>>>>>>> hung-show-topic-detail
 Route::get('/student/season{season?}','StudentController@showStudents')
     ->name('students-in-season');
 
 Route::get('/companies/season{season?}','CompanyController@showCompanies')
     ->name('companies-in-season');
 
+<<<<<<< HEAD
+=======
+
+//Need type of user authentication routes
+
+>>>>>>> hung-show-topic-detail
 Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],function(){
 
     Route::any('seasons','SeasonController@showSeasons')

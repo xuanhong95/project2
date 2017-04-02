@@ -1,8 +1,12 @@
 @extends('layouts.app')
-@section('content')
-    <div class="container" style="margin-top:70px">
-        <div class="col-md-10 col-md-offset-1 well">
-            <legend>Feedbacks</legend>
+@extends('layouts.left-sidebar')
+
+@section('content-with-sidebar')
+    <div class="container-fluid" style="margin-top:30px">
+        <div class="col-md-12 well">
+            <div class="page-header">
+                <h3>Feedback</h3>
+            </div>
             <div class="col-md-offset-1 col-md-6">
                 <a href="{!! route('create-feedback')!!}" role="button" class="btn btn-info">New Feedback...</a>
             </div>
@@ -46,4 +50,5 @@
             </div>
         </div>
     </div>
+
 @endsection

@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@extends('layouts.left-sidebar')
+
 <style>
     input[type=checkbox]{
         transform: scale(1.2);
@@ -47,8 +49,8 @@
         cursor: pointer;
     }
 </style>
-@section('content')
-<div class="container" style='margin-top:70px'>
+@section('content-with-sidebar')
+<div class="container-fluid" style='margin-top:70px'>
     @if(Session::has('message'))
     <div class="alert alert-success">
         {!! Session::get('message') !!}
@@ -332,8 +334,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-md-12" colspan="3">Nếu sinh viên chưa thực tập ở công ty nào thì mục trên ghi "Không có".<br> 
-                        Viện Đào tạo Quốc tế sẽ căn cứ trên kỹ năng của sinh viên và yêu cầu của doanh nghiệp để phân công. 
+                    <td class="col-md-12" colspan="3">Nếu sinh viên chưa thực tập ở công ty nào thì mục trên ghi "Không có".<br>
+                        Viện Đào tạo Quốc tế sẽ căn cứ trên kỹ năng của sinh viên và yêu cầu của doanh nghiệp để phân công.
                         Sinh viên phải cam kết tuân thủ theo phân công của Viện.
                     </td>
                 </tr>
@@ -345,6 +347,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="/js/jquery.numeric.js"></script>

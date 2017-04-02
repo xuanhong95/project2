@@ -1,10 +1,14 @@
 @extends('layouts.app')
-@section('content')
+@extends('layouts.left-sidebar')
 
-<div class="container" style="margin-top:70px">
+@section('content-with-sidebar')
+
+<div class="container-fluid" style="margin-top:30px">
     <div class="col-md-8 col-md-offset-2 well">
         {!! $form->header !!}
-        <legend>Season {!! $season !!}:</legend>
+        <div class="page-header col-md-offset-1">
+            <h3>Season {!! $season !!}</h3>
+        </div>
         <div class="form-group">
 
             <div class="col-sm-6 ">
