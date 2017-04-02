@@ -51,7 +51,7 @@ class HomeController extends Controller
                                             ->where('recruitment_id', $recruitment_id)
                                             ->first();
 
-        return view('home.topic_detail', compact('topic', 'enterprise_info',                                     'enterprise_account', 'student_apply',
+        return view('home.topic_detail', compact('topic', 'enterprise_info','enterprise_account', 'student_apply',
                                                  'company', 'recruitment_contents'));
     }
 }

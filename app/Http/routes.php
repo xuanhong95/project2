@@ -35,24 +35,18 @@ Route::any('profile','AddInfoController@anyShowProfile')
 Route::get('/topics', 'HomeController@viewTopicList')
     ->name('view-topics');
 
-<<<<<<< HEAD
-=======
 Route::get('/topics/{topic_id}', 'HomeController@viewTopic')
     ->name('view-topic-detail');
 
->>>>>>> hung-show-topic-detail
 Route::get('/student/season{season?}','StudentController@showStudents')
     ->name('students-in-season');
 
 Route::get('/companies/season{season?}','CompanyController@showCompanies')
     ->name('companies-in-season');
 
-<<<<<<< HEAD
-=======
 
 //Need type of user authentication routes
 
->>>>>>> hung-show-topic-detail
 Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],function(){
 
     Route::any('seasons','SeasonController@showSeasons')
