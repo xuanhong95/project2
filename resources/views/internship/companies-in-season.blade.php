@@ -1,7 +1,9 @@
 @extends('layouts.app')
-@section('content')
-<div class="container" style="margin-top:70px">
-    <div class="page-header">
+@extends('layouts.left-sidebar')
+
+@section('content-with-sidebar')
+<div class="container-fluid" style="margin-top:30px">
+    <div class="page-header col-md-offset-1">
         <h2>Companies</h2>
     </div>
     <div class="col-md-10 col-md-offset-1 well">

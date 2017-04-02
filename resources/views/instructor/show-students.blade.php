@@ -1,8 +1,12 @@
 @extends('layouts.app')
-@section('content')
-<div class="container" style="margin-top:70px">
+@extends('layouts.left-sidebar')
+
+@section('content-with-sidebar')
+<div class="container-fluid" style="margin-top:30px">
     <div class="col-md-10 col-md-offset-1 well">
-        <legend>Students</legend>
+        <div class="page-header col-md-offset-1">
+            <h3>Students</h3>
+        </div>
         <div class="col-md-12 btn btn-default">
             @foreach( $students as $student)
             <div class="col-md-12">

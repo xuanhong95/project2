@@ -1,16 +1,20 @@
 @extends('layouts.app')
-@section('content')
+@extends('layouts.left-sidebar')
+
+@section('content-with-sidebar')
 <style media="screen">
     btn-toolbar{
         margin-left:
     }
 </style>
 
-<div class="container" style="margin-top:70px">
+<div class="container-fluid" style="margin-top:30px">
     <div class="col-md-10 col-md-offset-1 well">
-        <legend>Profile:</legend>
+        <div class="page-header col-md-offset-1">
+            <h3>Profile</h3>
+        </div>
         <div class="col-md-8 col-md-offset-1">
-            {!! $form !!}            
+            {!! $form !!}
         </div>
     </div>
 </div>

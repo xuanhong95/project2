@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@extends('layouts.left-sidebar')
 <style>
     h3{
         margin-top: 0px!important;
@@ -31,7 +32,7 @@
         cursor: pointer;
     }
 </style>
-@section('content')
+@section('content-with-sidebar')
 <div class="container" style="margin-top:70px">
     <div class="form-group">
         {!! $form->header !!}

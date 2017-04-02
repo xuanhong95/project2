@@ -1,19 +1,23 @@
 @extends('layouts.app')
-@section('content')
+@extends('layouts.left-sidebar')
+
+@section('content-with-sidebar')
 <style media="screen">
     .margin-seasons{
         margin-left: 30px;
         margin-bottom: 30px;
     }
 </style>
-<div class="container" style="margin-top:70px">
+<div class="container-fluid" style="margin-top:30px">
 
     <div class="col-md-10" style="margin-bottom:30px">
         <a href="{!! route('create-season') !!}"  class="btn btn-info">Start new Season...</a>
     </div>
 
     <div class="col-md-10 col-md-offset-1 well col-sm-10 col-xs-10 col-xs-offset-1">
-        <legend>Seasons:</legend>
+        <div class="page-header col-md-offset-1">
+            <h3>Seasons</h3>
+        </div>
         @if(count($seasons)==0)
             <div class="col-md-6 col-md-offset-3">
                 <h2>There aren't any available seasons</h2>

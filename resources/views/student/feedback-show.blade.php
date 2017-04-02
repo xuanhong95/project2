@@ -1,8 +1,12 @@
 @extends('layouts.app')
-@section('content')
-    <div class="container" style="margin-top:70px">
+@extends('layouts.left-sidebar')
+
+@section('content-with-sidebar')
+    <div class="container-fluid" style="margin-top:30px">
         <div class="col-md-10 col-md-offset-1 well">
-            <legend>Feedback</legend>
+            <div class="page-header col-md-offset-1">
+                <h3>Feeadback</h3>
+            </div>
             <div class="col-md-8 col-md-offset-2">
                 {!! $form !!}
             </div>
