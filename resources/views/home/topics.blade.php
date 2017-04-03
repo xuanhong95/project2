@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@extends('layouts.left-sidebar')
 <style>
     img{
         float:left;
@@ -17,10 +18,13 @@
         margin-right: 20px;
     }
 </style>
-@section('content')
-<div class="container" style="margin-top:70px">
+
+@section('content-with-sidebar')
+<div class="container-fluid" style="margin-top:30px">
     <div class="col-md-10 col-md-offset-1 well">
-        <legend>List topic</legend>
+        <div class="page-header col-md-offset-1">
+            <h3>Topics</h3>
+        </div>
         <?php $i = 0; ?>
         @foreach($list_topic as $topic)
         <div class="col-md-12 alert-success" style="margin-top: 5px; border-radius: 4px">
@@ -33,7 +37,7 @@
                 <p>Công ty: {{\App\Company::getCompanyNameByID($topic->company_id)}}</p>
                 <p>Người đăng tin: {{\App\Enterprise::getEnterpriseNameByID($topic->user_id)}}</p>
             </div>
-                <a class="btn-view-detail" href="/view-topic/{{$topic->id}}">View Detail</a>
+                <a class="btn-view-detail" href="{!! route('view-topic-detail',['topic_id'=>$topic->id]) !!}">View Detail</a>
             <?php $i++; ?>
             @else
             <div>
@@ -41,7 +45,7 @@
                 <p>Công ty: {{\App\Company::getCompanyNameByID($topic->company_id)}}</p>
                 <p>Người đăng tin: {{\App\Enterprise::getEnterpriseNameByID($topic->user_id)}}</p>
             </div>
-                <a class="btn-view-detail" href="/view-topic/{{$topic->id}}">View Detail</a>
+                <a class="btn-view-detail" href="{!! route('view-topic-detail',['topic_id'=>$topic->id]) !!}">View Detail</a>
             @endif
         </div>
         @endforeach
