@@ -205,7 +205,7 @@
 </div>
 
 
-<div class="col-md-12" >
+<div class="col-md-12" style="clear:both">
     <!--footer start from here-->
     <link href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="/css/footer.css" rel="stylesheet">

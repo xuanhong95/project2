@@ -11,8 +11,8 @@
     td{
         height:40px;
     }
-    table{
-        border-collapse: collapse;
+    tbody{
+        background:#d6d6d6;
     }
     #add-button:hover{
         cursor: pointer;
@@ -31,6 +31,11 @@
     .textarea-width{
         padding-left: 0px!important;
         padding-right: 0px!important;
+    }
+    textarea{
+        max-height: 7em;
+        resize: none;
+        overflow: auto;
     }
     p{
         margin: 0px 0px 0px 0px!important;
