@@ -61,8 +61,8 @@ Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],f
         ->name('read-recruitment');
     Route::any('recruitments/{id}/accept','RecruitmentController@acceptRecruitment')
         ->name('accept-recruitment');
-    Route::any('recruitments/{id}/deny','RecruitmentController@denyRecruitment')
-        ->name('deny-recruitment');
+    Route::any('recruitments/{id}/decline/{reason}','RecruitmentController@denyRecruitment')
+        ->name('decline-recruitment');
 });
 
 Route::group(['middleware'=>'auth','prefix'=>'enterprise'],function(){

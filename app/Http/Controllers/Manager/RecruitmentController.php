@@ -23,10 +23,10 @@ class RecruitmentController extends \App\Http\Controllers\Controller
         }
 
         $recruitments=\App\Recruitment::join('enterprises', 'recruitments.user_id', '=', 'enterprises.user_id')
-                                        ->join('companies', 'companies.id','=','enterprises.company_id')
-                                        ->where('recruitments.season','=',$lastSeason->id)
-                                        ->select('recruitments.id','companies.name','recruitments.is_confirm')
-                                        ->get();
+            ->join('companies', 'companies.id','=','enterprises.company_id')
+            ->where('recruitments.season','=',$lastSeason->id)
+            ->select('recruitments.id','companies.name','recruitments.is_confirm','description')
+            ->get();
         // dd($recruitments);
         return view('manager.recruitments',compact('recruitments','lastSeason'));
     }
@@ -77,9 +77,10 @@ class RecruitmentController extends \App\Http\Controllers\Controller
         return redirect()->route('manager-recruitments');
     }
 
-    public function denyRecruitment($id){
+    public function denyRecruitment($id,$reason){
         $deniedRecruitment=\App\Recruitment::where('id',$id)->first();
         $deniedRecruitment->is_confirm=0;
+        $deniedRecruitment->description = $reason;
         $deniedRecruitment->save();
         return redirect()->route('manager-recruitments');
     }

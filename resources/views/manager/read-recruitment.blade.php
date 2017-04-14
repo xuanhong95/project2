@@ -146,10 +146,29 @@ textarea{
             </a>
         </div>
         <div class="col-md-3 col-md-offset-1">
-            <a href="{!! route('deny-recruitment',['id' => $recruitment_contents[0]->recruitment_id]) !!}"
-                role="button" class="btn btn-warning btn-lg">
-                Deny
-            </a>
+            <a href="#" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#decline-reason">Decline</a>
+            <div id="decline-reason" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <p><strong>Decline reasons:</strong></p>
+                        </div>
+                        <div class="modal-body">
+                            <textarea id="decline-reason-content" class="form-control" rows="8" cols="80" placeholder="Decline reasons..."></textarea>
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="col-md-2 col-md-offset-3">
+                                <a id="send-decline-season" href="#" class="btn btn-primary" data-dismiss="modal"
+                                    >Send</a>
+                            </div>
+                            <div class="col-md-2 col-md-offset-2">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -159,5 +178,15 @@ textarea{
 <script>
 $("#phone").numeric();
 $("#quantity").numeric();
+$("#send-decline-season").on("click",function(){
+    $.ajax({
+        url:"/manager/recruitments/"+"{{ $recruitment_contents[0]->recruitment_id }}/decline/"
+                +$('#decline-reason-content').val(),
+        method: "POST",
+        success:function(){
+            window.location.href = "{{ route('manager-recruitments') }}";
+        }
+    });
+});
 </script>
 @endsection

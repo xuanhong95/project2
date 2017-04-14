@@ -19,8 +19,9 @@
     <div class="col-md-10 col-md-offset-1">
         <table class="table table-striped table-hover table-responsive">
             <tr class="text-center">
-                <th class="col-md-5"><strong>Company</strong></th>
-                <th class="col-md-3 con-md-offset-4"><strong>Status</strong></th>
+                <th class="col-md-3"><strong>Company</strong></th>
+                <th class="col-md-3"><strong>Status</strong></th>
+                <th class="col-md-3"><strong>Description</strong></th>
             </tr>
             @foreach( $recruitments as $recruitment )
             <tr>
@@ -31,6 +32,9 @@
                 </td>
                 <td>
                     <strong>{{ \App\Recruitment::getRecruitmentConfirmation( $recruitment->id ) }}</strong>
+                </td>
+                <td>
+                    <p>{!! $recruitment->description !!}</p>
                 </td>
             </tr>
             @endforeach
