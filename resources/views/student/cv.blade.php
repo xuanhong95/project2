@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@extends('layouts.left-sidebar')
 
 <style>
     input[type=checkbox]{
@@ -11,8 +10,8 @@
     td{
         height:40px;
     }
-    table{
-        border-collapse: collapse;
+    tbody{
+        background:#d6d6d6;
     }
     #add-button:hover{
         cursor: pointer;
@@ -32,6 +31,11 @@
         padding-left: 0px!important;
         padding-right: 0px!important;
     }
+    textarea{
+        max-height: 7em;
+        resize: none;
+        overflow: auto;
+    }
     p{
         margin: 0px 0px 0px 0px!important;
     }
@@ -49,8 +53,9 @@
         cursor: pointer;
     }
 </style>
-@section('content-with-sidebar')
-<div class="container-fluid" style='margin-top:70px'>
+@section('content')
+@include('layouts.left-sidebar')
+<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
     @if(Session::has('message'))
     <div class="alert alert-success">
         {!! Session::get('message') !!}
@@ -340,7 +345,7 @@
                     </td>
                 </tr>
             </table>
-            <div class="form-group">
+            <div class="">
                 <div class="col-md-2 col-md-offset-10" style="margin-top: 15px">
                     {!! $form->footer !!}
                 </div>

@@ -71,8 +71,10 @@ Route::group(['middleware'=>'auth','prefix'=>'enterprise'],function(){
 
         Route::any('recruitments','RecruitmentController@showRecruitments')
             ->name('enterprise-recruitment');
-        Route::any('create-new-recruitment','RecruitementController@createRecruitment')
+        Route::any('create-new-recruitment','RecruitmentController@createRecruitment')
             ->name('create-recruitment');
+        Route::any('recruitments/{recruitment_id}','RecruitmentController@readRecruitment')
+            ->name('enterprise-read-recruitment');
 
     });
 });

@@ -1,13 +1,12 @@
 @extends('layouts.app')
-@extends('layouts.left-sidebar')
 
-@section('content-with-sidebar')
+@section('content')
 <style media="screen">
     btn-toolbar{
         margin-left:
     }
 </style>
-
+@include('layouts.left-sidebar')
 <div class="container-fluid" style="margin-top:30px">
     <div class="col-md-10 col-md-offset-1 well">
         <div class="page-header col-md-offset-1">
