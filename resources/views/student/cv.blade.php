@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 <style>
     input[type=checkbox]{
         transform: scale(1.2);
@@ -9,8 +10,8 @@
     td{
         height:40px;
     }
-    table{
-        border-collapse: collapse;
+    tbody{
+        background:#d6d6d6;
     }
     #add-button:hover{
         cursor: pointer;
@@ -30,6 +31,11 @@
         padding-left: 0px!important;
         padding-right: 0px!important;
     }
+    textarea{
+        max-height: 7em;
+        resize: none;
+        overflow: auto;
+    }
     p{
         margin: 0px 0px 0px 0px!important;
     }
@@ -48,7 +54,8 @@
     }
 </style>
 @section('content')
-<div class="container" style='margin-top:70px'>
+@include('layouts.left-sidebar')
+<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
     @if(Session::has('message'))
     <div class="alert alert-success">
         {!! Session::get('message') !!}
@@ -332,19 +339,20 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-md-12" colspan="3">Nếu sinh viên chưa thực tập ở công ty nào thì mục trên ghi "Không có".<br> 
-                        Viện Đào tạo Quốc tế sẽ căn cứ trên kỹ năng của sinh viên và yêu cầu của doanh nghiệp để phân công. 
+                    <td class="col-md-12" colspan="3">Nếu sinh viên chưa thực tập ở công ty nào thì mục trên ghi "Không có".<br>
+                        Viện Đào tạo Quốc tế sẽ căn cứ trên kỹ năng của sinh viên và yêu cầu của doanh nghiệp để phân công.
                         Sinh viên phải cam kết tuân thủ theo phân công của Viện.
                     </td>
                 </tr>
             </table>
-            <div class="form-group">
+            <div class="">
                 <div class="col-md-2 col-md-offset-10" style="margin-top: 15px">
                     {!! $form->footer !!}
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="/js/jquery.numeric.js"></script>

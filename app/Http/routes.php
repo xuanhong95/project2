@@ -10,6 +10,14 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+    'add-info' => 'AddInfoController',
+    'company' => 'CompanyController',
+]);
+
+// Public routes
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,23 +27,25 @@ Route::get('/login',function(){
     return view('auth.login');
 });
 
+//Need authentication routes
+
 Route::any('profile','AddInfoController@anyShowProfile')
     ->name('profile');
-Route::controllers([
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
-    'add-info' => 'AddInfoController',
-    'company' => 'CompanyController',
-]);
 
 Route::get('/topics', 'HomeController@viewTopicList')
     ->name('view-topics');
+
+Route::get('/topics/{topic_id}', 'HomeController@viewTopic')
+    ->name('view-topic-detail');
 
 Route::get('/student/season{season?}','StudentController@showStudents')
     ->name('students-in-season');
 
 Route::get('/companies/season{season?}','CompanyController@showCompanies')
     ->name('companies-in-season');
+
+
+//Need type of user authentication routes
 
 Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],function(){
 
@@ -61,8 +71,10 @@ Route::group(['middleware'=>'auth','prefix'=>'enterprise'],function(){
 
         Route::any('recruitments','RecruitmentController@showRecruitments')
             ->name('enterprise-recruitment');
-        Route::any('create-new-recruitment','RecruitementController@createRecruitment')
+        Route::any('create-new-recruitment','RecruitmentController@createRecruitment')
             ->name('create-recruitment');
+        Route::any('recruitments/{recruitment_id}','RecruitmentController@readRecruitment')
+            ->name('enterprise-read-recruitment');
 
     });
 });

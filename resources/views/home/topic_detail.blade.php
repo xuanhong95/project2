@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 <style>
     img{
         float:left;
@@ -36,9 +37,12 @@
     }
 </style>
 @section('content')
-<div class="container" style="margin-top:70px">
+@include('layouts.left-sidebar')
+<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
     <div class="col-md-10 col-md-offset-1 well">
-        <legend style="font-size:30px">Thông tin tuyển dụng</legend>
+        <div class="page-header col-md-offset-1">
+            <h3>Thông tin tuyển dụng</h3>
+        </div>
         <div class="company-info">
             <h4>I - Thông tin công ty</h4>
             <ul class="col-md-offset-1">
@@ -119,4 +123,3 @@
     });
 </script>
 @endsection
-

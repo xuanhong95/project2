@@ -1,11 +1,13 @@
 @extends('layouts.app')
+
 @section('content')
-<div class="container" style="margin-top:70px">
-
-
+@include('layouts.left-sidebar')
+<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
     <div class="col-md-8 col-md-offset-2 well">
         {!! $form->header !!}
-        <legend>Season {!! $season !!}:</legend>
+        <div class="page-header col-md-offset-1">
+            <h3>Season {!! $season !!}</h3>
+        </div>
         <div class="form-group">
             <label for="dob" class="col-sm-3 control-label"></label>
             <div class="col-sm-6 ">

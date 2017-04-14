@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('layouts.left-sidebar')
 <style media="screen">
 #time_from,#time_to{
     width: 30%;
@@ -11,9 +12,10 @@
         max-height: 60px;
     }
 </style>
-<div class="container" style="margin-top:70px">
-
-        <h2>Báo Cáo Thực Tập</h2>
+<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
+    <div class="page-header">
+        <h3>Báo Cáo Thực Tập</h3>
+    </div>
         <div class="" >
             {!! $form->header !!}
             <div class="col-md-3 col-md-offset-3">
@@ -86,7 +88,7 @@
                             <div class="form-group">
                                 <label for="" class="control-label">Internship time:</label>
                                 <div class="col-sm-10 col-sm-offset-2">
-                                    
+
                                     <label for="time_from" class="col-sm-2">From:</label>
                                     <div class="col-sm-10">
                                         {!! $form->field('time_from') !!}

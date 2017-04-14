@@ -1,14 +1,18 @@
 @extends('layouts.app')
+
 @section('content')
+@include('layouts.left-sidebar')
 <style media="screen">
 textarea{
     max-height: 100px;
     text-overflow: ellipsis;
 }
 </style>
-<div class="container" style="margin-top:70px">
+<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
     <div class="col-md-10 col-md-offset-1 well">
-        <legend>Commit Work</legend>
+        <div class="page-headercol-md-offset-1">
+            <h3>Commit work</h3>
+        </div>
         <div class="col-md-10 col-md-offset-1">
             <legend><h4>Student:</h4></legend>
             <div class="col-md-8 col-md-offset-2">

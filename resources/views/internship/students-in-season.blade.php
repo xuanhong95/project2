@@ -1,8 +1,10 @@
 @extends('layouts.app')
+
 @section('content')
-<div class="container" style="margin-top:70px">
-    <div class="page-header">
-        <h2>Students</h2>
+@include('layouts.left-sidebar')
+<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
+    <div class="page-header col-md-offset-1">
+        <h3>Students</h3>
     </div>
     <div class="col-md-10 col-md-offset-1 well">
         <div class="">

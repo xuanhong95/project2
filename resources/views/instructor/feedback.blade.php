@@ -1,4 +1,5 @@
-@extends('layouts.app');
+@extends('layouts.app')
+
 @section('content')
 <style media="screen">
 table, th, td {
@@ -16,7 +17,8 @@ textarea{
     resize : none;
 }
 </style>
-    <div class="container">
+@include('layouts.left-sidebar')
+    <div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
         <div class="col-md-10 col-md-offset-1 well">
             <div class="page-header col-md-offset-1">
                 <h2>Feedback</h2>

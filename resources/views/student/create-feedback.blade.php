@@ -1,8 +1,12 @@
 @extends('layouts.app')
+
 @section('content')
-    <div class="container" style="margin-top:70px">
+@include('layouts.left-sidebar')
+    <div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
         <div class="col-md-10 col-md-offset-1 well">
-            <legend>New Feedback</legend>
+            <div class="page-header col-md-offset-1">
+                <h3>New Feedback</h3>
+            </div>
             <div class="">
                 <h4>Season:{!! $lastSeason->id !!}</h4>
             </div>
