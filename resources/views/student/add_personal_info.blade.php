@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@extends('layouts.left-sidebar')
 
-@section('content-with-sidebar')
-<div class="container-fluid" style='margin-top:70px'>
+@section('content')
+@include('layouts.left-sidebar')
+<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
     @if(Session::has('message'))
     <div class="alert alert-success">
         {!! Session::get('message') !!}

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@extends('layouts.left-sidebar')
+
 <style>
     h3{
         margin-top: 0px!important;
@@ -32,8 +32,9 @@
         cursor: pointer;
     }
 </style>
-@section('content-with-sidebar')
-<div class="container" style="margin-top:70px">
+@section('content')
+@include('layouts.left-sidebar')
+<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
     <div class="form-group">
         {!! $form->header !!}
         @if(!$form->message)
@@ -139,7 +140,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/js/jquery.numeric.js"></script>
 <script>
-
     //construct
     var recruitment_contents = {!! $recruitment_content !!};
     // alert(recruitment_contents[0]['position']);
@@ -166,11 +166,11 @@
             $('#add-button').addClass('hidden');
         }
         $('.add-line tr:last').before("<tr>"+$('#template').html()+"</tr>");
+        $('.add-line tr:last').addClass('a-recruitment-content');
     });
 
     //Button reset
     $('#reset-button').on('click',function(){
-        console.log('Work!');
         var tr_in_addline = $('.addline').find('tr');
         var count_tr_in_addline =  tr_in_addline.size();
         for(var i = 1; i < count_tr_in_addline-1; i++){

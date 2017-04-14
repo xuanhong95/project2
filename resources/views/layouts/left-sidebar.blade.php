@@ -1,7 +1,7 @@
 
 <link rel="stylesheet" href="/css/sidebar.css">
 <!-- Sidebar -->
-<div id="sidebar" class="col-md-2 col-sm-4 col-xs-4" style="width:100%">
+<div id="sidebar" class="col-md-2">
 <nav class="navbar navbar-default sidebar" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">

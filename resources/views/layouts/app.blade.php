@@ -113,7 +113,6 @@
                             Enterprise <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{!! route('create-recruitment') !!}">Create new recruitment</a>                                    </li>
                             <li><a href="{!! route('enterprise-recruitment') !!}">Show Recruitments</a></li>
                         </ul>
                     </li>
@@ -137,143 +136,137 @@
                             Companies <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                        <li><a href="{!! route('manager-recruitments') !!}">Recruitments</a></li>
-                    </ul>
-                </li>
-            </ul>
+                            <li><a href="{!! route('manager-recruitments') !!}">Recruitments</a></li>
+                        </ul>
+                    </li>
+                </ul>
 
-            <!-- navbar for SYSTEM MANAGER -->
-            @elseif(\Auth::user()->user_type==5)
-            <ul class="nav navbar-nav">
-                <li class=dropdown>
-                    <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
-                        System Manager <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Users</a></li>
-                        <li><a href="#">Config</a></li>
-                    </ul>
-                </li>
-            </ul>
-            @endif
-
-            <!-- DEFAULT navbar  -->
-            <ul class="nav navbar-nav">
-                <li class=dropdown>
-                    <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
-                        Internship <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="{!! route('students-in-season')!!}">Students</a></li>
-                        <li><a href="{!! route('companies-in-season')!!}">Companies</a></li>
-                        <li><a href="{!! route('view-topics') !!}">Topics</a></li>
-                        <li><a href="#">Result</a></li>
-                    </ul>
-                </li>
-            </ul>
-            @endif
-            <!-- Right Side Of Navbar -->
-            <ul class="nav navbar-nav navbar-right">
-                <!-- Authentication Links -->
-                @if (Auth::guest())
-                <li><a href="{{ url('auth/login') }}" style="color:white;">Login</a></li>
-                <li><a href="{{ url('auth/register') }}" style="color:white;">Register</a></li>
-                @else
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:white;">
-                        {{ Auth::user()->name }} <span class="caret"></span>
-                    </a>
-
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="{!! route('profile') !!}"><i class=""></i>Profile</a></li>
-                        <li><a href="{{ url('auth/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-
-                    </ul>
-                </li>
+                <!-- navbar for SYSTEM MANAGER -->
+                @elseif(\Auth::user()->user_type==5)
+                <ul class="nav navbar-nav">
+                    <li class=dropdown>
+                        <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
+                            System Manager <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Users</a></li>
+                            <li><a href="#">Config</a></li>
+                        </ul>
+                    </li>
+                </ul>
                 @endif
-            </ul>
+
+                <!-- DEFAULT navbar  -->
+                <ul class="nav navbar-nav">
+                    <li class=dropdown>
+                        <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
+                            Internship <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{!! route('students-in-season')!!}">Students</a></li>
+                            <li><a href="{!! route('companies-in-season')!!}">Companies</a></li>
+                            <li><a href="{!! route('view-topics') !!}">Topics</a></li>
+                            <li><a href="#">Result</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                @endif
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
+                    @if (Auth::guest())
+                    <li><a href="{{ url('auth/login') }}" style="color:white;">Login</a></li>
+                    <li><a href="{{ url('auth/register') }}" style="color:white;">Register</a></li>
+                    @else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:white;">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{!! route('profile') !!}"><i class=""></i>Profile</a></li>
+                            <li><a href="{{ url('auth/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+
+                        </ul>
+                    </li>
+                    @endif
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
-<div style="min-height:100%">
-    <div class="" >
+    </nav>
+    <div style="min-height:100%; margin-top:50px;">
         @yield('content')
     </div>
-    <div class="col-md-10 pull-right">
-        @yield('content-with-sidebar')
-    </div>
-</div>
 
+    <div class="col-md-12" style="clear:both;">
+        <!--footer start from here-->
+        <link href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="/css/footer.css" rel="stylesheet">
+        <style >
+        .copyright { min-height:40px; background-color:#000000;}
+        .copyright p { text-align:left; color:#FFF; padding:10px 0; margin-bottom:0px;}
+        .container {
+            min-height: 100%;
+        }
+        .footer {
+            margin-top: 30px;
+            position: absolute;
+            right: 0;
+            left: 0;
+            background-color: #efefef;
+            text-align: center;
+        }
+        </style>
+        <div class="footer">
+            <footer style="background-image:url('/images/footersievn.png'); background-repeat:repeat-x;">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 footerleft ">
 
-<div class="col-md-12" style="clear:both">
-    <!--footer start from here-->
-    <link href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="/css/footer.css" rel="stylesheet">
-    <style >
-      .copyright { min-height:40px; background-color:#000000;}
-      .copyright p { text-align:left; color:#FFF; padding:10px 0; margin-bottom:0px;}
-      .container {
-        min-height: 100%;
-      }
-      .footer {
-        margin-top: 30px;
-        position: absolute;
-        right: 0;
-        left: 0;
-        background-color: #efefef;
-        text-align: center;
-      }
-    </style>
-    <div class="footer">
-      <footer style="background-image:url('/images/footersievn.png'); background-repeat:repeat-x;">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-6 col-sm-6 footerleft ">
+                            <p><i class="fa fa-map-pin"></i>Address: Room 201, D7 Building, HUST | No.1, Dai Co Viet Street, Hanoi, Vietnam.</p>
+                            <p><i class="fa fa-phone"></i>Tel:(+84)04.3868.3407 & 3868.2261 | Fax:(+84)04.3868.3409</p>
+                            <p><i class="fa fa-envelope"></i>Email: info@sie.edu.vn | Website: http://sie.hust.edu.vn</p>
 
-              <p><i class="fa fa-map-pin"></i>Address: Room 201, D7 Building, HUST | No.1, Dai Co Viet Street, Hanoi, Vietnam.</p>
-              <p><i class="fa fa-phone"></i>Tel:(+84)04.3868.3407 & 3868.2261 | Fax:(+84)04.3868.3409</p>
-              <p><i class="fa fa-envelope"></i>Email: info@sie.edu.vn | Website: http://sie.hust.edu.vn</p>
+                        </div>
 
-            </div>
-
-            <div class="col-md-3 col-sm-3 paddingtop-bottom " >
-              <div class="fb-page" data-href="https://www.facebook.com/sie.hust.edu.vn/" data-tabs="timeline" data-height="300" data-small-header="false" style="margin-bottom:15px;" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                <div class="fb-xfbml-parse-ignore">
-                  <blockquote cite="https://www.facebook.com/sie.hust.edu.vn/"><a href="https://www.facebook.com/sie.hust.edu.vn/">Facebook</a></blockquote>
+                        <div class="col-md-3 col-sm-3 paddingtop-bottom " >
+                            <div class="fb-page" data-href="https://www.facebook.com/sie.hust.edu.vn/" data-tabs="timeline" data-height="300" data-small-header="false" style="margin-bottom:15px;" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                                <div class="fb-xfbml-parse-ignore">
+                                    <blockquote cite="https://www.facebook.com/sie.hust.edu.vn/"><a href="https://www.facebook.com/sie.hust.edu.vn/">Facebook</a></blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 paddingtop-bottom">
+                            <div class="logofooter" > <img src="/images/logonho.png" alt="sie_logo"></div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-3 paddingtop-bottom">
-              <div class="logofooter" > <img src="/images/logonho.png" alt="sie_logo"></div>
-            </div>
-          </div>
-        </div>
-      </footer>
-      <!--footer start from here-->
+            </footer>
+            <!--footer start from here-->
 
-      <div class="copyright" style="height:50px">
-        <div class="container">
-          <div class="col-md-6">
-            <p>Copyright© School of International Education | HUST</p>
-          </div>
-          <div class="col-md-6">
-            <p>Powered by: Students</p>
-          </div>
+            <div class="copyright" style="height:50px">
+                <div class="container">
+                    <div class="col-md-6">
+                        <p>Copyright© School of International Education | HUST</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>Powered by: Students</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
     </div>
-
-</div>
-<!-- JavaScripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<script>
+    <!-- JavaScripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script>
     $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-</script>
-{{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    </script>
+    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

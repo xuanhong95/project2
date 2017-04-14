@@ -3,11 +3,9 @@ body,html{
   }
 #sidebar{
     background : #fff;
-    margin-top:50px;
-    padding:0 2px 0 0;
+    padding:0;
     height: 100%;
     overflow:auto;
-    position:fixed;
 }
   nav.sidebar, .main{
     -webkit-transition: margin 200ms ease-out;
