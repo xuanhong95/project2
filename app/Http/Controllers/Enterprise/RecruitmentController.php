@@ -126,6 +126,7 @@ class RecruitmentController extends Controller
                 $recruit_table->user_id = \Auth::id();
                 $recruit_table->quantity = $input['quantity'];
                 $recruit_table->season = $season;
+                $recruit_table->is_confirm = null;
                 $recruit_table->save();
 
                 $recruitment_this_season = \App\Recruitment::where([

@@ -22,6 +22,7 @@ class CreateRecruitmentsTable extends Migration
             $table->integer('quantity');
             $table->integer('season');
             $table->boolean('is_confirm')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

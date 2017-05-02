@@ -17,8 +17,6 @@
         </div>
         <div class="row">
             <!-- Edit button -->
-            @if( (\App\Recruitment::getRecruitmentConfirmation( $recruitment->id ) === "Accepted")
-                    && (\App\Season::is_openningSeasonID( $recruitment->season )))
             <div class="col-md-12" style="margin-bottom:20px">
                 <!-- Start modal -->
                 <div class="col-md-12">
@@ -51,7 +49,6 @@
 
                 </div>
             </div>
-            @endif
             <!-- end modal -->
             <!-- end edit-button -->
 

@@ -70,8 +70,65 @@
     $('#start_date, #register_deadline, #submit_result_deadline, #remarking_deadline, #end_date').datepicker({
         changeMonth:true,
         changeYear:true,
-        dateFormat:'yy/mm/dd',
+        dateFormat:'yy-mm-dd',
         yearRange:':+1',
     });
+
+    function hasError(element){
+        //remove success classes
+        element.closest(".form-group").removeClass("has-success");
+        element.closest("span").removeClass("glyphicon-ok");
+
+        //add error classes
+        element.closest(".form-group").addClass("has-error");
+        element.closest("span").addClass("glyphicon-remove");
+        $("input[type = submit]").addClass("disabled");
+    }
+
+    function hasSuccess(element){
+        // remove error classes
+        element.closest(".form-group").removeClass("has-error");
+        element.closest("span").removeClass("glyphicon-remove");
+        $("input[type = submit]").removeClass("disabled");
+
+        //add success classes
+        element.closest(".form-group").addClass("has-success");
+        element.closest("span").addClass("glyphicon-ok");
+    }
+
+    $('#start_date, #register_deadline, #submit_result_deadline, #remarking_deadline, #end_date').on("change",function(){
+        // start_date must before register_deadline
+        if($("#start_date").val() >= $("#register_deadline").val()){
+            hasError($("#register_deadline"));
+        }
+        else{
+            hasSuccess($("#register_deadline"));
+        }
+
+        //register_deadline must before submit_result_deadline
+        if($("#register_deadline").val() >= $("#submit_result_deadline").val()){
+            hasError($("#submit_result_deadline"));
+        }
+        else{
+            hasSuccess($("#submit_result_deadline"))
+        }
+
+        //submit_result_deadline must before remarking_deadline
+        if($("#submit_result_deadline").val() >= $("#remarking_deadline").val()){
+            hasError($("#remarking_deadline"));
+        }
+        else{
+            hasSuccess($("#remarking_deadline"));
+        }
+
+        //remarking_deadline must before end_date
+        if($("#remarking_deadline").val() >= $("#end_date").val()){
+            hasError($("#end_date"));
+        }
+        else{
+            hasSuccess($("#end_date"));
+        }
+    });
+
 </script>
 @endsection
