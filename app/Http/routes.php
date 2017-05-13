@@ -27,6 +27,8 @@ Route::get('/login',function(){
     return view('auth.login');
 });
 
+Route::get('/allocations','HomeController@viewAllocation')
+    ->name('allocations');
 //Need authentication routes
 
 Route::any('profile','AddInfoController@anyShowProfile')
@@ -63,6 +65,10 @@ Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],f
         ->name('accept-recruitment');
     Route::any('recruitments/{id}/decline/{reason}','RecruitmentController@denyRecruitment')
         ->name('decline-recruitment');
+    Route::any('allocate','AllocationController@viewManagerAllocating')
+        ->name('manager-allocate');
+    Route::any('allocating','AllocationController@allocate')
+        ->name('allocate');
 });
 
 Route::group(['middleware'=>'auth','prefix'=>'enterprise'],function(){

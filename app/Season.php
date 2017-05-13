@@ -32,8 +32,14 @@ class Season extends Model
         }
     }
 
-    public static function getLastSeasonID(){
-        return \App\Season::orderBy("id",desc)->first();
+    public static function getLastSeason()
+    {
+        return \App\Season::orderBy("id",'desc')->first();
+    }
+
+    public static function getLastSeasonID()
+    {
+        return \App\Season::getLastSeason()->id;
     }
 
     public static function is_openningSeasonID($season_id)
@@ -48,7 +54,7 @@ class Season extends Model
     {
         $currentDate = date('Y-m-d');
         $season = \App\Season::where('id', $season_id)->first();
-        
+
         return ( $currentDate >= $season->start_date )&&( $currentDate <= $season->end_date )?false:true;
     }
 
@@ -98,5 +104,12 @@ class Season extends Model
     public static function getAllSeasonIDs()
     {
         return \App\Season::select('id')->get();
+    }
+
+    public static function getStartDate( $season_id )
+    {
+        $season = \App\Season::where("id",'=',$season_id)->first();
+        
+        return $season->start_date;
     }
 }

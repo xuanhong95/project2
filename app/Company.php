@@ -15,4 +15,5 @@ class Company extends Model
     	$company = \App\Company::where('id', $id)->first();
     	return $company->address;
     }
+
 }

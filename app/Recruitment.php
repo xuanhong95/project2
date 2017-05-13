@@ -9,7 +9,7 @@ class Recruitment extends Model
     public static function getRecruitmentConfirmation($recruitment_id)
     {
         $recruitment = \App\Recruitment::where('id', $recruitment_id)->first();
-        
+
         if( is_null($recruitment->is_confirm) ){
             return "Unapproved";
         }
@@ -47,5 +47,14 @@ class Recruitment extends Model
     public static function getUnconfirmedRecruitments()
     {
         return \App\Recruitment::where('is_confirm',null)->get();
+    }
+
+    public static function getCompaniesInSeason( $season_id )
+    {
+        return \App\Recruitment::join("enterprises","enterprises.user_id","=","recruitments.user_id")
+            ->join("companies","companies.id",'=', "enterprises.company_id")
+            ->where("recruitments.season",'=', $season_id)
+            ->select("companies.id","companies.name")
+            ->get();
     }
 }
