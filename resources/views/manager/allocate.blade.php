@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('content')
 @include('layouts.left-sidebar')
+<style media="screen">
+    .in{
+        display: table;
+    }
+</style>
 <div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
     <!-- page header -->
     <div class="page-header col-md-offset-1">
@@ -15,17 +20,22 @@
             <div class="btn btn-default btn-block" data-toggle="collapse" data-target="#{{ $company->id }}" >
                 <h3>Company: {{ \App\Company::getCompanyNameByID( $company->id ) }}</h3>
             </div>
-            <table  id="{{ $company->id }}" class="collapse fade table table-striped table-hover table-bordered">
+            
+            <div id="{{ $company->id }}" class="collapse" >
+                <table  class="table table-responsive table-striped table-hover table-bordered">
 
-                @foreach( $allocations as $allocation)
-                    @if( $company->id == $allocation->company_id )
-                        <tr>
-                            <td ><h4>{{ \App\StudentInfo::getStudentNumberByID( $allocation->student_id ) }}</h4></td>
-                            <td ><h4>{{ \App\User::getUserNameByID( $allocation->student_id ) }}</h4></td>
-                        </tr>
-                    @endif
-                @endforeach
-            </table>
+                    @foreach( $allocations as $allocation)
+                        @if( $company->id == $allocation->company_id )
+                            <tr>
+                                <td ><h4>{{ \App\StudentInfo::getStudentNumberByID( $allocation->student_id ) }}</h4></td>
+                                <td ><h4>{{ \App\User::getUserNameByID( $allocation->student_id ) }}</h4></td>
+                            </tr>
+                        @endif
+                    @endforeach
+
+                </table>
+            </div>
+
         @endforeach
     </div>
     <!-- End accepted interns -->
