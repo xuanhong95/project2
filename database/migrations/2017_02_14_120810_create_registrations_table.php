@@ -21,7 +21,8 @@ class CreateRegistrationsTable extends Migration
             $table->string('special_certificate')->nullable();
             $table->string('soft_skill')->nullable();
             $table->string('other_description')->nullable();
-            $table->text('wished_skill')->nullable();;
+            $table->text('wished_skill')->nullable();
+            $table->integer('season');
             $table->boolean('is_confirmed')->nullable();
             $table->timestamps();
         });

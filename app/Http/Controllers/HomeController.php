@@ -36,10 +36,11 @@ class HomeController extends Controller
         return view('home.topics', compact('list_topic'));
     }
 
-    public function viewTopic($recruitment_id){
+    public function viewTopic($recruitment_id)
+    {
         $topic = \App\Recruitment::where('recruitments.id',$recruitment_id)->first();
 
-        $enterprise_info=\App\Enterprise::where('user_id',$topic->user_id)->first();
+        $enterprise_info = \App\Enterprise::where('user_id',$topic->user_id)->first();
 
         $enterprise_account=\App\User::where('id',$enterprise_info->user_id)->first();
 
@@ -53,5 +54,28 @@ class HomeController extends Controller
 
         return view('home.topic_detail', compact('topic', 'enterprise_info','enterprise_account', 'student_apply',
                                                  'company', 'recruitment_contents'));
+    }
+
+    public function viewAllocation()
+    {
+        $lastSeason = \App\Season::getLastSeasonID();
+
+        $allocations = \App\Allocation::getAllocationsInSeason( $lastSeason );
+
+        $studentsInSeason = \App\Registration::getStudentsInSeason( $lastSeason );
+        $companiesInSeason = \App\Recruitment::getCompaniesInSeason( $lastSeason );
+
+        $leftStudents = array();
+        foreach ($studentsInSeason as $student) {
+            if(\App\Allocation::existStudentInAllocationSeason($lastSeason, $student->user_id)){
+            }
+            else{
+                    array_push($leftStudents, $student);
+            }
+        }
+
+        // dd($studentsInSeason,$leftStudents);
+        // dd($companiesInSeason);
+        return view('internship.allocations-status', compact("allocations","leftStudents","companiesInSeason"));
     }
 }

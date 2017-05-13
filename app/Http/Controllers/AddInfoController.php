@@ -75,8 +75,8 @@ class AddInfoController extends Controller
 		else{
 			$form->add('desire_skill', 'Kỹ năng muốn học hỏi', 'textarea')->placeholder('Nhập càng chi tiết càng tốt')->insertValue($registration->wished_skill);
 		}
-		
-		
+
+
 
 		if(empty($avail_company)){
 			$form->add('cpn_name', 'Company Name', 'text');
@@ -146,10 +146,12 @@ class AddInfoController extends Controller
 				$registration = new \App\Registration();
 				$registration->user_id = \Auth::id();
 				$registration->wished_skill = $input['desire_skill'];
+				$registration->season = \App\Season::getLastSeasonID();
 				$registration->save();
 			}
 			else{
 				$registration->wished_skill = $input['desire_skill'];
+				$registration->season = \App\Season::getLastSeasonID();
 				$registration->save();
 			}
 
