@@ -49,8 +49,11 @@
     .form-control{
         border-radius: 0px!important;
     }
-    #add-button:hover{
+    #add-button:hover, #remove-button:hover{
         cursor: pointer;
+    }
+    .lang-point-error{
+        color: red;
     }
 </style>
 @section('content')
@@ -58,9 +61,12 @@
 <div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
     @if(Session::has('message'))
     <div class="alert alert-success">
-        {!! Session::get('message') !!}
+        {!! \Session::get('message') !!}
     </div>
-    @endif
+    <div class="col-md-2 col-md-offset-10" style="margin-top: 15px">
+        {!! $form->footer !!}
+    </div>
+    @else
     <div class="form-group">
         {!! $form->header !!}
         <div class="row" >
@@ -185,6 +191,11 @@
                                     {!! $form->field('point') !!}
                                 </div>
                             </div>
+                            <div style="float: right" class="lang-point-error">
+                                <p class="ielts-check hidden">Your IELTS Point not valid</p>
+                                <p class="toefl-check hidden">Your TOEFL Point not valid</p>
+                                <p class="toeic-check hidden">Your TOEIC Point not valid</p>
+                            </div>
                         </td>
                     </td>
                 </tr>
@@ -242,10 +253,16 @@
                                 @endfor
                                 <tr>
                                     <td colspan="4" style="text-align: right; border: none;">
+                                        <img id="remove-button" style="width: 16px; padding-bottom: 1px" src="/images/removecontent.png"/>
                                         <img id="add-button" src="/images/addcontent.png"/>
                                     </td>
                                 </tr>
                             </table>
+                            <div style="margin-bottom: 10px;">
+                                <div class=' required {{ $form->field("other_description")->has_error }}'>
+                                    {!! $form->field("other_description") !!}
+                                </div>
+                            </div>
                         </td>
                     </td>
                 </tr>
@@ -352,9 +369,11 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/js/jquery.numeric.js"></script>
 <script>
     var count_skill = $('.skill-point').size();
@@ -376,7 +395,19 @@
         if(count_skill == 5){
             $('#add-button').addClass('hidden');
         }
+        if(count_skill > 1){
+            $('#remove-button').removeClass('hidden');
+        }
         $('.add-line tr:last').before(html);
+    });
+
+    $('#remove-button').click(function(){
+        count_skill--;
+        $('.add-line tr:last').prev().remove();
+        if(count_skill < 5)
+            $('#add-button').removeClass('hidden');
+        if(count_skill == 1)
+            $('#remove-button').addClass('hidden');
     });
 
     $("#phone").numeric();
@@ -384,11 +415,20 @@
     $(document).ready(function(){
         if($('#have_company').val() == 1)
             $('#div_company').removeClass('hidden');
+        if(count_skill == 1)
+            $('#remove-button').addClass('hidden');
     });
 
     $('#have_company').click(function(){
         $('#div_company').toggleClass('hidden');
     });
 
+    $('#cpn_start_date, #cpn_end_date').datepicker({
+        changeMonth:true,
+        changeYear:true,
+        dateFormat:'yy/mm/dd',
+        yearRange:':+1',
+    });
 </script>
+<script src="/js/cv_page.js"></script>
 @endsection
