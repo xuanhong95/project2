@@ -34,13 +34,14 @@
             @endfor
         </table>
     </div>
+        @if( $createRecruitmentEnable )
+        <div class="col-md-2 col-md-offset-1">
+            <a href="{!! route('create-recruitment') !!}" class="btn btn-primary">Create New Recruitment</a>
+        </div>
+        @endif
     @endif
 
-    @if( \App\Season::is_closedSeasonID( end($recruitments)[0]->season) )
-    <div class="col-md-2 col-md-offset-1">
-        <a href="{!! route('create-recruitment') !!}" class="btn btn-primary">Create New Recruitment</a>
-    </div>
-    @endif
+
     <div class="col-md-2 pull-right">
         <a href="{!! route('homepage') !!}" class="btn btn-default btn-lg">Back</a>
     </div>
