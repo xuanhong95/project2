@@ -87,5 +87,30 @@ class CompanyController extends Controller
         }
     }
 
+    public function viewTimesheet()
+    {
+        $lastSeason = \App\Season::getLastSeasonID();
+
+        $companiesInSeason = \App\Recruitment::getCompaniesInSeason( $lastSeason );
+
+        return view('internship.timesheet',compact("lastSeason","companiesInSeason"));
+    }
+
+    public function getTimesheetsOfCompanyInSeason()
+    {
+        $input = \Input::all();
+
+        $timesheetOfStudents = \App\Timesheet::join('allocations',"timesheets.id_allocation",'=','allocations.id')
+            ->join('users', 'users.id', '=', 'allocations.student_id')
+            ->join('student_infos', 'student_infos.user_id', '=', 'users.id')
+            ->where([
+                ["allocations.company_id", '=', $input['company_id']],
+                ["allocations.season", '=', $input['season']]
+            ])
+            ->select("users.name","student_infos.student_number")
+            ->get();
+
+        return $timesheetOfStudents;
+    }
 
 }

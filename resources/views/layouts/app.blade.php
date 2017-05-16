@@ -100,7 +100,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">Marking</a></li>
                             <li><a href="{!! route('instructor-students') !!}">Manage students</a></li>
-                            <li><a href="#">Timekeeping</a></li>
+                            <li><a href="{{ route('timekeeping') }}">Timekeeping</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -167,6 +167,7 @@
                             <li><a href="{!! route('companies-in-season')!!}">Companies</a></li>
                             <li><a href="{!! route('view-topics') !!}">Topics</a></li>
                             <li><a href="{!! route('allocations') !!}">Allocations</a></li>
+                            <li><a href="{{ route('timesheet') }}">Timesheet</a></li>
                             <li><a href="#">Result</a></li>
                         </ul>
                     </li>

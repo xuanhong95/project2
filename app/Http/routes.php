@@ -46,7 +46,11 @@ Route::get('/student/season{season?}','StudentController@showStudents')
 Route::get('/companies/season{season?}','CompanyController@showCompanies')
     ->name('companies-in-season');
 
+Route::any('/timesheet',"CompanyController@viewTimesheet")
+    ->name('timesheet');
 
+Route::any('/get-time-sheet',"CompanyController@getTimesheetsOfCompanyInSeason")
+    ->name("getTimesheetsOfCompanyInSeason");
 //Need type of user authentication routes
 
 Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],function(){
@@ -107,4 +111,7 @@ Route::group(['middleware'=>'auth','prefix'=>'instructor','namespace'=>'Instruct
         ->name('commit-work');
     Route::any('feedback/{student_id}','FeedbackController@feedbackStudent')
         ->name('instructor-feedback');
+
+    Route::any('/timekeeping',"TimekeepingController@viewTimesheets")
+        ->name('timekeeping');
 });

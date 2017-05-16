@@ -6,11 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Registration extends Model
 {
-    //
-    public static function getRegistrationsOfCompanies( $companies )
-    {
-
-    }
 
     public static function getStudentsInSeason( $season )
     {
