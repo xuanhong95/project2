@@ -15,7 +15,7 @@ class Registration extends Model
                 ["registrations.season",'=',$season],
                 ["is_confirmed",'=', 1]
             ])
-            ->select("student_infos.user_id","student_infos.student_number","users.name")
+            ->select("student_infos.*","users.name")
             ->get();
     }
 

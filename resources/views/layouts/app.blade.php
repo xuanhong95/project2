@@ -86,7 +86,7 @@
                             Instructor Teacher <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Marking</a></li>
+                            <li><a href="{{ route('teacher-marking') }}">Marking</a></li>
                         </ul>
                     </li>
                 </ul>

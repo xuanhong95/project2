@@ -24,5 +24,20 @@ class EnterpriseInstructor extends Model
 
     }
 
+    public static function getInstructorsInCompany( $company_id )
+    {
+        return \App\EnterpriseInstructor::where("company_id",'=', $company_id)->get();
+    }
 
+    public static function getInstructorOfStudent( $student_id, $season )
+    {
+        return \App\EnterpriseInstructor::join("allocations","allocations.instructor_id",'=',"enterprise_instructors.user_id")
+            ->join("users","users.id",'=',"enterprise_instructors.user_id")
+            ->where([
+                ["allocations.student_id",'=', $student_id],
+                ["season",'=', $season]
+            ])
+            ->select("users.name","enterprise_instructors.*")
+            ->first();
+    }
 }

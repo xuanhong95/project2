@@ -20,15 +20,37 @@
             <div class="btn btn-default btn-block" data-toggle="collapse" data-target="#{{ $company->id }}" >
                 <h3>Company: {{ \App\Company::getCompanyNameByID( $company->id ) }}</h3>
             </div>
-            
+
             <div id="{{ $company->id }}" class="collapse" >
                 <table  class="table table-responsive table-striped table-hover table-bordered">
 
                     @foreach( $allocations as $allocation)
                         @if( $company->id == $allocation->company_id )
-                            <tr>
-                                <td ><h4>{{ \App\StudentInfo::getStudentNumberByID( $allocation->student_id ) }}</h4></td>
-                                <td ><h4>{{ \App\User::getUserNameByID( $allocation->student_id ) }}</h4></td>
+                            <tr id="{{ $allocation->student_id }}">
+                                <td><h4>{{ \App\StudentInfo::getStudentNumberByID( $allocation->student_id ) }}</h4></td>
+                                <td><h4>{{ \App\User::getUserNameByID( $allocation->student_id ) }}</h4></td>
+                                <td>
+                                    <select class="instructor" name="">
+                                        <option value="{{ $allocation->instructor_id }}">{{ \App\User::getUserNameByID( $allocation->instructor_id ) }}</option>
+                                        <?php $instructorsInCompany = \App\EnterpriseInstructor::getInstructorsInCompany($allocation->company_id) ?>
+                                        @foreach( $instructorsInCompany as $instructor )
+                                            <option value="{{ $instructor->user_id }}">{{ $instructor->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="teacher" name="">
+                                        <option value="{{ $allocation->teacher_id }}">{{ \App\User::getUserNameByID( $allocation->teacher_id ) }}</option>
+                                        <?php $teachers = \App\Teacher::getAllTeachers() ?>
+                                        @foreach( $teachers as $teacher )
+                                            <option value="{{ $teacher->user_id }}">{{ $teacher->name }}</option>
+                                        @endforeach
+                                    </select>
+
+                                </td>
+                                <td>
+                                    <span class="glyphicon"></span>
+                                </td>
                             </tr>
                         @endif
                     @endforeach
@@ -45,7 +67,7 @@
         <legend>Left Students</legend>
         <table class="table table-striped table-hover table-bordered">
             @foreach( $leftStudents as $student)
-            <tr>
+            <tr id="{{ $student->user_id }}">
                 <td>
                     {{ $student->student_number }}
                 </td>
@@ -53,12 +75,22 @@
                     {{ $student->name }}
                 </td>
                 <td>
-                    <select id="{{ $student->user_id}}">
-                        <option value="0">--Choose--</option>
+                    <select class="company">
+                        <option value="0">--Choose Company--</option>
                         @foreach( $companiesInSeason as $company )
                         <option value="{{ $company->id }}">{{ $company->name }}</option>
                         @endforeach
                     </select>
+                    <td>
+                        <select class="instructor"class="" name="">
+                            <option value="0">--Choose Instructor--</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="teacher" name="">
+                            <option value="0">--Choose Teacher--</option>
+                        </select>
+                    </td>
                     <span class="glyphicon"></span>
                 </td>
             </tr>
@@ -77,21 +109,53 @@
 $(function(){
     $("select").on('change', function(){
         var currentSelect = $(this);
+
         $.ajax({
             url:"{{ route('allocate') }}",
             currentElement : currentSelect,
             data: {
-                student_id: $(this).attr("id"),
-                company_id: $(this).val()
+                student_id: $(this).closest("tr").attr("id"),
+                company_id: $(this).closest(".company")[0].value,
+                instructor_id: $(this).closest(".instructor").val,
+                teacher_id: $(this).closest(".teacher").val,
+                season: {{ $lastSeason }}
             },
             success:function(result){
                 this.currentElement.next("span").addClass("glyphicon-ok");
+                if(this.currentElement.hasClass("company")){
+                    console.log("has class company");
+                    var inInstructorCombobox = this.currentElement.closest(".instructor");
+                    var inCompanyId = this.currentElement[0].value;
+                    loadInstructors( inInstructorCombobox, inCompanyId );
+                }
             },
             error:function(result){
                 this.currentElement.next("span").addClass("glyphicon-remove");
             }
         });
     });
+
+    function loadInstructors( inInstructorCombobox, inCompanyId ){
+        console.log("loadInstructors");
+        $.ajax({
+            url: "{{ route('getInstructorsInCompany') }}",
+            combobox: inInstructorCombobox,
+            data:{
+                company_id : inCompanyId,
+            },
+            success: function( instructors ){
+                var html = "<option value='0'>--Choose Instructor--</option>/n";
+                for( instructor of instructors ){
+                    html += '<option value="'+instructor.attr("user_id")+'">'+instructor.attr("name")+'</option>/n';
+                }
+                this.combobox.text(html);
+            },
+            error:function(result){
+                console.log(result);
+                $(this).next("span").addClass("glyphicon-remove");
+            }
+        });
+    }
 });
 </script>
 @endsection

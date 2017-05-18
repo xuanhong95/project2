@@ -72,4 +72,25 @@ class Allocation extends Model
         return $allocation == null?false:true;
     }
 
+    public static function getAllocationsOfTeacherInSeason( $season_id, $teacher_id )
+    {
+        $allocation = \App\Allocation::where([
+            ['season','=',$season_id],
+            ['teacher_id','=',$teacher_id]
+            ])->first();
+        return $allocation;
+    }
+
+    public static function getStudentsOfTeacherInSeason( $teacher_id, $season_id)
+    {
+        return \App\Allocation::join("users","users.id",'=',"allocations.student_id")
+            ->join("student_infos","student_infos.user_id",'=', "allocations.student_id")
+            ->where([
+                ['season','=', $season_id],
+                ["teacher_id", '=', $season_id]
+            ])
+            ->select("users.name","student_infos.*","allocations.*")
+            ->get();
+    }
+
 }

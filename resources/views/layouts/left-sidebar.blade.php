@@ -32,7 +32,7 @@
                         Instructor Teacher <span class="caret"></span>
                     </a>
                     <ul class="collapse forAnimate" id="teacher">
-                        <li><a href="#">Marking</a></li>
+                        <li><a href="teacher-marking">Marking</a></li>
                     </ul>
                 </li>
 

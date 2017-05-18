@@ -73,6 +73,8 @@ Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],f
         ->name('manager-allocate');
     Route::any('allocating','AllocationController@allocate')
         ->name('allocate');
+    Route::any('getInstructorsInCompany',"AllocationController@getInstructorsInCompany")
+        ->name("getInstructorsInCompany");
 });
 
 Route::group(['middleware'=>'auth','prefix'=>'enterprise'],function(){
@@ -114,4 +116,9 @@ Route::group(['middleware'=>'auth','prefix'=>'instructor','namespace'=>'Instruct
 
     Route::any('/timekeeping',"TimekeepingController@viewTimesheets")
         ->name('timekeeping');
+});
+
+Route::group(['middleware'=>'auth','prefix'=>'teacher', 'namespace'=>'Teacher'], function(){
+    Route::any('marking','MarkingController@viewMarkingList')
+        ->name("teacher-marking");
 });
