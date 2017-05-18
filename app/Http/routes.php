@@ -46,7 +46,11 @@ Route::get('/student/season{season?}','StudentController@showStudents')
 Route::get('/companies/season{season?}','CompanyController@showCompanies')
     ->name('companies-in-season');
 
+Route::any('/timesheet',"CompanyController@viewTimesheet")
+    ->name('timesheet');
 
+Route::any('/get-time-sheet',"CompanyController@getTimesheetsOfCompanyInSeason")
+    ->name("getTimesheetsOfCompanyInSeason");
 //Need type of user authentication routes
 
 Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],function(){
@@ -69,6 +73,8 @@ Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],f
         ->name('manager-allocate');
     Route::any('allocating','AllocationController@allocate')
         ->name('allocate');
+    Route::any('getInstructorsInCompany',"AllocationController@getInstructorsInCompany")
+        ->name("getInstructorsInCompany");
 });
 
 Route::group(['middleware'=>'auth','prefix'=>'enterprise'],function(){
@@ -107,4 +113,12 @@ Route::group(['middleware'=>'auth','prefix'=>'instructor','namespace'=>'Instruct
         ->name('commit-work');
     Route::any('feedback/{student_id}','FeedbackController@feedbackStudent')
         ->name('instructor-feedback');
+
+    Route::any('/timekeeping',"TimekeepingController@viewTimesheets")
+        ->name('timekeeping');
+});
+
+Route::group(['middleware'=>'auth','prefix'=>'teacher', 'namespace'=>'Teacher'], function(){
+    Route::any('marking','MarkingController@viewMarkingList')
+        ->name("teacher-marking");
 });

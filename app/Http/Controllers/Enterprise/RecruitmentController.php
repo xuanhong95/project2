@@ -11,9 +11,10 @@ class RecruitmentController extends Controller
 {
     public function showRecruitments()
     {
+        $createRecruitmentEnable = \App\Recruitment::creatable( \Auth::id() );
         $recruitments = $this->getAllCompanyRecruitment(\Auth::id());
 
-        return view('enterprise.recruitments', compact('recruitments'));
+        return view('enterprise.recruitments', compact('recruitments','createRecruitmentEnable'));
     }
 
     /**

@@ -6,6 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Recruitment extends Model
 {
+
+    public static function creatable( $enterprise_id )
+    {
+        $lastSeason = \App\Season::getLastSeasonID();
+        $existedRecruitment = \App\Recruitment::where([
+            ["user_id",'=', $enterprise_id],
+            ["season", '=', $lastSeason]
+        ])->first();
+
+        return ($existedRecruitment == null);
+
+    }
+
     public static function getRecruitmentConfirmation($recruitment_id)
     {
         $recruitment = \App\Recruitment::where('id', $recruitment_id)->first();

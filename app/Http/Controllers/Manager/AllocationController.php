@@ -31,7 +31,7 @@ class AllocationController extends Controller
             // dd($allocations);
             // dd($studentsInSeason,$leftStudents);
             // dd($companiesInSeason);
-            return view('manager.allocate', compact("allocations","leftStudents","companiesInSeason"));
+            return view('manager.allocate', compact("allocations","leftStudents","companiesInSeason","lastSeason"));
 
     }
 
@@ -39,15 +39,32 @@ class AllocationController extends Controller
     {
         $student_id = \Input::get('student_id');
         $company_id = \Input::get('company_id');
+        $instructor_id = \Input::get('instructor_id');
+        $teacher_id = \Input::get('teacher_id');
+        $season = \Input::get('season');
 
-        $newAllocation = new \App\Allocation;
+        $allocation = \App\Allocation::where([
+            ["student_id",'=',$student_id],
+            ["season", '=', $season]
+        ])->first();
 
-        $newAllocation->student_id = $student_id;
-        $newAllocation->company_id = $company_id;
-        $newAllocation->teacher_id = 2;
-        $newAllocation->instructor_id = 3;
-        $newAllocation->season = \App\Season::getLastSeasonID();
+        if( $allocation == null ){
+            $allocation = new \App\Allocation;
+        }
 
-        $newAllocation->save();
+        $allocation->student_id = $student_id;
+        $allocation->company_id = $company_id;
+        $allocation->teacher_id = ($teacher_id == 0)? 2 : $teacher_id;
+        $allocation->instructor_id = ($instructor_id == 0)? 3 : $instructor_id;
+        $allocation->season = $season;
+
+        $allocation->save();
+    }
+
+    public function getInstructorsInCompany()
+    {
+        $company_id = \Input::get('company_id');
+
+        return \App\EnterpriseInstructor::getInstructorsInCompany($company_id);
     }
 }
