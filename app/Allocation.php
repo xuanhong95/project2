@@ -83,7 +83,7 @@ class Allocation extends Model
 
     public static function getStudentsOfTeacherInSeason( $teacher_id, $season_id)
     {
-        return \App\Allocation::join("users","users.id",'=',"allocations.student_id")
+        $students = \App\Allocation::join("users","users.id",'=',"allocations.student_id")
             ->join("student_infos","student_infos.user_id",'=', "allocations.student_id")
             ->where([
                 ['season','=', $season_id],
@@ -91,6 +91,8 @@ class Allocation extends Model
             ])
             ->select("users.name","student_infos.*","allocations.*")
             ->get();
+
+        return $students;
     }
 
 }

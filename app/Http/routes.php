@@ -121,4 +121,6 @@ Route::group(['middleware'=>'auth','prefix'=>'instructor','namespace'=>'Instruct
 Route::group(['middleware'=>'auth','prefix'=>'teacher', 'namespace'=>'Teacher'], function(){
     Route::any('marking','MarkingController@viewMarkingList')
         ->name("teacher-marking");
+    Route::any('handle','MarkingController@handleMarking')
+        ->name("handleMarking");
 });
