@@ -12,26 +12,26 @@ class AllocationController extends Controller
     //
     public function viewManagerAllocating()
     {
-            $lastSeason = \App\Season::getLastSeasonID();
+        $lastSeason = \App\Season::getLastSeasonID();
 
-            $allocations = \App\Allocation::getAllocationsInSeason( $lastSeason );
+        $allocations = \App\Allocation::getAllocationsInSeason( $lastSeason );
 
-            $studentsInSeason = \App\Registration::getStudentsInSeason( $lastSeason );
-            $companiesInSeason = \App\Recruitment::getCompaniesInSeason( $lastSeason );
+        $studentsInSeason = \App\Registration::getStudentsInSeason( $lastSeason );
+        $companiesInSeason = \App\Recruitment::getCompaniesInSeason( $lastSeason );
 
-            $leftStudents = array();
-            foreach ($studentsInSeason as $student) {
-                if(\App\Allocation::existStudentInAllocationSeason($lastSeason, $student->user_id)){
-                }
-                else{
-                        array_push($leftStudents, $student);
-                }
+        $leftStudents = array();
+        foreach ($studentsInSeason as $student) {
+            if(\App\Allocation::existStudentInAllocationSeason($lastSeason, $student->user_id)){
             }
+            else{
+                array_push($leftStudents, $student);
+            }
+        }
 
-            // dd($allocations);
-            // dd($studentsInSeason,$leftStudents);
-            // dd($companiesInSeason);
-            return view('manager.allocate', compact("allocations","leftStudents","companiesInSeason","lastSeason"));
+        // dd($allocations);
+        // dd($studentsInSeason,$leftStudents);
+        // dd($companiesInSeason);
+        return view('manager.allocate', compact("allocations","leftStudents","companiesInSeason","lastSeason"));
 
     }
 
@@ -46,7 +46,7 @@ class AllocationController extends Controller
         $allocation = \App\Allocation::where([
             ["student_id",'=',$student_id],
             ["season", '=', $season]
-        ])->first();
+            ])->first();
 
         if( $allocation == null ){
             $allocation = new \App\Allocation;
@@ -59,12 +59,12 @@ class AllocationController extends Controller
         $allocation->season = $season;
 
         $allocation->save();
-    }
+        }
 
-    public function getInstructorsInCompany()
-    {
-        $company_id = \Input::get('company_id');
+        public function getInstructorsInCompany()
+        {
+            $company_id = \Input::get('company_id');
 
-        return \App\EnterpriseInstructor::getInstructorsInCompany($company_id);
+            return \App\EnterpriseInstructor::getInstructorsInCompany($company_id);
+        }
     }
-}
