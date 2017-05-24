@@ -31,16 +31,12 @@ class CompanyController extends Controller
     public function showCompanies($season_id = null)
     {
         if (is_null($season_id)){
-            $season = \App\Season::getOpenningSeason();
-        }
-        else{
-            $season = \App\Season::getSeasonByID( $season_id );
+            $season_id = \App\Season::getLastSeasonID();
         }
 
         $enterprises_recruitments = \App\Recruitment::where([
             ['is_confirm','=','1'],
-            ['updated_at','>=',$season->start_date],
-            ['updated_at','<=',$season->end_date]
+            ['season','=',$season_id]
         ])
         ->distinct()
         ->get();

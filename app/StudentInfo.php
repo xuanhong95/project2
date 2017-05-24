@@ -12,7 +12,7 @@ class StudentInfo extends Model
     ];
 
     public static function getStudentsInSeason($season){
-    
+
         return \App\User::join('registrations','users.id','=','registrations.user_id')
             ->where("registrations.season",'=',$season)
             ->get();
@@ -23,5 +23,13 @@ class StudentInfo extends Model
         $student = \App\StudentInfo::where("user_id",'=', $student_id)->select("student_number")->first();
 
         return $student->student_number;
+    }
+
+    public static function getStudentInfo( $user_id )
+    {
+        return \App\StudentInfo::join("users","users.id",'=',"student_infos.user_id")
+            ->where("users.id",'=',$user_id)
+            ->select("users.name","student_infos.*")
+            ->first();
     }
 }

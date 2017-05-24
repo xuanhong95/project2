@@ -12,9 +12,14 @@ td{
 .no-padding{
     padding: 0px;
 }
+tr{
+    max-height: 50px;
+}
 textarea{
     max-height: 50px;
     resize : none;
+    padding: 0;
+    text-align: left;
 }
 </style>
 @include('layouts.left-sidebar')
@@ -24,15 +29,18 @@ textarea{
                 <h2>Feedback</h2>
             </div>
             <div class="col-md-10 col-md-offset-1 row">
-                {!! $form->header !!}
+            <form class="" action="{{ route('instructor-feedback',['student_id'=>$student->user_id])}}" method="post">
+                {{ csrf_field() }}
             </div>
-            <div class="col-md-10">
-                <h4 class="text-success">{!! $form->message !!}</h4>
+            @if(Session::has("message"))
+            <div class="col-md-3 pull-right">
+                <h4 class="text-success">{!! Session::get('message') !!}</h4>
             </div>
+            @endif
             <div class="col-md-10 col-md-offset-1 row">
                 <label for="student_name" class="col-md-2">Sinh viên:</label>
                 <div class="col-md-6" style="top: -5px">
-                    <strong>{!! $form->field('student_name') !!}</strong>
+                    <strong>{{ $student->name }}</strong>
                 </div>
             </div>
             <br>
@@ -42,101 +50,67 @@ textarea{
                 <h4>A- Nhận xét về sinh viên thực tập</h4>
                 <div class="row">
                     <legend><h5>1.Trình độ kỹ thuật</h5></legend>
-                    <table class="col-md-12" >
+                    <table class="col-md-12 table table-striped table-bordered">
                         <tr class="text-center">
-                            <td class="col-md-6">Tiêu chí</td>
-                            <td class="col-md-2">Điểm</td>
-                            <td>Nhận xét</td>
+                            <th class="col-md-6">Tiêu chí</td>
+                            <th class="col-md-2">Điểm</td>
+                            <th>Nhận xét</td>
                         </tr>
+                        @foreach( $technicalLevelRecords as $record )
                         <tr>
-                            <td>Trình độ kỹ thuật liên quan đến đề tài thực tập</td>
-                            <td>{!! $form->field('point_tech0') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_tech') !!}</td>
+                            <td>{{ $record->criteria }}</td>
+                            <td>
+                                <select class="form-control" name="technicalLevel-{{ $record->criteria_id }}">
+                                    <option value="A" <?php echo $record->point == 'A'?'selected':''  ?>>Excellent</option>
+                                    <option value="B" <?php echo $record->point == 'B'?'selected':''  ?>>Good</option>
+                                    <option value="C" <?php echo $record->point == 'C'?'selected':''  ?>>Medium</option>
+                                    <option value="D" <?php echo $record->point == 'D'?'selected':''  ?>>Nomal</option>
+                                    <option value="F" <?php echo $record->point == 'F'?'selected':''  ?>>Bad</option>
+                                    <option value="X" <?php echo $record->point == 'X'?'selected':''  ?>>No idea</option>
+                                </select>
+                            </td>
+                            <td class="no-padding">
+                                <textarea type="text" class="form-control"
+                                    name="technicalLevelComment-{{ $record->criteria_id }}" cols="50" rows="10" placeholder="comment..."
+                                    >{{ $record->comment}}</textarea>
+                            </td>
 
                         </tr>
-                        <tr>
-                            <td>Khả năng nắm bắt các kỹ thuật mới</td>
-                            <td>{!! $form->field('point_tech1') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_tech') !!}</td>
+                        @endforeach
 
-                        </tr>
-                        <tr>
-                            <td>Mức độ làm chủ kỹ thuật, công nghệ sau khi đã được hướng dẫn</td>
-                            <td>{!! $form->field('point_tech2') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_tech') !!}</td>
-
-                        </tr>
-                        <tr>
-                            <td>Khả năng phân tích</td>
-                            <td>{!! $form->field('point_tech3') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_tech') !!}</td>
-
-                        </tr>
-                        <tr>
-                            <td>Phương pháp luận – cách thức tổ chức công việc</td>
-                            <td>{!! $form->field('point_tech4') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_tech') !!}</td>
-
-                        </tr>
-                        <tr>
-                            <td>Óc sáng tạo</td>
-                            <td>{!! $form->field('point_tech5') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_tech') !!}</td>
-
-                        </tr>
-                        <tr>
-                            <td>Trình độ ngoại ngữ phục vụ cho công việc</td>
-                            <td>{!! $form->field('point_tech6') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_tech') !!}</td>
-                        </tr>
                     </table>
                 </div>
                 <br>
                 <br>
                 <div class="row">
                     <legend><h5>2.Công việc đã thực hiện</h5></legend>
-                    <table class="col-md-12" >
+                    <table class="col-md-12 table table-striped table-bordered" >
                         <tr class="text-center">
-                            <td  class="col-md-6">Tiêu chí</td>
-                            <td class="col-md-2">Điểm</td>
-                            <td>Nhận xét</td>
+                            <th class="col-md-6">Tiêu chí</td>
+                            <th class="col-md-2">Điểm</td>
+                            <th>Nhận xét</td>
                         </tr>
+                        @foreach( $taskRecords as $record )
                         <tr>
-                            <td>Khối lượng công việc đã thực hiện trong thời gian thực tập</td>
-                            <td>{!! $form->field('point_task0') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_task') !!}</td>
+                            <td>{{ $record->criteria }}</td>
+                            <td>
+                                <select class="form-control" name="task-{{ $record->criteria_id }}" value="{{ $record->point }}">
+                                    <option value="A" <?php echo $record->point == 'A'?'selected':''  ?>>Excellent</option>
+                                    <option value="B" <?php echo $record->point == 'B'?'selected':''  ?>>Good</option>
+                                    <option value="C" <?php echo $record->point == 'C'?'selected':''  ?>>Medium</option>
+                                    <option value="D" <?php echo $record->point == 'D'?'selected':''  ?>>Nomal</option>
+                                    <option value="F" <?php echo $record->point == 'F'?'selected':''  ?>>Bad</option>
+                                    <option value="X" <?php echo $record->point == 'X'?'selected':''  ?>>No idea</option>
+                                </select>
+                            </td>
+                            <td class="no-padding">
+                                <textarea type="text" class="form-control"
+                                    name="taskComment-{{ $record->criteria_id }}" cols="50" rows="10" placeholder="comment..."
+                                >{{ $record->comment}}</textarea>
+                            </td>
 
                         </tr>
-                        <tr>
-                            <td>Chất lượng công việc đã thực hiện trong thời gian thực tập</td>
-                            <td>{!! $form->field('point_task1') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_task') !!}</td>
-
-                        </tr>
-                        <tr>
-                            <td>Khả năng tự hoàn thành công việc và cách giải quyết các vấn đề phát sinh</td>
-                            <td>{!! $form->field('point_task2') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_task') !!}</td>
-
-                        </tr>
-                        <tr>
-                            <td>Viết tài liệu về công việc đã thực hiện</td>
-                            <td>{!! $form->field('point_task3') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_task') !!}</td>
-
-                        </tr>
-                        <tr>
-                            <td>Thuyết trình</td>
-                            <td>{!! $form->field('point_task4') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_task') !!}</td>
-
-                        </tr>
-                        <tr>
-                            <td>Tuân thủ các ràng buộc chất lượng công việc của cơ sở thực tập</td>
-                            <td>{!! $form->field('point_task5') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_task') !!}</td>
-
-                        </tr>
+                        @endforeach
 
                     </table>
                 </div>
@@ -144,76 +118,69 @@ textarea{
                 <br>
                 <div class="row">
                     <legend><h5>3.Thái độ, ý thức</h5></legend>
-                    <table class="col-md-12" >
+                    <table class="col-md-12 table table-striped table-bordered" >
                         <tr class="text-center">
-                            <td class="col-md-6">Tiêu chí</td>
-                            <td class="col-md-2">Điểm</td>
-                            <td>Nhận xét</td>
+                            <th class="col-md-6">Tiêu chí</td>
+                            <th class="col-md-2">Điểm</td>
+                            <th>Nhận xét</td>
                         </tr>
+                        @foreach( $attitudeRecords as $record )
                         <tr>
-                            <td>Đúng giờ</td>
-                            <td>{!! $form->field('point_attitude0') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_attitude') !!}</td>
+                            <td>{{ $record->criteria }}</td>
+                            <td>
+                                <select class="form-control" name="attitude-{{ $record->criteria_id }}" value="{{ $record->point }}">
+
+                                    <option value="A" <?php echo $record->point == 'A'?'selected':''  ?>>Excellent</option>
+                                    <option value="B" <?php echo $record->point == 'B'?'selected':''  ?>>Good</option>
+                                    <option value="C" <?php echo $record->point == 'C'?'selected':''  ?>>Medium</option>
+                                    <option value="D" <?php echo $record->point == 'D'?'selected':''  ?>>Nomal</option>
+                                    <option value="F" <?php echo $record->point == 'F'?'selected':''  ?>>Bad</option>
+                                    <option value="X" <?php echo $record->point == 'X'?'selected':''  ?>>No idea</option>
+                                </select>
+                            </td>
+                            <td class="no-padding">
+                                <textarea type="text" class="form-control"
+                                    name="attitudeComment-{{ $record->criteria_id }}" cols="50" rows="10" placeholder="comment..."
+                                >{{ $record->comment}}</textarea>
+                            </td>
 
                         </tr>
-                        <tr>
-                            <td>Vẻ ngoài (quần áo, tác phong nơi công sở, …)</td>
-                            <td>{!! $form->field('point_attitude1') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_attitude') !!}</td>
-
-                        </tr>
-                        <tr>
-                            <td>Giữ gìn hình ảnh cho cơ sở thực tập và cho sản phẩm đã thực hiện trong quá trình làm việc</td>
-                            <td>{!! $form->field('point_attitude2') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_attitude') !!}</td>
-
-                        </tr>
-                        <tr>
-                            <td>Làm việc nhóm</td>
-                            <td>{!! $form->field('point_attitude3') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_attitude') !!}</td>
-
-                        </tr>
-                        <tr>
-                            <td>Quan hệ, giao tiếp với nhân viên, khách hàng của cơ sở thực tập</td>
-                            <td>{!! $form->field('point_attitude4') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_attitude') !!}</td>
-
-                        </tr>
-                        <tr>
-                            <td>Tuân thủ các quy định làm việc của công ty và cam kết khi thực tập</td>
-                            <td>{!! $form->field('point_attitude5') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_attitude') !!}</td>
-                        </tr>
+                        @endforeach
                     </table>
                 </div>
                 <br>
                 <br>
                 <div class="row">
                     <legend><h5>4.Tiến bộ trong quá trình thực tập</h5></legend>
-                    <table class="col-md-12" >
+                    <table class="col-md-12 table table-striped table-bordered" >
                         <tr class="text-center">
-                            <td class="col-md-6">Tiêu chí</td>
-                            <td class="col-md-2">Điểm</td>
-                            <td>Nhận xét</td>
+                            <th class="col-md-6">Tiêu chí</td>
+                            <th class="col-md-2">Điểm</td>
+                            <th>Nhận xét</td>
                         </tr>
+                        @foreach( $improvementRecords as $record )
                         <tr>
-                            <td>Cải thiện năng lực, trình độ kỹ thuật</td>
-                            <td>{!! $form->field('point_improvement0') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_improvement') !!}</td>
+                            <td>{{ $record->criteria }}</td>
+                            <td>
+                                <select class="form-control" name="improvement-{{ $record->criteria_id }}" value="{{ $record->point }}">
+
+                                    <option value="A" <?php echo $record->point == 'A'?'selected':''  ?>>Excellent</option>
+                                    <option value="B" <?php echo $record->point == 'B'?'selected':''  ?>>Good</option>
+                                    <option value="C" <?php echo $record->point == 'C'?'selected':''  ?>>Medium</option>
+                                    <option value="D" <?php echo $record->point == 'D'?'selected':''  ?>>Nomal</option>
+                                    <option value="F" <?php echo $record->point == 'F'?'selected':''  ?>>Bad</option>
+                                    <option value="X" <?php echo $record->point == 'X'?'selected':''  ?>>No idea</option>
+                                </select>
+                            </td>
+                            <td class="no-padding">
+                                <textarea type="text" class="form-control"
+                                    name="improvementComment-{{ $record->criteria_id }}" cols="50" rows="10" placeholder="comment..."
+                                        >{{ $record->comment}}</textarea>
+                            </td>
 
                         </tr>
-                        <tr>
-                            <td>Cải thiện thái độ, ý thức</td>
-                            <td>{!! $form->field('point_improvement1') !!}</td>
-                            <td  class="no-padding">{!! $form->field('comment_improvement') !!}</td>
+                        @endforeach
 
-                        </tr>
-                        <tr>
-                            <td>Cải thiện về phương pháp làm việc</td>
-                            <td>{!! $form->field('point_improvement2') !!}</td>
-                            <td class="no-padding">{!! $form->field('comment_improvement') !!}</td>
-                        </tr>
                     </table>
                 </div>
                 <br>
@@ -229,11 +196,24 @@ textarea{
                                 D : sinh viên chưa đạt hết các mục tiêu đặt ra, nhưng có cố gắng, nỗ lực, <br>
                                 F : ý thức học tập của sinh viên kém, không đạt yêu cầu <br>
                             </td>
-                            <td>{!! $form->field('general_appreciation_id') !!}</td>
+                            <td>
+                                <select class="form-control" name="generalAppreciation">
+                                    <option value="A" <?php echo $appreciation->general_appreciation_id == 'A'?'selected':''  ?>>A</option>
+                                    <option value="B" <?php echo $appreciation->general_appreciation_id == 'B'?'selected':''  ?>>B</option>
+                                    <option value="C" <?php echo $appreciation->general_appreciation_id == 'C'?'selected':''  ?>>C</option>
+                                    <option value="D" <?php echo $appreciation->general_appreciation_id == 'D'?'selected':''  ?>>D</option>
+                                    <option value="D" <?php echo $appreciation->general_appreciation_id == 'F'?'selected':''  ?>>FS</option>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
                             <td>Quý vị có muốn tiếp tục nhận sinh viên thực tập đợt sau không ?</td>
-                            <td class="text-center">{!! $form->field('is_continue_receive') !!} Có</td>
+                            <td class="text-center">
+                                <select class="form-control" name="continueReceive">
+                                    <option value="1" <?php echo $appreciation->is_continue_receive == "1"?'selected':'' ?>>Yes</option>
+                                    <option value="0" <?php echo $appreciation->is_continue_receive == "0"?'selected':'' ?>>No</option>
+                                </select>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -251,15 +231,34 @@ textarea{
                         <label for="missing_knownledge" class="col-md-16">1.Trong 2 tuần đầu của kỳ thực tập, sinh viên
                             chưa nắm vững các nhóm kiến thức nào?</label>
                         <div class="col-md-11 col-md-offset-1">
-                            {!! $form->field('missing_knownledge') !!}
+                            <?php $missingKnownledge = json_decode($appreciation->missing_knownledge) == null?[]:json_decode($appreciation->missing_knownledge);
+                                ?>
+                            <input type="checkbox" name="missingKnownledge[]" value="1"
+                                <?php echo in_array("1",$missingKnownledge)?'checked':'' ?>>
+                            Kiến thức cơ sở (giải thuật, toán, …)&nbsp;?&nbsp;&nbsp;
+                            <input type="checkbox" name="missingKnownledge[]" value="2"
+                                <?php echo in_array("2",$missingKnownledge)?'checked':'' ?>>
+                            Ngôn ngữ lập trình ?&nbsp;&nbsp;
+                            <input type="checkbox" name="missingKnownledge[]" value="3"
+                                <?php echo in_array("3",$missingKnownledge)?'checked':'' ?>>
+                            Phần mềm&nbsp;?&nbsp;&nbsp;
+                            <input type="checkbox" name="missingKnownledge[]" value="4"
+                                <?php echo in_array("4",$missingKnownledge)?'checked':'' ?>>
+                            Phần cứng&nbsp;?&nbsp;&nbsp;
+                            <input type="checkbox" name="missingKnownledge[]" value="5" id="otherKnownledge"
+                                <?php echo in_array("5",$missingKnownledge)?'checked':'' ?>>
+                            Khác&nbsp;&nbsp;&nbsp;
+
                         </div>
                     </div>
                     <div class="col-md-11 form-group col-md-offset-1
-                    <?php echo array_key_exists('5',$missing_knownledge) === null?'hide':''?>
+                    <?php echo in_array("5",$missingKnownledge)?'':"hide" ?>
                     " id="expand">
                         <label for="other_missing_knownledge">Các nhóm kiến thức khác là:</label>
                         <div class="col-md-11 col-md-offset-1">
-                            {!! $form->field('other_missing_knownledge') !!}
+                            <textarea name="otherMissingKnowledge" class="form-control" rows="8" cols="80" placeholder="Others..."
+
+                            >{{ $appreciation->other_missing_knownledge}}</textarea>
                         </div>
                     </div>
 
@@ -267,52 +266,63 @@ textarea{
                         <label for="necessary_knownledge">2.Theo quý vị, nhà trường cần chú trọng đào tạo thêm nhóm
                             kiến thức nào cho sinh viên ?</label>
                         <div class="col-md-11 col-md-offset-1">
-                            {!! $form->field('necessary_knownledge') !!}
+                            <textarea name="necessaryKnowledge"
+                                class="form-control" rows="8" cols="80" placeholder="Necessary knowledges..."
+
+                                >{{ $appreciation->necessary_knownledge}}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12 form-group">
                         <label for="is_language_necessary">3.Ngoại ngữ phải là yêu cầu thiết yếu trong công
                             việc tại cơ sở thực tập hay không ?</label>
                         <div class="col-md-11 col-md-offset-1">
-                            {!! $form->field('is_language_necessary') !!} Có
+                            <input type="checkbox" name="isLanguageNecessary" value="1"
+                                <?php echo $appreciation->is_language_necessary == "1"?'checked':'' ?>> Có
                         </div>
                     </div>
                     <div class="col-md-12 form-group">
                         <label for="is_language_met">4.Nếu có, trình độ tiếng Anh / Pháp của sinh viên c
                             ó đáp ứng yêu cầu không ?</label>
                         <div class="col-md-11 col-md-offset-1">
-                            {!! $form->field('is_language_met') !!} Có
+                            <input type="checkbox" name="isLanguageMet" value="1"
+                                <?php echo $appreciation->is_language_met == "1"?'checked':'' ?>> Có
                         </div>
                     </div>
                     <div class="col-md-12 form-group">
                         <label for="shortcoming">5.Vui lòng chỉ ra một số thiếu sót của sinh viên trong quá trình thực tập ?</label>
                         <div class="col-md-11 col-md-offset-1">
-                            {!! $form->field('shortcoming') !!}
+                            <textarea name="shortcoming" class="form-control" rows="8" cols="80" placeholder="Shortcomings.."
+                                >{{ $appreciation->shortcoming}}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12 form-group">
                         <label for="advantage">6.Vui lòng chỉ ra các ưu điểm của sinh viên trong quá trình thực tập ?</label>
                         <div class="col-md-11 col-md-offset-1">
-                            {!! $form->field('advantage') !!}
+                            <textarea name="advantages" class="form-control" rows="8" cols="80" placeholder="Advantages..."
+                                >{{ $appreciation->advantage}}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12 form-group">
                         <label for="procedure_improvement">7.Theo quý vị, có cần cải tiến quy trình thực tập không ?
                             Cải tiến như thế nào ?</label>
                         <div class="col-md-11 col-md-offset-1">
-                            {!! $form->field('procedure_improvement') !!}
+                            <textarea name="procedureImprovement" class="form-control" rows="8" cols="80" placeholder="Improvements..."
+                                >{{ $appreciation->procedure_improvement}}</textarea>
                         </div>
                     </div>
                 </div>
                 <div class="">
-                    <div class="col-md-2 col-md-offset-3">
-                        {!! $form->footer !!}
-                    </div>
-                    <div class="col-md-2 col-md-offset-3">
+                    <div class="col-md-2 col-md-offset-1">
                         <a href="{!! route('instructor-students') !!}"
-                        class="btn btn-default" role="button">Back</a>
+                        class="btn btn-default" role="button"><i class="glyphicon glyphicon-chevron-left"></i>Back</a>
+                    </div>
+
+                    <div class="col-md-2 col-md-offset-5">
+
+                        <button type="summit" class="btn btn-default"><i class="glyphicon glyphicon-save"></i>Submit</button>
                     </div>
                 </div>
+                </form>
             </div>
 
         </div>
@@ -320,12 +330,10 @@ textarea{
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script type="text/javascript">
     $(function(){
-        if($("input[ name = 'missing_knownledge[]']").val())
-         $("input[ name = 'missing_knownledge[]']").on('click',function(){
-             if ($(this).val() === '5'){
+         $("#otherKnownledge").on('click',function(){
                  $("#expand").toggleClass('hide');
+                 $("#expand textarea").val("");
 
-             }
         });
     });
 

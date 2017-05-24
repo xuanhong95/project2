@@ -17,7 +17,8 @@ class CreateTimesheetsTable extends Migration
             $table->increments('id');
             $table->integer('id_allocation')->unsigned();
             $table->foreign('id_allocation')->references('id')->on('allocations');
-            $table->string('work_content',50);
+            $table->integer('task_id')->unsigned();
+            $table->foreign("task_id")->references("id")->on("task_forms");
             $table->smallInteger('month');
             $table->string('enough_time')->nullable();
             $table->string('overtime')->nullable();

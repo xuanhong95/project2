@@ -113,12 +113,15 @@ Route::group(['middleware'=>'auth','prefix'=>'instructor','namespace'=>'Instruct
         ->name('commit-work');
     Route::any('feedback/{student_id}','FeedbackController@feedbackStudent')
         ->name('instructor-feedback');
-
-    Route::any('/timekeeping',"TimekeepingController@viewTimesheets")
+    Route::any('timekeeping',"TimekeepingController@viewTimesheets")
         ->name('timekeeping');
+    Route::post("checkTimekeeping","TimekeepingController@timekeeping")
+        ->name("checkTimekeeping");
 });
 
 Route::group(['middleware'=>'auth','prefix'=>'teacher', 'namespace'=>'Teacher'], function(){
     Route::any('marking','MarkingController@viewMarkingList')
         ->name("teacher-marking");
+    Route::any('handle','MarkingController@handleMarking')
+        ->name("handleMarking");
 });

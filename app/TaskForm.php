@@ -19,6 +19,11 @@ class TaskForm extends Model
 
     }
 
+    public static function getTaskFormsByAllocationID( $allocation_id )
+    {
+        return \App\TaskForm::where("id_allocation", $allocation_id)->get();
+    }
+
     public static function getTaskFormsOfStudentsInSeason( $students, $season)
     {
         $taskForms = array();
@@ -43,6 +48,12 @@ class TaskForm extends Model
         }
 
         return $taskForms;
+    }
+
+    public static function getTaskFormsOfStudentInSeason($student_id, $season){
+        $allocation = \App\Allocation::getAllocationStudentIDSeason($student_id, $season);
+
+        return \App\TaskForm::where("id_allocation", $allocation->id)->get();
     }
 
     public static function decodeDaysToArray( $daysString )

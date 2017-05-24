@@ -16,24 +16,19 @@ class StudentController extends Controller
     public function showStudents($season_id = null)
     {
         if (is_null($season_id)){
-            $season = \App\Season::getOpenningSeason();
-        }
-        else{
-            $season = \App\Season::getSeasonByID( $season_id );
+            $season_id = \App\Season::getLastSeasonID();
         }
 
         $student_registrations = \App\Registration::where([
-            ['is_confirmed','=','1'],
-            ['updated_at','>=',$season->start_date],
-            ['updated_at','<=',$season->end_date]
+            ["season",'=', $season_id]
         ])->get();
-
+        
         $students = array();
         //get student infomations through registration->user_id
         foreach ($student_registrations as $registration) {
             $student = \App\User::join('student_infos','student_infos.user_id','=','users.id')
                 ->where('user_id','=',$registration->user_id)
-                ->select('name','student_number','class')
+                ->select('users.name','student_infos.*')
                 ->first();
             array_push($students, $student);
         }
