@@ -87,7 +87,8 @@ class FeedbackController extends Controller
 
             $appreciation->save();
 
-            return back();
+            \Session::flash("message","Submitted");
+            return \Redirect::back();
         }
 
 

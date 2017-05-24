@@ -10,44 +10,59 @@ use App\Http\Controllers\Controller;
 class TimekeepingController extends Controller
 {
     //
-    public function viewTimesheets()
+    public function viewTimesheets($selectedMonth = null, $season = null)
     {
-        $lastSeason = \App\Season::getLastSeasonID();
+        if( is_null($season) ){
+            $season = \App\Season::getLastSeason();
+        }
 
-        $timesheetOfStudent = \App\EnterpriseInstructor::getStudentsInSeason( $lastSeason );
+        $monthsInSeason = \App\Season::getMonthsBetween($season->start_date,$season->end_date);
 
-        $studentsInSeason = \App\Registration::getStudentsInSeason( $lastSeason );
+        if( is_null($selectedMonth) ){
+            $selectedMonth = $monthsInSeason[0];
+        }
 
-        $timesheets = \App\Timesheet::getTimesheetsOfStudentsInSeason($studentsInSeason, $lastSeason);
+        $students = \App\Registration::getStudentsInSeason( $season->id );
 
-        $taskForms = \App\TaskForm::getTaskFormsOfStudentsInSeason($studentsInSeason, $lastSeason );
+        $timesheetsOfStudentsInSelectedMonth
+            = \App\Timesheet::getTimesheetsOfStudentsInMonthOfSeason($students, $selectedMonth, $season);
+// dd($timesheetsOfStudentsInSelectedMonth);
+        if( (\Request::isMethod("post")) && (\Input::get("_token") == csrf_token()) ){
+            $selectedMonthIndex= \Input::get("selectedMonthIndex");
+            $selectedStudentId = \Input::get("student_id");
 
-        // dd($timesheets);
-        // $company_id = \App\EnterpriseInstructor::
-        // dd($taskForms);
-        // dd($timesheetOfStudent);
-        // dd($studentsInSeason);
-        return view("instructor.instructor-timesheets", compact("timesheetOfStudent","studentsInSeason","taskForms", "timesheets"));
+            $selectedMonth = $monthsInSeason[$selectedMonthIndex];
+            $student = \App\StudentInfo::getStudentInfo( $selectedStudentId );
+            $timesheetsOfStudentInSelectedMonth
+                = \App\Timesheet::getTimesheetsOfStudentInMonthOfSeason($student, $selectedMonth, $season);
+
+            return $timesheetsOfStudentInSelectedMonth;
+        }
+
+        // dd($timesheetsOfStudentsInSelectedMonth);
+        return view("instructor.instructor-timesheets",
+        compact("timesheetsOfStudentsInSelectedMonth","monthsInSeason"));
     }
 
-    public static function getDaysNumber( $month, $year)
+    public function timekeeping()
     {
-        switch ($month) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12: return 31;
-            case 2: if( ($year % 4 == 0) && ($year % 100 != 0)){
-                        return 29;
-                    }
-                    else{
-                        return 28;
-                    }
+        if((\Request::isMethod("post")) && (\Input::get("_token") == csrf_token())){
+            $input = \Input::all();
+            $data = \Input::get('days');
+            $student_id = \Input::get('student_id');
+            $month = \Input::get('month');
+            $status = \Input::get('status');
+            $season_id = \Input::get('season_id');
+            $task_id = \Input::get('task_id');
 
-            default: return 30;
+            $student = \App\StudentInfo::getStudentInfo($student_id);
+            $season = \App\Season::getSeason($season_id);
+
+            $result = \App\Timesheet::saveValue($data, $student, $status, $task_id, $month, $season);
+
+            return $result;
         }
     }
+
+
 }

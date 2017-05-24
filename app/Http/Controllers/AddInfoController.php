@@ -128,6 +128,7 @@ class AddInfoController extends Controller
 				$registration->user_id = \Auth::id();
 				$registration->wished_skill = $input['desire_skill'];
 				$registration->season = \App\Season::getLastSeasonID();
+				$registration->is_confirmed = 1;
 				$registration->save();
 			}
 			else{

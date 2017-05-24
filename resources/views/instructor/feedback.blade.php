@@ -32,9 +32,11 @@ textarea{
             <form class="" action="{{ route('instructor-feedback',['student_id'=>$student->user_id])}}" method="post">
                 {{ csrf_field() }}
             </div>
-            <div class="col-md-10">
-                <h4 class="text-success">{!! $message !!}</h4>
+            @if(Session::has("message"))
+            <div class="col-md-3 pull-right">
+                <h4 class="text-success">{!! Session::get('message') !!}</h4>
             </div>
+            @endif
             <div class="col-md-10 col-md-offset-1 row">
                 <label for="student_name" class="col-md-2">Sinh viên:</label>
                 <div class="col-md-6" style="top: -5px">
