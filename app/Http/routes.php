@@ -125,3 +125,12 @@ Route::group(['middleware'=>'auth','prefix'=>'teacher', 'namespace'=>'Teacher'],
     Route::any('handle','MarkingController@handleMarking')
         ->name("handleMarking");
 });
+
+Route::group(['middleware'=>'auth','prefix'=>'manager', 'namespace'=>'Teacher'], function(){
+    Route::any('edit-point','MarkingController@editPoint')
+        ->name("edit-point");
+});
+
+Route::any('teacher/marking/accept/{id}', ['as' => 'id', 'uses' => 'Teacher\MarkingController@approvePoint']);
+Route::any('teacher/marking/decline/{id}', ['as' => 'id', 'uses' => 'Teacher\MarkingController@declinePoint']);
+

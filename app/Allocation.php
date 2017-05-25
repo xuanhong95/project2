@@ -100,6 +100,17 @@ class Allocation extends Model
         return $students;
     }
 
+    public static function getAllStudentInSeason($season_id){
+        $students = \App\Allocation::join("users","users.id",'=',"allocations.student_id")
+            ->join("student_infos","student_infos.user_id",'=', "allocations.student_id")
+            ->where([
+                ['season','=', $season_id],
+            ])
+            ->select("users.name","student_infos.*","allocations.*")
+            ->get();
+        return $students;
+    }
+
     public static function getInternshipStatus( Season $season )
     {
         $internship = new \StdClass;
