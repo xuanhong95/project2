@@ -83,13 +83,38 @@ class CompanyController extends Controller
         }
     }
 
-    public function viewTimesheet()
+    public function viewTimesheet($selectedMonth = null, $season = null)
     {
-        $lastSeason = \App\Season::getLastSeasonID();
+        if( is_null($season) ){
+            $season = \App\Season::getLastSeason();
+        }
 
-        $companiesInSeason = \App\Recruitment::getCompaniesInSeason( $lastSeason );
+        $monthsInSeason = \App\Season::getMonthsBetween($season->start_date,$season->end_date);
 
-        return view('internship.timesheet',compact("lastSeason","companiesInSeason"));
+        if( is_null($selectedMonth) ){
+            $selectedMonth = $monthsInSeason[0];
+        }
+
+        $students = \App\Registration::getStudentsInSeason( $season->id );
+
+        $timesheetsOfStudentsInSelectedMonth
+            = \App\Timesheet::getTimesheetsOfStudentsInMonthOfSeason($students, $selectedMonth, $season);
+// dd($timesheetsOfStudentsInSelectedMonth);
+        if( (\Request::isMethod("post")) && (\Input::get("_token") == csrf_token()) ){
+            $selectedMonthIndex= \Input::get("selectedMonthIndex");
+            $selectedStudentId = \Input::get("student_id");
+
+            $selectedMonth = $monthsInSeason[$selectedMonthIndex];
+            $student = \App\StudentInfo::getStudentInfo( $selectedStudentId );
+            $timesheetsOfStudentInSelectedMonth
+                = \App\Timesheet::getTimesheetsOfStudentInMonthOfSeason($student, $selectedMonth, $season);
+
+            return $timesheetsOfStudentInSelectedMonth;
+        }
+
+        // dd($timesheetsOfStudentsInSelectedMonth);
+        return view("internship.timesheet",
+        compact("timesheetsOfStudentsInSelectedMonth","monthsInSeason"));
     }
 
     public function getTimesheetsOfCompanyInSeason()

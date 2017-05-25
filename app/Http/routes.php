@@ -73,8 +73,8 @@ Route::group(['prefix'=>'manager','middleware'=>'auth','namespace'=>'Manager'],f
         ->name('manager-allocate');
     Route::any('allocating','AllocationController@allocate')
         ->name('allocate');
-    Route::any('getInstructorsInCompany',"AllocationController@getInstructorsInCompany")
-        ->name("getInstructorsInCompany");
+    Route::any('getInstructorsOfCompany',"AllocationController@getInstructorsOfCompany")
+        ->name("getInstructorsOfCompany");
 });
 
 Route::group(['middleware'=>'auth','prefix'=>'enterprise'],function(){
