@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class CheckEnterprise
 {
@@ -16,7 +17,7 @@ class CheckEnterprise
     public function handle($request, Closure $next)
     {
         $enterpriseType = 3;
-        if(Auth::user()->user_type === $enterpriseType){
+        if(Auth::user()->user_type == $enterpriseType){
             return $next($request);
         }
 
