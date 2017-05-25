@@ -126,6 +126,7 @@
                             Internship Manager <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="/manager/edit-point">Marking</a></li>
                             <li><a href="{!! route('seasons') !!}">Seasons</a></li>
                             <li><a href="#">Internship Schedule</a></li>
                             <li><a href="#">Score</a></li>
@@ -149,6 +150,7 @@
                             System Manager <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="/teacher/marking">Marking</a></li>
                             <li><a href="#">Users</a></li>
                             <li><a href="#">Config</a></li>
                         </ul>
