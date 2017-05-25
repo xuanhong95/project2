@@ -76,6 +76,8 @@
                         <li><a href="{!! route('seasons') !!}">Seasons</a></li>
                         <li><a href="#">Internship Schedule</a></li>
                         <li><a href="#">Score</a></li>
+                        <li><a href="{{ route('manager-allocate')}}">Allocating</a></li>
+
                     </ul>
                 </li>
                 <li class=dropdown>

@@ -4,6 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Season;
+use App\Allocation;
+use App\Registration;
+use App\Recruitment;
+use App\StudentInfo;
+use App\EnterpriseInstructor;
+use App\Company;
+use App\Teacher;
 
 class HomeController extends Controller
 {
@@ -56,26 +64,20 @@ class HomeController extends Controller
                                                  'company', 'recruitment_contents'));
     }
 
-    public function viewAllocation()
+    public function viewAllocation(Season $season = null)
     {
-        $lastSeason = \App\Season::getLastSeasonID();
-
-        $allocations = \App\Allocation::getAllocationsInSeason( $lastSeason );
-
-        $studentsInSeason = \App\Registration::getStudentsInSeason( $lastSeason );
-        $companiesInSeason = \App\Recruitment::getCompaniesInSeason( $lastSeason );
-
-        $leftStudents = array();
-        foreach ($studentsInSeason as $student) {
-            if(\App\Allocation::existStudentInAllocationSeason($lastSeason, $student->user_id)){
-            }
-            else{
-                    array_push($leftStudents, $student);
-            }
+        if($season->exists == false){
+            $season = Season::getLastSeason();
         }
 
-        // dd($studentsInSeason,$leftStudents);
-        // dd($companiesInSeason);
-        return view('internship.allocations-status', compact("allocations","leftStudents","companiesInSeason"));
+        $companies = Company::getCompanies($season);
+        $teachers = Teacher::getAllTeachers();
+        $internshipStatus = Allocation::getInternshipStatus($season);
+        $noCompanyStudents = StudentInfo::getNoCompanyStudents($season);
+// dd($internshipStatus);
+// dd($noCompanyStudents);
+        return view('internship.allocations-status',
+            compact("noCompanyStudents","companies","season","teachers",
+                    "internshipStatus"));
     }
 }

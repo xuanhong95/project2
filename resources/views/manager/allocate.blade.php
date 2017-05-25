@@ -1,11 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @include('layouts.left-sidebar')
-<style media="screen">
-    .in{
-        display: table;
-    }
-</style>
+<link rel="stylesheet" href="/css/toastr.min.css">
 <div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
     <!-- page header -->
     <div class="page-header col-md-offset-1">
@@ -15,48 +11,51 @@
 
     <!-- Companies with their accepted interns -->
     <div class="col-md-10 col-md-offset-1 well">
-        <legend>Companies with their interns</legend>
-        @foreach( $companiesInSeason as $company)
-            <div class="btn btn-default btn-block" data-toggle="collapse" data-target="#{{ $company->id }}" >
-                <h3>Company: {{ \App\Company::getCompanyNameByID( $company->id ) }}</h3>
-            </div>
+        <legend>Companies with students</legend>
+        @foreach( $internshipStatus->companies as $company)
+        <div class="btn btn-default btn-block" data-toggle="collapse" data-target="#{{ $company->id }}" >
+            <h3>Company: {{ $company->name }}</h3>
+        </div>
 
-            <div id="{{ $company->id }}" class="collapse" >
-                <table  class="table table-responsive table-striped table-hover table-bordered">
+        <div id="{{ $company->id }}" class="collapse" >
+            <table  class="table table-responsive table-striped table-hover table-bordered">
+                <tr>
+                    <th>Student number</th>
+                    <th>Name</th>
+                    <th>Enterprise instructor</th>
+                    <th>Teacher</th>
+                </tr>
+                @foreach( $company->studentInstructor as $roles)
+                <tr id="{{ $roles->student->user_id }}" class="hasCompany">
+                    <td><h4>{{ $roles->student->student_number }}</h4></td>
+                    <td><h4>{{ $roles->student->name }}</h4></td>
+                    <td>
+                        <select class="instructor form-control" name="">
+                            @foreach( $company->instructors as $instructor )
+                            <option value="{{ $instructor->user_id }}"
+                                <?php echo $instructor == $roles->instructor?"selected":""; ?>
+                                >{{ $instructor->name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <select class="teacher  form-control" name="">
+                            @foreach( $teachers as $teacher )
+                            <option value="{{ $teacher->user_id }}"
+                                <?php echo $teacher == $roles->teacher?"selected":"" ?>
+                                >{{ $teacher->name }}</option>
+                            @endforeach
+                        </select>
 
-                    @foreach( $allocations as $allocation)
-                        @if( $company->id == $allocation->company_id )
-                            <tr id="{{ $allocation->student_id }}">
-                                <td><h4>{{ \App\StudentInfo::getStudentNumberByID( $allocation->student_id ) }}</h4></td>
-                                <td><h4>{{ \App\User::getUserNameByID( $allocation->student_id ) }}</h4></td>
-                                <td>
-                                    <select class="instructor" name="">
-                                        <option value="{{ $allocation->instructor_id }}">{{ \App\User::getUserNameByID( $allocation->instructor_id ) }}</option>
-                                        <?php $instructorsInCompany = \App\EnterpriseInstructor::getInstructorsInCompany($allocation->company_id) ?>
-                                        @foreach( $instructorsInCompany as $instructor )
-                                            <option value="{{ $instructor->user_id }}">{{ $instructor->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="teacher" name="">
-                                        <option value="{{ $allocation->teacher_id }}">{{ \App\User::getUserNameByID( $allocation->teacher_id ) }}</option>
-                                        <?php $teachers = \App\Teacher::getAllTeachers() ?>
-                                        @foreach( $teachers as $teacher )
-                                            <option value="{{ $teacher->user_id }}">{{ $teacher->name }}</option>
-                                        @endforeach
-                                    </select>
+                    </td>
+                    <td>
+                        <span class="glyphicon"></span>
+                    </td>
+                </tr>
+                @endforeach
 
-                                </td>
-                                <td>
-                                    <span class="glyphicon"></span>
-                                </td>
-                            </tr>
-                        @endif
-                    @endforeach
-
-                </table>
-            </div>
+            </table>
+        </div>
 
         @endforeach
     </div>
@@ -64,10 +63,10 @@
 
     <!-- left students -->
     <div class="col-md-10 col-md-offset-1 well">
-        <legend>Left Students</legend>
+        <legend>Non-company students</legend>
         <table class="table table-striped table-hover table-bordered">
-            @foreach( $leftStudents as $student)
-            <tr id="{{ $student->user_id }}">
+            @foreach( $noCompanyStudents as $student)
+            <tr id="{{ $student->user_id }}" class="noCompany">
                 <td>
                     {{ $student->student_number }}
                 </td>
@@ -75,20 +74,23 @@
                     {{ $student->name }}
                 </td>
                 <td>
-                    <select class="company">
+                    <select class="company form-control">
                         <option value="0">--Choose Company--</option>
-                        @foreach( $companiesInSeason as $company )
+                        @foreach( $companies as $company )
                         <option value="{{ $company->id }}">{{ $company->name }}</option>
                         @endforeach
                     </select>
                     <td>
-                        <select class="instructor"class="" name="">
+                        <select class="instructor form-control" name="">
                             <option value="0">--Choose Instructor--</option>
                         </select>
                     </td>
                     <td>
-                        <select class="teacher" name="">
-                            <option value="0">--Choose Teacher--</option>
+                        <select class="teacher form-control" name="">
+                            <option value="">--Choose Teacher--</option>
+                            @foreach( $teachers as $teacher )
+                            <option value="{{ $teacher->user_id }}">{{ $teacher->name }}</option>
+                            @endforeach
                         </select>
                     </td>
                     <span class="glyphicon"></span>
@@ -105,29 +107,44 @@
     </div>
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src = "/js/toastr.min.js"></script>
 <script type="text/javascript">
-$(function(){
-    $("select").on('change', function(){
-        var currentSelect = $(this);
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
 
+$(function(){
+    $(".hasCompany").on('change',"select", function(){
+        var studentDiv = $(this).closest(".hasCompany");
         $.ajax({
             url:"{{ route('allocate') }}",
-            currentElement : currentSelect,
+            method: "post",
+            currentElement : $(this),
             data: {
-                student_id: $(this).closest("tr").attr("id"),
-                company_id: $(this).closest(".company")[0].value,
-                instructor_id: $(this).closest(".instructor").val,
-                teacher_id: $(this).closest(".teacher").val,
-                season: {{ $lastSeason }}
+                student_id: studentDiv.attr("id"),
+                company_id: studentDiv.closest(".collapse").attr("id"),
+                instructor_id: studentDiv.find(".instructor").val(),
+                teacher_id: studentDiv.find(".teacher").val(),
+                season: {{ $season->id }},
+                _token: $('meta[name="csrf-token"]').attr('content')
             },
             success:function(result){
-                this.currentElement.next("span").addClass("glyphicon-ok");
-                if(this.currentElement.hasClass("company")){
-                    console.log("has class company");
-                    var inInstructorCombobox = this.currentElement.closest(".instructor");
-                    var inCompanyId = this.currentElement[0].value;
-                    loadInstructors( inInstructorCombobox, inCompanyId );
-                }
+
+                toastr.success("Success");
             },
             error:function(result){
                 this.currentElement.next("span").addClass("glyphicon-remove");
@@ -135,23 +152,59 @@ $(function(){
         });
     });
 
-    function loadInstructors( inInstructorCombobox, inCompanyId ){
-        console.log("loadInstructors");
+    $(".noCompany").on("change","select",function(){
+        var studentDiv = $(this).closest(".noCompany");
         $.ajax({
-            url: "{{ route('getInstructorsInCompany') }}",
+            url:"{{ route('allocate') }}",
+            method: "post",
+            containerDiv : studentDiv,
+            company_id: studentDiv.find(".company").val(),
+            data: {
+                student_id: studentDiv.attr("id"),
+                company_id: studentDiv.find(".company").val(),
+                instructor_id: studentDiv.find(".instructor").val(),
+                teacher_id: studentDiv.find(".teacher").val(),
+                season: {{ $season->id }},
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success:function(result){
+                this.containerDiv.find("span").addClass("glyphicon-ok");
+                if(this.containerDiv.context.className.includes("company")){
+                    console.log("has class company");
+                    var inInstructorCombobox = this.containerDiv.find(".instructor");
+                    var inCompanyId = this.company_id;
+                    loadInstructors( inInstructorCombobox, inCompanyId );
+                }else{
+                    toastr.success("Success");
+                }
+
+            },
+            error:function(result){
+                this.currentElement.next("span").addClass("glyphicon-remove");
+                toastr.error("Error");
+            }
+        });
+    });
+
+    function loadInstructors( inInstructorCombobox, inCompanyId ){
+        $.ajax({
+            url: "{{ route('getInstructorsOfCompany') }}",
+            method: "post",
             combobox: inInstructorCombobox,
             data:{
                 company_id : inCompanyId,
             },
             success: function( instructors ){
-                var html = "<option value='0'>--Choose Instructor--</option>/n";
+                console.log(instructors);
+                var html = "<option value='0'>--Choose Instructor--</option>\n";
                 for( instructor of instructors ){
-                    html += '<option value="'+instructor.attr("user_id")+'">'+instructor.attr("name")+'</option>/n';
+                    html += '<option value="'+instructor.user_id+'">'+instructor.name+'</option>\n';
                 }
-                this.combobox.text(html);
+                this.combobox.html(html);
+                console.log(this.combobox);
+                toastr.success("Success");
             },
             error:function(result){
-                console.log(result);
                 $(this).next("span").addClass("glyphicon-remove");
             }
         });

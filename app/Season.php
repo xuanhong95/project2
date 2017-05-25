@@ -34,7 +34,7 @@ class Season extends Model
 
     public static function getLastSeason()
     {
-        return \App\Season::orderBy("id",'desc')->first();
+        return \App\Season::orderBy("id","desc")->first();
     }
 
     public static function getLastSeasonID()
