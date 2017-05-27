@@ -1,5 +1,20 @@
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300);
+
+.copyright { min-height:40px; background-color:#000000;}
+.copyright p { text-align:left; color:#FFF; padding:10px 0; margin-bottom:0px;}
+.container {
+	min-height: 100%;
+}
+.footer {
+	margin-top: 30px;
+	position: absolute;
+	right: 0;
+	left: 0;
+	background-color: #efefef;
+	text-align: center;
+}
+
 footer { min-height:182px; font-family: 'Open Sans', sans-serif; }
 .footerleft { margin-top:38px; padding:0 36px; }
 .logofooter { margin-bottom:10px; font-size:25px; color:#fff; font-weight:700;}
@@ -18,9 +33,6 @@ footer { min-height:182px; font-family: 'Open Sans', sans-serif; }
 	-moz-transform: scale(1.1);
 	-o-transform: scale(1.1);
 }
-
-
-
 
 .icon-ul { list-style-type:none !important; margin:0px; padding:0px;}
 .icon-ul li { line-height:75px; width:100%; float:left;}

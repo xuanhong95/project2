@@ -68,16 +68,16 @@
                     </tr>
 
                     @if(!empty($result->edit_progress_point) || !empty($result->edit_exam_point))
-                    @if(\Auth::user()->user_type == 4)
+                    @if(\Auth::user()->user_type == 1)
                     <tr style="text-align: center; font-weight: bold">
                         <td colspan="6">
-                           <p> Waiting for approve </p> 
+                           <p> Waiting for approve </p>
                         </td>
                     </tr>
-                    @elseif(\Auth::user()->user_type == 5)
+                    @elseif(\Auth::user()->user_type == 4)
                     <tr style="text-align: center; font-weight: bold">
                         <td colspan="4">
-                           <p> Waiting for approve </p> 
+                           <p> Waiting for approve </p>
                         </td>
                         <td>
                             <span id="{{$result->id}}" class="accept_point">Accept</span>

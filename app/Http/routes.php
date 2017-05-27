@@ -27,31 +27,37 @@ Route::get('/login',function(){
     return view('auth.login');
 });
 
-Route::get('/allocations','HomeController@viewAllocation')
-    ->name('allocations');
-//Need authentication routes
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/allocations','HomeController@viewAllocation')
+        ->name('allocations');
+    //Need authentication routes
 
-Route::any('profile','AddInfoController@anyShowProfile')
-    ->name('profile');
+    Route::any('profile','AddInfoController@anyShowProfile')
+        ->name('profile');
 
-Route::get('/topics', 'HomeController@viewTopicList')
-    ->name('view-topics');
+    Route::get('/topics', 'HomeController@viewTopicList')
+        ->name('view-topics');
 
-Route::get('/topics/{topic_id}', 'HomeController@viewTopic')
-    ->name('view-topic-detail');
+    Route::get('/topics/{topic_id}', 'HomeController@viewTopic')
+        ->name('view-topic-detail');
 
-Route::get('/student/season{season?}','StudentController@showStudents')
-    ->name('students-in-season');
+    Route::get('/student/season{season?}','StudentController@showStudents')
+        ->name('students-in-season');
 
-Route::get('/companies/season{season?}','CompanyController@showCompanies')
-    ->name('companies-in-season');
+    Route::get('/companies/season{season?}','CompanyController@showCompanies')
+        ->name('companies-in-season');
 
-Route::any('/timesheet',"CompanyController@viewTimesheet")
-    ->name('timesheet');
+    Route::any('/timesheet',"CompanyController@viewTimesheet")
+        ->name('timesheet');
 
-Route::any('/get-time-sheet',"CompanyController@getTimesheetsOfCompanyInSeason")
-    ->name("getTimesheetsOfCompanyInSeason");
+    Route::any('/get-time-sheet',"CompanyController@getTimesheetsOfCompanyInSeason")
+        ->name("getTimesheetsOfCompanyInSeason");
+
+    Route::any('/result',"HomeController@viewResult")
+        ->name("view-result");
+});
 //Need type of user authentication routes
+
 
 Route::group(['prefix'=>'manager','middleware'=>['auth','manager'],'namespace'=>'Manager'],function(){
 

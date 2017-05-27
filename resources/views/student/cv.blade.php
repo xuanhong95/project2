@@ -1,63 +1,8 @@
 @extends('layouts.app')
 
-<style>
-    input[type=checkbox]{
-        transform: scale(1.2);
-    }
-    table{
-        border-collapse: collapse;
-    }
-    td{
-        height:40px;
-    }
-    tbody{
-        background:#d6d6d6;
-    }
-    #add-button:hover{
-        cursor: pointer;
-    }
-    .pull-left{
-        float: right!important;
-    }
-    .form-group{
-        margin-top: 5px;
-        margin-bottom: 5px!important;
-    }
-    .textarea-height{
-        margin-bottom: 0px!important;
-        margin-top: 0px!important;
-    }
-    .textarea-width{
-        padding-left: 0px!important;
-        padding-right: 0px!important;
-    }
-    textarea{
-        max-height: 7em;
-        resize: none;
-        overflow: auto;
-    }
-    p{
-        margin: 0px 0px 0px 0px!important;
-    }
-    td{
-        border: 1px solid black;
-    }
-    .name_field{
-        padding-left: 7px!important;
-    }
-
-    .form-control{
-        border-radius: 0px!important;
-    }
-    #add-button:hover, #remove-button:hover{
-        cursor: pointer;
-    }
-    .lang-point-error{
-        color: red;
-    }
-</style>
 @section('content')
 @include('layouts.left-sidebar')
+<link rel="stylesheet" href="/css/cv.css">
 <div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
     @if(Session::has('message'))
     <div class="alert alert-success">

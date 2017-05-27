@@ -5,7 +5,7 @@
     <div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
         <div class="col-md-10 col-md-offset-1 well">
             <div class="page-header col-md-offset-1">
-                <h3>Feeadback</h3>
+                <h3>Feedback</h3>
             </div>
             <div class="col-md-8 col-md-offset-2">
                 {!! $form !!}

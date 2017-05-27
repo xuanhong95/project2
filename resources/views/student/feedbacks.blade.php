@@ -3,16 +3,15 @@
 @section('content')
 @include('layouts.left-sidebar')
     <div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
-        <div class="col-md-12 well">
-            <div class="page-header">
-                <h3>Feedback</h3>
-            </div>
-            <div class="col-md-offset-1 col-md-6">
-                <a href="{!! route('create-feedback')!!}" role="button" class="btn btn-info">New Feedback...</a>
-            </div>
-            <br>
-            <br>
-            <div class="col-md-10 col-md-offset-1" style="margin-top:40px">
+        <div class="page-header col-md-offset-1">
+            <h3>Feedback</h3>
+        </div>
+        <div class="col-md-offset-1 col-md-6">
+            <a href="{!! route('create-feedback')!!}" role="button" class="btn btn-info">New Feedback...</a>
+        </div>
+        <div class="col-md-10 col-md-offset-1 well" style="margin-top:20px">
+
+            <div class="col-md-10 col-md-offset-1" >
                 @if( is_null($feedbacks))
                     <h1>There are not any feedbacks!</h1>
                 @else
