@@ -271,17 +271,17 @@ class AddInfoController extends Controller
 
 	}else if($user_type==2){// create profile for enterprise instructor
 
-		$info=\App\EnterpriseInstructor::where('user_id',$user_id)->first();
+		$info=\App\EnterpriseInstructor::getInstructorById($user_id);
 		// if profile is still null,add default
 		if(is_null($info)){
 			\DB::table('enterprise_instructors')->insertGetId([
 				'user_id'=>\Auth::user()->id,
 				'company_id'=>'1',
 				]);
-			$info=\App\EnterpriseInstructor::where('user_id',$user_id)->first();
+			$info=\App\EnterpriseInstructor::getInstructorById($user_id);
+
 		}
 		$name=\App\User::where('id',$user_id)->first();
-		$list_companies=\DB::table('companies')->select('id','name')->orderBy('name','esc')->get();
 		// dd($list_companies);
 		//Create form
 		$form=\DataForm::create();

@@ -24,10 +24,11 @@ textarea{
 </style>
 @include('layouts.left-sidebar')
     <div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
+        <div class="page-header col-md-offset-1">
+            <h2>Feedback</h2>
+        </div>
         <div class="col-md-10 col-md-offset-1 well">
-            <div class="page-header col-md-offset-1">
-                <h2>Feedback</h2>
-            </div>
+
             <div class="col-md-10 col-md-offset-1 row">
             <form class="" action="{{ route('instructor-feedback',['student_id'=>$student->user_id])}}" method="post">
                 {{ csrf_field() }}

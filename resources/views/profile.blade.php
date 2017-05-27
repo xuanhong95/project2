@@ -7,14 +7,16 @@
     }
 </style>
 @include('layouts.left-sidebar')
-<div class="container-fluid" style="margin-top:30px">
+<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
+    <div class="page-header col-md-offset-1">
+        <h3>Profile</h3>
+    </div>
     <div class="col-md-10 col-md-offset-1 well">
-        <div class="page-header col-md-offset-1">
-            <h3>Profile</h3>
-        </div>
+
         <div class="col-md-8 col-md-offset-1">
             {!! $form !!}
         </div>
+
     </div>
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>

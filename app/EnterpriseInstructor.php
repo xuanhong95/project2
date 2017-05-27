@@ -69,4 +69,14 @@ class EnterpriseInstructor extends Model
             ->select("users.name","enterprise_instructors.*")
             ->first();
     }
+
+    public static function getInstructorById( $instructor_id )
+    {
+        return \App\EnterpriseInstructor::join("users",
+                "users.id",'=',"enterprise_instructors.user_id")
+            ->join('companies',"companies.id",'=',"enterprise_instructors.company_id")
+            ->where("enterprise_instructors.user_id",$instructor_id)
+            ->select("users.name","enterprise_instructors.*",'companies.name as company')
+            ->first();
+    }
 }
