@@ -16,8 +16,9 @@ class CheckTeacher
      */
     public function handle($request, Closure $next)
     {
+        // dd(Auth::user()->user_type);
         $teacherType = 1;
-        if(Auth::user()->user_type === $teacherType){
+        if(Auth::user()->user_type == $teacherType){
             return $next($request);
         }
 

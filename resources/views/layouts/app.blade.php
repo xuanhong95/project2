@@ -47,7 +47,7 @@
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top" style="position:fixed;width:100%;top: 0;background-image: url(/images/bg-header.jpg)">
-        <div class="container-fluid">
+        <div class="container">
             <div class="navbar-header">
                 <!-- Collapsed Hamburger -->
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
@@ -200,7 +200,7 @@
             </div>
         </div>
     </nav>
-    <div class="col-md-12" style="min-height:100%; margin-top:50px;">
+    <div class="container" style="min-height:100%; margin-top:50px;">
         @yield('content')
     </div>
 
