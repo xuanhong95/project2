@@ -152,9 +152,7 @@
                             System Manager <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Marking</a></li>
-                            <li><a href="#">Users</a></li>
-                            <li><a href="#">Config</a></li>
+                            <li><a href="/system-manager/manage-account">Account Management</a></li>
                         </ul>
                     </li>
                 </ul>

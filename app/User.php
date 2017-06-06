@@ -34,6 +34,32 @@ class User extends Authenticatable
         return $user->email;
     }
 
+    public static function getTypeNameByID($id){
+        switch ($id) {
+            case '0':
+                return "Student";
+                break;
+            case '1':
+                return "Instructor Teacher";
+                break;
+            case '2':
+                return "Enterprise Instructor";
+                break;
+            case '3':
+                return "Enterprise";
+                break;
+            case '4':
+                return "Internship Manager";
+                break;
+            case '5':
+                return "System Manager";
+                break;
+            default:
+                return "Undefined";
+                break;
+        }
+    }
+
     public static function getStudentSourceCompanyAvailable($avail_company, $id){
         if(empty($avail_company)){
             $source = \App\User::join('student_infos', 'users.id', '=', 'student_infos.user_id')

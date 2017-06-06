@@ -140,3 +140,9 @@ Route::group(['middleware'=>['auth','teacher'],'prefix'=>'teacher', 'namespace'=
     Route::any('handle','MarkingController@handleMarking')
         ->name("handleMarking");
 });
+
+Route::group(['middleware'=>['auth','systemManager'],'prefix'=>'system-manager', 'namespace'=>'SystemController'], function(){
+    Route::any('manage-account','SystemManagerController@manageAccount')
+        ->name("manage-account");
+    Route::any('edit-account/{id}','SystemManagerController@editAccount');
+});
