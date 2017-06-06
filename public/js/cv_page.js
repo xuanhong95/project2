@@ -55,18 +55,17 @@ function validateSkills(count_skill_row){
     })
 
     for (var i=1; i<=count_skill_row; i++){
-        console.log($("input:radio[name=optradio" + i + "]").val());
         if($("input:radio[name=optradio" + i + "]").val() == ""){
             count_error++;
         }
     }
 
     if(count_error == 0){
-        $('.add-line').css('background', '');
+        $('.add-line').parent().css('background', '');
         return true;
     }
     else{
-        $('.add-line').css('background', '#F08080');
+        $('.add-line').parent().css('background', '#F08080');
         return false;
     }
 }

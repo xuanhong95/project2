@@ -1,13 +1,5 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="/css/homepage.css">
-<style type="text/css">
-    .footer{
-        bottom: 0;
-    }
-    html{
-        overflow: hidden;
-    }
-</style>
 @section('content')
 <div class="container" style="margin-top: 70px; min-height: 50%;">
     <div class="row">

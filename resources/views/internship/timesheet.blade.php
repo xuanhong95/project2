@@ -155,13 +155,13 @@
             // console.log($(this));
 
             var selectedMonthIndex = $(this)[0].selectedIndex;
-            console.log(selectedMonthIndex);
+            // console.log(selectedMonthIndex);
             var student_id = $(this).closest(".collapse").attr("id");
             // console.log(selectedStudentDiv);
             var table = $(this).closest(".content").find("table");
             // console.log(table);
             $.ajax({
-                url: "{{ route('timekeeping') }}",
+                url: "{{ route('getTimesheetByMonth') }}",
                 method: "post",
                 data:{
                     student_id : student_id,

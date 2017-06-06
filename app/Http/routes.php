@@ -55,6 +55,9 @@ Route::group(['middleware'=>'auth'],function(){
 
     Route::any('/result',"HomeController@viewResult")
         ->name("view-result");
+
+    Route::any('/getTimesheet','CompanyController@viewTimesheet')
+        ->name("getTimesheetByMonth");
 });
 //Need type of user authentication routes
 
