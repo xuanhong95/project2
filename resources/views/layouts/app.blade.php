@@ -23,25 +23,25 @@
 
 
     <style>
-    body{
-        font-family:  'Segoe UI';
-    }
+        body{
+            font-family:  'Segoe UI';
+        }
 
-    .fa-btn {
-        margin-right: 6px;
-    }
-    #app-layout{
-        background: rgba(228, 228, 228, 1.48);;
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-    .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
-        background-color: #bf3f3f;
-    }
-    .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover{
-        background-color: rgba(189, 218, 214, 0.59);
-    }
+        .fa-btn {
+            margin-right: 6px;
+        }
+        #app-layout{
+            background: rgba(228, 228, 228, 1.48);;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
+            background-color: #bf3f3f;
+        }
+        .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover{
+            background-color: rgba(189, 218, 214, 0.59);
+        }
 
     </style>
 </head>
@@ -200,25 +200,73 @@
             </div>
         </div>
     </nav>
-    <div style="min-height:100%; margin-top:50px;">
-        <div class="center-block" style="max-width:1920px; min-height:100%">
-            @yield('content')
+    <div class="col-md-12" style="min-height:100%; margin-top:50px;">
+        @yield('content')
+    </div>
+
+    <div class="col-md-12" style="clear:both;">
+        <!--footer start from here-->
+        <style >
+        .copyright { min-height:40px; background-color:black;}
+            .copyright p { text-align:left; color:#FFF; padding:10px 0; margin-bottom:0px;}
+            .footer {
+                margin-top: 30px;
+                position: absolute;
+                right: 0;
+                left: 0;
+                background-color: #efefef;
+                text-align: center;
+            }
+        </style>
+        <div class="footer">
+            <footer style="background-image:url('/images/footersievn.png'); background-repeat:repeat-x;">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 footerleft ">
+
+                            <p><i class="fa fa-map-pin"></i>Address: Room 201, D7 Building, HUST | No.1, Dai Co Viet Street, Hanoi, Vietnam.</p>
+                            <p><i class="fa fa-phone"></i>Tel:(+84)04.3868.3407 & 3868.2261 | Fax:(+84)04.3868.3409</p>
+                            <p><i class="fa fa-envelope"></i>Email: info@sie.edu.vn | Website: http://sie.hust.edu.vn</p>
+
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 paddingtop-bottom " >
+                            <div class="fb-page" data-href="https://www.facebook.com/sie.hust.edu.vn/" data-tabs="timeline" data-height="300" data-small-header="false" style="margin-bottom:15px;" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                                <div class="fb-xfbml-parse-ignore">
+                                    <blockquote cite="https://www.facebook.com/sie.hust.edu.vn/"><a href="https://www.facebook.com/sie.hust.edu.vn/">Facebook</a></blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 paddingtop-bottom">
+                            <div class="logofooter" > <img src="/images/logonho.png" alt="sie_logo"></div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!--footer start from here-->
+
+            <div class="copyright" style="height:50px">
+                <div class="container">
+                    <div class="col-md-6">
+                        <p>Copyright© School of International Education | HUST</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>Powered by: Students</p>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
 
-    <div class="center-block" style="max-width:1920px;">
-        @include('layouts.footer')
-    </div>
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     </script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>

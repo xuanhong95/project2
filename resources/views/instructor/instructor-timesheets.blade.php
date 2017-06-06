@@ -146,7 +146,7 @@
             // console.log($(this));
 
             var selectedMonthIndex = $(this)[0].selectedIndex;
-            console.log(selectedMonthIndex);
+            // console.log(selectedMonthIndex);
             var student_id = $(this).closest(".collapse").attr("id");
             // console.log(selectedStudentDiv);
             var table = $(this).closest(".content").find("table");
