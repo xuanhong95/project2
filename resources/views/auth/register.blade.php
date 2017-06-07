@@ -66,22 +66,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
-                            <label for="role" class="col-md-4 control-label">Role:</label>
-
-                            <div class="col-md-6">
-                                <select id="role" class="form-control" name="role">
-                                    <option value="0">Student</option>
-                                    <option value="1">Instructor Teacher</option>
-                                    <option value="2">Enterprise Instructor</option>
-                                    <option value="3">Enterprise</option>
-                                    <option value="4">Internship Manager</option>
-                                    <option value="5">System Manager</option>
-                                </select>
-                            </div>
-                        </div>
-
-
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
