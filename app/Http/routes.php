@@ -90,6 +90,7 @@ Route::group(['prefix'=>'manager','middleware'=>['auth','manager'],'namespace'=>
         ->name("acceptRemarking");
     Route::any("remarking-request/decline/{id}","RemarkingController@declinePoint")
         ->name("declineRemarking");
+    Route::any('edit-point','RemarkingController@editPoint');
 });
 
 Route::group(['middleware'=>['auth','enterprise'],'prefix'=>'enterprise'],function(){
@@ -141,8 +142,13 @@ Route::group(['middleware'=>['auth','teacher'],'prefix'=>'teacher', 'namespace'=
         ->name("handleMarking");
 });
 
-Route::group(['middleware'=>['auth','systemManager'],'prefix'=>'system-manager', 'namespace'=>'SystemController'], function(){
-    Route::any('manage-account','SystemManagerController@manageAccount')
+Route::group(['middleware'=>['auth','systemManager'],'prefix'=>'system-manager'], function(){
+    Route::any('manage-account','SystemController\SystemManagerController@manageAccount')
         ->name("manage-account");
-    Route::any('edit-account/{id}','SystemManagerController@editAccount');
+    Route::any('edit-account/{id}','SystemController\SystemManagerController@editAccount');
+    Route::any('edit-point', 'Manager\RemarkingController@editPoint');
 });
+
+Route::any('system/marking/accept/{id}', ['as' => 'id', 'uses' => 'Manager\RemarkingController@approvePoint']);
+Route::any('system/marking/decline/{id}', ['as' => 'id', 'uses' => 'Manager\RemarkingController@declinePoint']);
+
