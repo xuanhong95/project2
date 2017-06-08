@@ -84,13 +84,6 @@ Route::group(['prefix'=>'manager','middleware'=>['auth','manager'],'namespace'=>
         ->name('allocate');
     Route::any('getInstructorsOfCompany',"AllocationController@getInstructorsOfCompany")
         ->name("getInstructorsOfCompany");
-    Route::any('edit-point','RemarkingController@editPoint')
-        ->name("edit-point");
-    Route::any("remarking-request/accept/{id}","RemarkingController@approvePoint")
-        ->name("acceptRemarking");
-    Route::any("remarking-request/decline/{id}","RemarkingController@declinePoint")
-        ->name("declineRemarking");
-    Route::any('edit-point','RemarkingController@editPoint');
 });
 
 Route::group(['middleware'=>['auth','enterprise'],'prefix'=>'enterprise'],function(){
@@ -140,15 +133,18 @@ Route::group(['middleware'=>['auth','teacher'],'prefix'=>'teacher', 'namespace'=
         ->name("teacher-marking");
     Route::any('handle','MarkingController@handleMarking')
         ->name("handleMarking");
+    Route::any('edit-point','RemarkingController@editPoint')
+        ->name("teacher-edit-point");
 });
 
 Route::group(['middleware'=>['auth','systemManager'],'prefix'=>'system-manager'], function(){
     Route::any('manage-account','SystemController\SystemManagerController@manageAccount')
         ->name("manage-account");
     Route::any('edit-account/{id}','SystemController\SystemManagerController@editAccount');
-    Route::any('edit-point', 'Manager\RemarkingController@editPoint');
 });
 
-Route::any('system/marking/accept/{id}', ['as' => 'id', 'uses' => 'Manager\RemarkingController@approvePoint']);
-Route::any('system/marking/decline/{id}', ['as' => 'id', 'uses' => 'Manager\RemarkingController@declinePoint']);
+Route::any('manager/edit-point','Teacher\RemarkingController@editPoint')
+        ->name("manager-edit-point");
+Route::any('manager/marking/accept/{id}', ['as' => 'id', 'uses' => 'Teacher\RemarkingController@approvePoint']);
+Route::any('manager/marking/decline/{id}', ['as' => 'id', 'uses' => 'Teacher\RemarkingController@declinePoint']);
 

@@ -25,8 +25,8 @@
         @else
         {{$message}}
 
-        @if(\Auth::user()->user_type == 4)
-        <form action="{{ route('edit-point') }}" method="post">
+        @if(\Auth::user()->user_type == 1)
+        <form action="{{ route('teacher-edit-point') }}" method="post">
             @else
             <form action="{{ route('teacher-marking') }}" method="post">
                 @endif
@@ -49,7 +49,7 @@
                         <td>{{ $result->class }}</td>
                         @if(!empty($result->edit_progress_point))
                         <td><div><input type="text" class="form-control" name="progress_point/{{ $result->user_id }}" id="progress_point_{{$result->id}}" value="{{ $result->progress_point }}">
-                           <span class="wait-approve-text-{{$result->id}}">({{$result->edit_progress_point}} waiting for approve)</span>
+                           <span class="wait-approve-text-{{$result->user_id}}">({{$result->edit_progress_point}} waiting for approve)</span>
                        </div>
                    </td>
                    @else
@@ -59,7 +59,7 @@
                    @if(!empty($result->edit_exam_point))
                    <td>
                     <div><input type="text" class="form-control" name="exam_point/{{ $result->user_id }}" id="exam_point_{{$result->id}}" value="{{ $result->exam_point }}">
-                        <span class="wait-approve-text-{{$result->id}}">({{$result->edit_exam_point}} waiting for approve)</span>
+                        <span class="wait-approve-text-{{$result->user_id}}">({{$result->edit_exam_point}} waiting for approve)</span>
                     </div>
                 </td>
                 @else
@@ -68,23 +68,23 @@
             </tr>
 
             @if(!empty($result->edit_progress_point) || !empty($result->edit_exam_point))
-            @if(\Auth::user()->user_type == 4)
+            @if(\Auth::user()->user_type == 1)
             <tr style="text-align: center; font-weight: bold">
                <td colspan="6">
                 <p> Waiting for approve </p> 
             </td>
         </tr>
-        @elseif(\Auth::user()->user_type == 5)
+        @elseif(\Auth::user()->user_type == 4)
         <tr style="text-align: center; font-weight: bold">
            <td colspan="4">
             <p> Waiting for approve </p> 
         </td>
         <td>
-           <span id="{{$result->id}}" class="accept_point">Accept</span>
+           <span id="{{$result->user_id}}" class="accept_point">Accept</span>
            <span class='message'></span>
        </td>
        <td>
-           <span id="{{$result->id}}" class="decline_point">Decline</span>
+           <span id="{{$result->user_id}}" class="decline_point">Decline</span>
            <span class='message'></span>
        </td>
    </tr>
@@ -98,7 +98,7 @@
 <div class="col-md-3 col-md-offset-1">
     <a href="{{ route('homepage') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>Back</a>
 </div>
-@if(\Auth::user()->user_type != 5)
+@if(\Auth::user()->user_type != 4)
 <div class="col-md-3 pull-right">
     <input type="submit" class="btn btn-default" value="Submit">
 </div>
@@ -128,7 +128,7 @@
         $(html_loading).appendTo($(message_span));
         $.ajax({
             type: 'GET',
-            url: "/system/marking/accept/" + element_id,
+            url: "/manager/marking/accept/" + element_id,
             success: function (data) {
                 $('#progress_point_' + element_id).val(data[0]);
                 $('#exam_point_' + element_id).val(data[1]);
@@ -161,7 +161,7 @@
         $(html_loading).appendTo($(message_span));
         $.ajax({
             type: 'GET',
-            url: "/system/marking/decline/" + element_id,
+            url: "/manager/marking/decline/" + element_id,
             success: function (data) {
                 $.map($('.wait-approve-text-' + element_id), function(e){
                     $(e).remove();
