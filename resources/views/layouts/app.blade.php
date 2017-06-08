@@ -91,6 +91,7 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ route('teacher-marking') }}">Marking</a></li>
+                            <li><a href="{{ route('teacher-edit-point') }}">Edit Point</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -129,7 +130,7 @@
                             Internship Manager <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ route('edit-point') }}">Remarking</a></li>
+                            <li><a href="{{ route('manager-edit-point') }}">Remarking</a></li>
                             <li><a href="{!! route('seasons') !!}">Seasons</a></li>
                             <li><a href="{{ route('manager-allocate')}}">Allocating</a></li>
                         </ul>
