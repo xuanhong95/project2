@@ -62,7 +62,7 @@ Route::group(['middleware'=>'auth'],function(){
 //Need type of user authentication routes
 
 
-Route::group(['prefix'=>'manager','middleware'=>['auth','manager'],'namespace'=>'Manager'],function(){
+Route::group(['prefix'=>'manager','middleware'=>['auth','manager','admin'],'namespace'=>'Manager'],function(){
 
     Route::any('seasons','SeasonController@showSeasons')
         ->name('seasons');
@@ -86,7 +86,7 @@ Route::group(['prefix'=>'manager','middleware'=>['auth','manager'],'namespace'=>
         ->name("getInstructorsOfCompany");
 });
 
-Route::group(['middleware'=>['auth','enterprise'],'prefix'=>'enterprise'],function(){
+Route::group(['middleware'=>['auth','enterprise','admin'],'prefix'=>'enterprise'],function(){
 
     Route::group(['namespace'=>'Enterprise'],function(){
 
@@ -100,7 +100,7 @@ Route::group(['middleware'=>['auth','enterprise'],'prefix'=>'enterprise'],functi
     });
 });
 
-Route::group(['middleware'=>['auth','student'],'prefix'=>'student','namespace'=>'Student'],function(){
+Route::group(['middleware'=>['auth','student','admin'],'prefix'=>'student','namespace'=>'Student'],function(){
 
     Route::any('feedback','FeedbackController@showFeedbacks')
         ->name('student-feedback');
@@ -114,7 +114,7 @@ Route::group(['middleware'=>['auth','student'],'prefix'=>'student','namespace'=>
 
 });
 
-Route::group(['middleware'=>['auth','instructor'],'prefix'=>'instructor','namespace'=>'Instructor'],function(){
+Route::group(['middleware'=>['auth','instructor','admin'],'prefix'=>'instructor','namespace'=>'Instructor'],function(){
 
     Route::any('students','InstructorController@showStudents')
         ->name('instructor-students');
@@ -128,7 +128,7 @@ Route::group(['middleware'=>['auth','instructor'],'prefix'=>'instructor','namesp
         ->name("checkTimekeeping");
 });
 
-Route::group(['middleware'=>['auth','teacher'],'prefix'=>'teacher', 'namespace'=>'Teacher'], function(){
+Route::group(['middleware'=>['auth','teacher','admin'],'prefix'=>'teacher', 'namespace'=>'Teacher'], function(){
     Route::any('marking','MarkingController@viewMarkingList')
         ->name("teacher-marking");
     Route::any('handle','MarkingController@handleMarking')
@@ -137,7 +137,7 @@ Route::group(['middleware'=>['auth','teacher'],'prefix'=>'teacher', 'namespace'=
         ->name("teacher-edit-point");
 });
 
-Route::group(['middleware'=>['auth','systemManager'],'prefix'=>'system-manager'], function(){
+Route::group(['middleware'=>['auth','systemManager','admin'],'prefix'=>'system-manager'], function(){
     Route::any('manage-account','SystemController\SystemManagerController@manageAccount')
         ->name("manage-account");
     Route::any('edit-account/{id}','SystemController\SystemManagerController@editAccount');
@@ -147,4 +147,3 @@ Route::any('manager/edit-point','Teacher\RemarkingController@editPoint')
         ->name("manager-edit-point");
 Route::any('manager/marking/accept/{id}', ['as' => 'id', 'uses' => 'Teacher\RemarkingController@approvePoint']);
 Route::any('manager/marking/decline/{id}', ['as' => 'id', 'uses' => 'Teacher\RemarkingController@declinePoint']);
-
