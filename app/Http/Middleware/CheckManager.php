@@ -17,7 +17,8 @@ class CheckManager
     public function handle($request, Closure $next)
     {
         $managerType = 4;
-        if(Auth::user()->user_type == $managerType){
+        $adminType = 6;
+        if(Auth::user()->user_type == $managerType || \Auth::user()->user_type == $adminType){
             return $next($request);
         }
 

@@ -17,7 +17,8 @@ class CheckStudent
     public function handle($request, Closure $next)
     {
         $studentType = 0;
-        if(Auth::user()->user_type == $studentType){
+        $adminType = 6;
+        if(Auth::user()->user_type == $studentType || \Auth::user()->user_type == $adminType){
             return $next($request);
         }
 

@@ -74,7 +74,7 @@
             </div>
         </div>
 
-        @if(\Auth::user()->user_type == 0)
+        @if(\Auth::user()->user_type == 0 || \Auth::user()->user_type == 6)
         <div class="recruit-info col-md-12" style="padding:20px 0px 0px 0px">
             <h4>III - Sinh viên đăng ký</h4>
             <label class="col-md-offset-1"> Chọn vị trí bạn ứng tuyển: </label>

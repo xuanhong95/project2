@@ -18,7 +18,8 @@ class CheckTeacher
     {
         // dd(Auth::user()->user_type);
         $teacherType = 1;
-        if(Auth::user()->user_type == $teacherType){
+        $adminType = 6;
+        if(Auth::user()->user_type == $teacherType || \Auth::user()->user_type == $adminType){
             return $next($request);
         }
 

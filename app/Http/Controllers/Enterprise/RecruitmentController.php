@@ -52,7 +52,7 @@ class RecruitmentController extends Controller
     *        if recruitment in this seasons is created before
     */
     public function createRecruitment(){
-        if(\Auth::user()->user_type != 3){
+        if(\Auth::user()->user_type != 3 && \Auth::user()->user_type != 6){
             return redirect('/');
         }
         $season = \App\Season::getOpenningSeasonID();

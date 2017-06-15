@@ -25,7 +25,7 @@
         @else
         {{$message}}
 
-        @if(\Auth::user()->user_type == 1)
+        @if(\Auth::user()->user_type == 1 || \Auth::user()->user_type == 6)
         <form action="{{ route('teacher-edit-point') }}" method="post">
             @else
             <form action="{{ route('teacher-marking') }}" method="post">
@@ -48,7 +48,7 @@
                         <td>{{ $result->name }}</td>
                         <td>{{ $result->class }}</td>
                         @if(!empty($result->edit_progress_point))
-                        <td><div><input type="text" class="form-control" name="progress_point/{{ $result->user_id }}" id="progress_point_{{$result->id}}" value="{{ $result->progress_point }}">
+                        <td><div><input type="text" class="form-control" name="progress_point/{{ $result->user_id }}" id="progress_point_{{$result->user_id}}" value="{{ $result->progress_point }}">
                            <span class="wait-approve-text-{{$result->user_id}}">({{$result->edit_progress_point}} waiting for approve)</span>
                        </div>
                    </td>
@@ -58,7 +58,7 @@
 
                    @if(!empty($result->edit_exam_point))
                    <td>
-                    <div><input type="text" class="form-control" name="exam_point/{{ $result->user_id }}" id="exam_point_{{$result->id}}" value="{{ $result->exam_point }}">
+                    <div><input type="text" class="form-control" name="exam_point/{{ $result->user_id }}" id="exam_point_{{$result->user_id}}" value="{{ $result->exam_point }}">
                         <span class="wait-approve-text-{{$result->user_id}}">({{$result->edit_exam_point}} waiting for approve)</span>
                     </div>
                 </td>
@@ -68,13 +68,14 @@
             </tr>
 
             @if(!empty($result->edit_progress_point) || !empty($result->edit_exam_point))
-            @if(\Auth::user()->user_type == 1)
+            @if((\Auth::user()->user_type == 1 || \Auth::user()->user_type == 6) &&
+                strpos($_SERVER['REQUEST_URI'], 'teacher') != false)
             <tr style="text-align: center; font-weight: bold">
                <td colspan="6">
                 <p> Waiting for approve </p> 
             </td>
         </tr>
-        @elseif(\Auth::user()->user_type == 4)
+        @elseif(\Auth::user()->user_type == 4  || \Auth::user()->user_type == 6)
         <tr style="text-align: center; font-weight: bold">
            <td colspan="4">
             <p> Waiting for approve </p> 
@@ -98,7 +99,7 @@
 <div class="col-md-3 col-md-offset-1">
     <a href="{{ route('homepage') }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>Back</a>
 </div>
-@if(\Auth::user()->user_type != 4)
+@if(\Auth::user()->user_type != 4 || \Auth::user()->user_type != 6)
 <div class="col-md-3 pull-right">
     <input type="submit" class="btn btn-default" value="Submit">
 </div>

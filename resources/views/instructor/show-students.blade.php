@@ -9,6 +9,9 @@
     <div class="col-md-10 col-md-offset-1 well">
 
         <div class="col-md-12 btn btn-default">
+            @if(count($students) == 0)
+                Oops! You don't have any student
+            @endif
             @foreach( $students as $student)
             <div class="col-md-12">
                 <div class="col-md-6 row">
