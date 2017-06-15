@@ -12,9 +12,8 @@
     }
 </style>
 @section('content')
-@include('layouts.left-sidebar')
 
-<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
+<div class="container" style="background:#f8f8f8;margin-bottom:30px">
     <!-- page header -->
     <div class="page-header col-md-offset-1">
         <h3>Marking</h3>
@@ -72,13 +71,13 @@
                 strpos($_SERVER['REQUEST_URI'], 'teacher') != false)
             <tr style="text-align: center; font-weight: bold">
                <td colspan="6">
-                <p> Waiting for approve </p> 
+                <p> Waiting for approve </p>
             </td>
         </tr>
         @elseif(\Auth::user()->user_type == 4  || \Auth::user()->user_type == 6)
         <tr style="text-align: center; font-weight: bold">
            <td colspan="4">
-            <p> Waiting for approve </p> 
+            <p> Waiting for approve </p>
         </td>
         <td>
            <span id="{{$result->user_id}}" class="accept_point">Accept</span>

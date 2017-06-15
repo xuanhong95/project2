@@ -37,8 +37,7 @@
     }
 </style>
 @section('content')
-@include('layouts.left-sidebar')
-<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
+<div class="container" style="background:#f8f8f8;margin-bottom:30px">
     <div class="col-md-10 col-md-offset-1 well">
         <div class="page-header col-md-offset-1">
             <h3>Thông tin tuyển dụng</h3>

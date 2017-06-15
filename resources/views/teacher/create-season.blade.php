@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.left-sidebar')
-<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
+<div class="container" style="background:#f8f8f8;margin-bottom:30px">
 
 
     <div class="col-md-8 col-md-offset-2 well">

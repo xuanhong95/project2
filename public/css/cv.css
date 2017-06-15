@@ -1,15 +1,15 @@
 input[type=checkbox]{
     transform: scale(1.2);
 }
-table{
+/*table{
     border-collapse: collapse;
-}
+}*/
 td{
     height:40px;
 }
-tbody{
+/*tbody{
     background:#d6d6d6;
-}
+}*/
 #add-button:hover{
     cursor: pointer;
 }
@@ -31,13 +31,14 @@ tbody{
 textarea{
     max-height: 7em;
     resize: none;
-    overflow: auto;
+    overflow: none;
 }
 p{
     margin: 0px 0px 0px 0px!important;
 }
 td{
     border: 1px solid black;
+    padding: 10px !important;
 }
 .name_field{
     padding-left: 7px!important;

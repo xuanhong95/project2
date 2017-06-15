@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-@include('layouts.left-sidebar')
 <style media="screen">
     /*input[type = "radio"]{
         -webkit-user-select: none;
@@ -10,7 +9,7 @@
     }*/
 </style>
 <link href="/css/toastr.min.css" rel="stylesheet">
-<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
+<div class="container" style="background:#f8f8f8;margin-bottom:30px">
     <div class="page-header col-md-offset-1">
         <h3>Timesheets</h3>
     </div>
