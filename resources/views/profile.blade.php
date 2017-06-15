@@ -12,7 +12,11 @@
         <h3>Profile</h3>
     </div>
     <div class="col-md-10 col-md-offset-1 well">
-
+        @if(\Session::has('message'))
+            <div class="col-md-8 alert alert-warning">
+                {{\Session::get('message')}}
+            </div>
+        @endif
         <div class="col-md-8 col-md-offset-1">
             {!! $form !!}
         </div>

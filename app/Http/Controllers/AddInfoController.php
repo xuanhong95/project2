@@ -23,6 +23,10 @@ class AddInfoController extends Controller
 		$avail_company = \App\AvailableCompany::where('user_id', $id)->first();
 		$source = \App\User::getStudentSourceCompanyAvailable($avail_company, $id);
 
+		if(count($source) == 0){
+			\Session::flash('message', 'You need fill your profile first');
+			return redirect('/profile');
+		}
 		$english_certi = \App\StudentEnglishCertificate::where('user_id', $id)->first();
 		$registration = \App\Registration::where('user_id', $id)->first();
 		$skill_list = \App\StudentProgrammingLanguage::where('user_id', $id)->get(['id', 'language_id', 'level']);
@@ -182,7 +186,7 @@ class AddInfoController extends Controller
 		$user_type=\Auth::user()->user_type;
 		$user_id=\Auth::user()->id;
 
-		if($user_type==0){
+		if($user_type==0 || $user_type == 6){
 			$info=\DB::table('student_infos')->where('user_id',$user_id)->first();
 		// if profile is still nul,add default
 			if(is_null($info)){
@@ -229,7 +233,7 @@ class AddInfoController extends Controller
 			});
 
 			$form->build();
-			return view('profile',compact('form'));
+			return view('profile', compact('form'));
 
 		// End student profile
 	}else if($user_type==1){	//Start teacher profile
