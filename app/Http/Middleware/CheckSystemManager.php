@@ -17,7 +17,8 @@ class CheckSystemManager
     public function handle($request, Closure $next)
     {
         $systemManagerType = 5;
-        if(Auth::user()->user_type == $systemManagerType){
+        $adminType = 6;
+        if(Auth::user()->user_type == $systemManagerType || \Auth::user()->user_type == $adminType){
             return $next($request);
         }
 

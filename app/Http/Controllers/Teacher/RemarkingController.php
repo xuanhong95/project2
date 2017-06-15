@@ -44,7 +44,7 @@ class RemarkingController extends Controller
     }
 
     public function approvePoint($id){
-        if(\Auth::user()->user_type != 4)
+        if(\Auth::user()->user_type != 4  && \Auth::user()->user_type != 6)
             return "False";
         $result = \App\Result::where('user_id', $id)->first();
         $arr_return = [];
@@ -59,12 +59,11 @@ class RemarkingController extends Controller
         array_push($arr_return, $result->progress_point);
         array_push($arr_return, $result->exam_point);
         $result->save();
-
         return $arr_return;
     }
 
     public function declinePoint($id){
-        if(\Auth::user()->user_type != 4)
+        if(\Auth::user()->user_type != 4  && \Auth::user()->user_type != 6)
             return "False";
 
         $result = \App\Result::where('user_id', $id)->first();

@@ -69,7 +69,7 @@
 
                 @else
                 <!-- navbar for STUDENT -->
-                @if(\Auth::user()->user_type==0)
+                @if(\Auth::user()->user_type==0 || \Auth::user()->user_type == 6)
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
@@ -83,7 +83,7 @@
                     </li>
                 </ul>
                 <!-- navbar for INSTRUCTOR TEACHER -->
-                @elseif(\Auth::user()->user_type==1)
+                @elseif(\Auth::user()->user_type==1 || \Auth::user()->user_type == 6)
                 <ul class="nav navbar-nav">
                     <li class=dropdown>
                         <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
@@ -96,7 +96,7 @@
                     </li>
                 </ul>
                 <!-- navbar for ENTERPRISE INSTRUCTOR -->
-                @elseif(\Auth::user()->user_type==2)
+                @elseif(\Auth::user()->user_type==2 || \Auth::user()->user_type == 6)
                 <ul class="nav navbar-nav">
                     <li class=dropdown>
                         <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
@@ -110,7 +110,7 @@
                 </ul>
 
                 <!-- navbar for ENTERPRISE -->
-                @elseif(\Auth::user()->user_type==3)
+                @elseif(\Auth::user()->user_type==3 || \Auth::user()->user_type == 6)
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
@@ -123,7 +123,7 @@
                 </ul>
 
                 <!-- navbar for INTERNSHIP MANAGER -->
-                @elseif(\Auth::user()->user_type==4)
+                @elseif(\Auth::user()->user_type==4 || \Auth::user()->user_type == 6)
                 <ul class="nav navbar-nav">
                     <li class=dropdown>
                         <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
@@ -146,7 +146,7 @@
                 </ul>
 
                 <!-- navbar for SYSTEM MANAGER -->
-                @elseif(\Auth::user()->user_type==5)
+                @elseif(\Auth::user()->user_type==5 || \Auth::user()->user_type == 6)
                 <ul class="nav navbar-nav">
                     <li class=dropdown>
                         <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">

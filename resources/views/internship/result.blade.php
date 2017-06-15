@@ -18,7 +18,7 @@
         @else
         {{$message}}
 
-        @if(\Auth::user()->user_type == 4)
+        @if(\Auth::user()->user_type == 4 || \Auth::user()->user_type == 6)
         <form action="{{ route('edit-point') }}" method="post">
         @else
         <form action="{{ route('teacher-marking') }}" method="post">

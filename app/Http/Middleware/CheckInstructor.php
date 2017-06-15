@@ -17,7 +17,8 @@ class CheckInstructor
     public function handle($request, Closure $next)
     {
         $instructorType = 2;
-        if(Auth::user()->user_type == $instructorType){
+        $adminType = 6;
+        if(Auth::user()->user_type == $instructorType || \Auth::user()->user_type == $adminType){
             return $next($request);
         }
 
