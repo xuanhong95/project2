@@ -16,8 +16,8 @@
         {!! $form->header !!}
         <div class="row" >
             <center><h1>Phiếu đăng ký nguyện vọng thực tập</h1></center>
-            <div style="margin-top: 20px">
-               <table class="col-md-10 col-md-offset-1"  style="border:1px solid black">
+            <div class="col-md-12" style="margin-top: 20px">
+               <table class=" col-md-12 table table-bordered table-responsive"  >
                 <tr>
                     <td class="col-md-3">Họ và tên
                     </td>
@@ -82,7 +82,7 @@
                     <td class="col-md-3" rowspan="2">Địa chỉ nơi đang ở
                     </td>
                     <td class="col-md-5" rowspan="2">
-                        <div class="form-group textarea-height">
+                        <div class="form-group textarea-height" style="margin: auto">
                             <div class="col-sm-12 required {{ $form->field('address')->has_error }} textarea-width">
                                 {!! $form->field('address') !!}
                             </div>
@@ -147,51 +147,51 @@
                 <tr>
                     <td class="col-md-3">Những kiến thức, kỹ năng đã có
                         <td class="col-md-9" colspan="2">Kỹ năng lập trình:
-                            <table class="col-md-12 add-line"  style="text-align: center; margin: 20px 0px">
+                            <table class="col-md-12 add-line table table-bordered table-responsive"  style="text-align: center; margin: 20px 0px">
                                 <tr>
-                                    <td class="col-md-3" rowspan="2" style="border:1px solid black; height: 30px">Ngôn ngữ
+                                    <td class="col-md-3" rowspan="2" >Ngôn ngữ
                                     </td>
-                                    <td class="col-md-9" colspan="3" style="border:1px solid black; padding: 0px 0px; height: 30px;">Mức độ sử dụng
+                                    <td class="col-md-9" colspan="3">Mức độ sử dụng
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="border: 1px solid black"> Biết
+                                    <td > Biết
                                     </td>
-                                    <td style="border: 1px solid black"> Có thể sử dụng
+                                    <td > Có thể sử dụng
                                     </td>
-                                    <td style="border: 1px solid black"> Thành thạo
+                                    <td > Thành thạo
                                     </td>
                                 </tr>
                                 <tr class="skill-point">
-                                    <td style="border: 1px solid black">
+                                    <td >
                                         <div class="col-sm-12 required {{ $form->field("language_id")->has_error }}">
                                             {!! $form->field("language_id") !!}
                                         </div>
                                     </td>
-                                    <td style="border: 1px solid black">
+                                    <td >
                                         <input type="radio" id='regular' name="optradio1" value="1">
                                     </td>
-                                    <td style="border: 1px solid black">
+                                    <td >
                                         <input type="radio" id='regular' name="optradio1" value="2">
                                     </td>
-                                    <td style="border: 1px solid black">
+                                    <td >
                                         <input type="radio" id='regular' name="optradio1" value="3">
                                     </td>
                                 </tr>
                                 @for($i=0;$i<count($skill_list)-1;$i++)
                                 <tr class="skill-point">
-                                    <td style="border: 1px solid black">
+                                    <td >
                                         <div class="col-sm-12 required {{ $form->field("language_id")->has_error }}">
                                             {!! $form->field("language_id") !!}
                                         </div>
                                     </td>
-                                    <td style="border: 1px solid black">
+                                    <td >
                                         <input type="radio" id='regular' name="optradio{{$i+2}}" value="1">
                                     </td>
-                                    <td style="border: 1px solid black">
+                                    <td >
                                         <input type="radio" id='regular' name="optradio{{$i+2}}" value="2">
                                     </td>
-                                    <td style="border: 1px solid black">
+                                    <td >
                                         <input type="radio" id='regular' name="optradio{{$i+2}}" value="3">
                                     </td>
                                 </tr>
@@ -215,7 +215,7 @@
                     <td class="col-md-3">Những kiến thức, kỹ năng muốn học hỏi
                     </td>
                     <td class="col-md-9" colspan="2">
-                        <div class="form-group textarea-height">
+                        <div class="form-group textarea-height" style="margin: auto">
                             <div class='col-sm-12 required {{ $form->field("desire_skill")->has_error }} textarea-width'>
                                 {!! $form->field("desire_skill") !!}
                             </div>
@@ -335,7 +335,7 @@
 
     $('#add-button').click(function(){
         count_skill++;
-        var html = '<tr class="skill-point"><td style="border: 1px solid black"> <div class="col-sm-12 required {{ $form->field("language_id")->has_error }}">{!! $form->field("language_id") !!}</div> </td> <td style="border: 1px solid black"><input type="radio" id="regular" name="optradio'+ count_skill + '" value="1"></td><td style="border: 1px solid black"><input type="radio" id="regular" name="optradio'+ count_skill +'" value="2"></td><td style="border: 1px solid black"><input type="radio" id="regular" name="optradio'+ count_skill +'" value="3"></td></tr>';
+        var html = '<tr class="skill-point"><td > <div class="col-sm-12 required {{ $form->field("language_id")->has_error }}">{!! $form->field("language_id") !!}</div> </td> <td ><input type="radio" id="regular" name="optradio'+ count_skill + '" value="1"></td><td ><input type="radio" id="regular" name="optradio'+ count_skill +'" value="2"></td><td ><input type="radio" id="regular" name="optradio'+ count_skill +'" value="3"></td></tr>';
 
         if(count_skill == 5){
             $('#add-button').addClass('hidden');

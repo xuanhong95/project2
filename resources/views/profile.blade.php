@@ -26,6 +26,9 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="/js/jquery.numeric.js">
+
+</script>
 
 <script type="text/javascript">
     $('#dob').datepicker({
@@ -35,5 +38,7 @@
         dateFormat:'dd/mm/yy',
         defaultDate:'1/6/1995'
     });
+
+    $('#student_number, #phone').numeric();
 </script>
 @endsection
