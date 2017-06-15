@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.left-sidebar')
 <link rel="stylesheet" href="/css/cv.css">
-<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
+<div class="container" style="background:#f8f8f8;margin-bottom:30px; margin-top: 35px">
     @if(Session::has('message'))
     <div class="alert alert-success">
         {!! \Session::get('message') !!}
@@ -233,7 +232,7 @@
                             <input type="checkbox" id="have_company" value="1">
                             @endif
                         </div>
-                        <div id="div_company" class="hidden" style="margin-top:10px">
+                        <div id="div_company" class="<?php echo empty($avail_company->name)?'hidden':''; ?>" style="margin-top:10px">
                             <div class="form-group">
                                 <div class="col-sm-3" style="text-align: right;">
                                     <label>
@@ -357,16 +356,16 @@
 
     $("#phone").numeric();
 
-    $(document).ready(function(){
-        if($('#have_company').val() == 1)
-            $('#div_company').removeClass('hidden');
+    $(function(){
         if(count_skill == 1)
             $('#remove-button').addClass('hidden');
+
+        $('#have_company').click(function(){
+            $('#div_company').toggleClass('hidden');
+        });
     });
 
-    $('#have_company').click(function(){
-        $('#div_company').toggleClass('hidden');
-    });
+
 
     $('#cpn_start_date, #cpn_end_date').datepicker({
         changeMonth:true,

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.left-sidebar')
 <style media="screen">
 #time_from,#time_to{
     width: 30%;
@@ -12,7 +11,7 @@ textarea.form-control {
     max-height: 60px;
 }
 </style>
-<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
+<div class="container" style="background:#f8f8f8;margin-bottom:30px">
     <div class="page-header col-md-offset-1">
         <h3>Báo Cáo Thực Tập</h3>
     </div>

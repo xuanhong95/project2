@@ -33,8 +33,7 @@
     }
 </style>
 @section('content')
-@include('layouts.left-sidebar')
-<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
+<div class="container" style="background:#f8f8f8;margin-bottom:30px">
     <div class="form-group">
         {!! $form->header !!}
         @if(!$form->message)

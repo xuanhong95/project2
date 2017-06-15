@@ -6,8 +6,7 @@
     }
 </style>
 @section('content')
-@include('layouts.left-sidebar')
-<div class="col-md-10" style="background:#f8f8f8;min-height:100%;">
+<div class="container" style="background:#f8f8f8;min-height:100%;">
     <div class="form-group">
         {!! $form->header !!}
         <div class="form-group">

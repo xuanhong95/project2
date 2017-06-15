@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('content')
-@include('layouts.left-sidebar')
 <link rel="stylesheet" href="/css/toastr.min.css">
-<div class="col-md-10" style="background:#f8f8f8;margin-bottom:30px">
+<div class="container" style="background:#f8f8f8;margin-bottom:30px">
     <!-- page header -->
     <div class="page-header col-md-offset-1">
         <h3>Allocation status</h3>

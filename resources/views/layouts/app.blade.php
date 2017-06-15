@@ -46,8 +46,8 @@
     </style>
 </head>
 <body id="app-layout">
-    @include('layouts.nav-bar')
-    <div class="container" style="min-height:100%; margin-top:50px;">
+        @include('layouts.nav-bar')
+    <div class="container" style="min-height:342px; margin-top:50px;">
         @yield('content')
     </div>
 
