@@ -49,7 +49,17 @@
                 </ul>
                 <!-- navbar for ENTERPRISE INSTRUCTOR -->
                 @elseif(\Auth::user()->user_type==2)
-                
+                <ul class="nav navbar-nav">
+                    <li class=dropdown>
+                        <a role="button" aria-expand="false" class="dropdown-toggle" href="#" data-toggle="dropdown" style="color:white;">
+                            Instructor <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{!! route('instructor-students') !!}">Manage students</a></li>
+                            <li><a href="{{ route('timekeeping') }}">Timekeeping</a></li>
+                        </ul>
+                    </li>
+                </ul>
 
                 <!-- navbar for ENTERPRISE -->
                 @elseif(\Auth::user()->user_type==3)
